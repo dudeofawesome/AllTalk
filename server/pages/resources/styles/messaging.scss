@@ -1,0 +1,827 @@
+@import 'material';
+
+@font-face {
+	font-family: 'roboto';
+	src: url('/resources/fonts/roboto-regular-webfont.eot');
+	src: url('/resources/fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('/resources/fonts/roboto-regular-webfont.woff2') format('woff2'),
+		 url('/resources/fonts/roboto-regular-webfont.woff') format('woff'),
+		 url('/resources/fonts/roboto-regular-webfont.ttf') format('truetype'),
+		 url('/resources/fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'robotobold';
+	src: url('/resources/fonts/roboto-bold-webfont.eot');
+	src: url('/resources/fonts/roboto-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('/resources/fonts/roboto-bold-webfont.woff2') format('woff2'),
+		 url('/resources/fonts/roboto-bold-webfont.woff') format('woff'),
+		 url('/resources/fonts/roboto-bold-webfont.ttf') format('truetype'),
+		 url('/resources/fonts/roboto-bold-webfont.svg#robotobold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+    font-family: 'robotothin';
+    src: url('/resources/fonts/Roboto-Thin-webfont.eot');
+    src: url('/resources/fonts/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/resources/fonts/Roboto-Thin-webfont.woff') format('woff'),
+         url('/resources/fonts/Roboto-Thin-webfont.ttf') format('truetype'),
+         url('/resources/fonts/Roboto-Thin-webfont.svg#robotothin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	background-color: rgb(220, 220, 220);
+	overflow-x: hidden;
+	font-family: "robotothin", sans-serif;
+    font-weight: 100;
+    color: rgb(90, 90, 90);
+	margin: 0px;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+header#app_toolbar {
+    position: absolute;
+    top: 0px;
+	width: 100%;
+	height: 28px;
+    z-index: 1;
+	display: block;
+    color: rgb(250, 250, 250);
+	background-color: $primary;
+    padding: 21px 38px 21px 38px;
+    font-size: 27px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    cursor: default;
+    
+    #menu_items {
+        position: absolute;
+        right: 97px;
+        top: 5px;
+        width: 300px;
+        height: 60px;
+        text-align: right;
+        
+        .menu_item {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 0;
+            background-color: transparent;
+            color: inherit;
+            font-size: inherit;
+            border-radius: 35px;
+            margin-left: -20px;
+
+            transition: background-color 0.2s;
+            -moz-transition: background-color 0.2s;
+            -webkit-transition: background-color 0.2s;
+            -o-transition: background-color 0.2s;
+
+            &:focus {
+                outline: 0 !important;
+            }
+            &:active {
+                background-color: rgba(153, 153, 153, 0.4);
+            }
+            
+            .icon {
+                
+            }
+            .name {
+                display: none;
+                font-family: "robotothin", sans-serif;
+                font-weight: 100;
+            }
+        }
+        #overflow {
+            display: inline-block;
+            position: relative;
+            top: -15px;
+            width: 60px;
+            height: 60px;
+            border: 0;
+            background-color: transparent;
+            color: inherit;
+            font-size: inherit;
+            border-radius: 35px;
+            margin-left: -20px;
+
+            transition: background-color 0.2s;
+            -moz-transition: background-color 0.2s;
+            -webkit-transition: background-color 0.2s;
+            -o-transition: background-color 0.2s;
+
+            &>.icon {
+                position: relative;
+                top: 16px;
+                left: -17px;
+                pointer-events: none;
+            }
+            &:focus {
+                outline: 0 !important;
+            }
+            &:active {
+                background-color: rgba(153, 153, 153, 0.4);
+            }
+            
+            #overflow_menu {
+                display: none;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 200px;
+                height: 0px;
+                overflow-y: hidden;
+                border-radius: 2px;
+                background-color: rgb(230, 230, 230);
+                box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+                
+                transition: height 0.2s;
+                -moz-transition: height 0.2s;
+                -webkit-transition: height 0.2s;
+                -o-transition: height 0.2s;
+
+                &[open] {
+                    display: block;
+                    height: auto;
+                }
+            
+                .menu_item {
+                    display: block;
+                    color: rgb(90, 90, 90);
+                    width: 100%;
+                    margin-left: 0px;
+                    border-radius: 0px;
+                    text-align: left;
+
+                    .icon {
+                        display: none;
+                    }
+                    .name {
+                        margin-left: 15px;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#content {
+    position: absolute;
+    top: 70px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 0;
+    overflow: hidden;
+}
+
+#sidebar {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 295px;
+    z-index: 3;
+    
+    background-color: rgb(225, 225, 225);
+    overflow-x: visible;
+//    overflow-y: hidden;
+    
+    #FAB {
+        position: absolute;
+        right: -37px;
+        bottom: 25px
+    }
+    
+    #chats {
+        height: 100%;
+        overflow-y: auto;
+        
+        .chat {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 70px;
+            overflow: hidden;
+            
+            cursor: default;
+            background-color: rgb(240, 240, 240);
+            border-bottom: 1px solid rgb(150, 150, 150);
+            
+            transition: background-color 0.2s;
+            -moz-transition: background-color 0.2s;
+            -webkit-transition: background-color 0.2s;
+            -o-transition: background-color 0.2s;
+
+            &[open] {
+                background-color: rgb(200, 200, 200);
+                
+                .status {
+                    border-color: rgb(200, 200, 200);
+                }
+            }
+            &[muted] {
+                .muted {
+                    opacity: 1;
+                }
+            }
+            &[online] {
+                .status {
+                    background-color: rgb(0, 200, 0);
+                }
+            }
+            &[away] {
+                .status {
+                    background-color: rgb(230, 200, 0);
+                }
+            }
+            &[offline] {
+                .status {
+                    background-color: rgb(150, 150, 150);
+                }
+            }
+            &:active {
+                background-color: rgb(200, 200, 200);
+
+                .status {
+                    border-color: rgb(200, 200, 200);
+                }
+            }
+            
+            .icon {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                width: 50px;
+                height: 50px;
+                
+                background-repeat: no-repeat;
+                background-origin: content-box;
+                background-size: cover;
+                border-radius: 35px;
+            }
+            .status {
+                position: absolute;
+                left: 45px;
+                top: 45px;
+                width: 12px;
+                height: 12px;
+                
+                border-radius: 10px;
+                border: solid 2px rgb(240, 240, 240);
+
+                transition: border-color 0.2s;
+                -moz-transition: border-color 0.2s;
+                -webkit-transition: border-color 0.2s;
+                -o-transition: border-color 0.2s;
+            }
+            .name {
+                position: absolute;
+                left: 70px;
+                top: 10px;
+                width: 170px;
+                overflow-x: hidden;
+            }
+            .lastMessage {
+                position: absolute;
+                left: 70px;
+                bottom: 10px;
+                width: 180px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-size: 14px;
+            }
+            .time {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                width: 45px;
+                overflow-x: hidden;
+                
+                text-align: right;
+                font-size: 12px;
+            }
+            .muted {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+#chat {
+    position: absolute;
+    left: 295px;
+    right: 300px;
+    top: 0px;
+    bottom: 0px;
+    z-index: 1;
+    
+    background-color: rgb(250, 250, 250);
+    
+    #history {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 30px;
+        margin: 0px 0px 20px 20px;
+        padding: 20px 20px 0px 0px;
+        
+        vertical-align: bottom;
+        overflow-y: auto;
+        
+        .message {
+            position: relative;
+            display: block;
+            width: 100%;
+            min-height: 45px;
+            height: auto;
+            
+            &[you] {
+                .icon {
+                    left: auto;
+                    right: 0px;
+                }
+                .text {
+                    left: auto;
+                    right: 45px;
+                    background-color: lighten($complement-1, 15%);
+                    padding: 7px 15px 3px 10px;
+                    
+                    -webkit-touch-callout: auto;
+                    -webkit-user-select: auto;
+                    -khtml-user-select: auto;
+                    -moz-user-select: auto;
+                    -ms-user-select: auto;
+                    user-select: auto;
+                    
+                    &::after {
+                        content: " ";
+                        position: absolute;
+                        bottom: 0px;
+                        right: -12px;
+                        z-index: 1;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 0 12px 12px 0px;
+                        border-color: transparent transparent lighten($complement-1, 15%) transparent;
+                    }
+                    &::before {
+                        content: " ";
+                        position: absolute;
+                        bottom: 1px;
+                        right: -11px;
+                        z-index: 0;
+                        width: 10px;
+                        height: 1px;
+                        background-color: transparent;
+                        box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9);
+                    }
+                }
+            }
+            &[other] {
+                .icon {
+                    left: 0px;
+                    right: auto;
+                }
+                .text {
+                    left: 45px;
+                    right: auto;
+                    background-color: rgb(225, 225, 225);
+                    padding: 7px 10px 3px 15px;
+
+                    -webkit-touch-callout: auto;
+                    -webkit-user-select: auto;
+                    -khtml-user-select: auto;
+                    -moz-user-select: auto;
+                    -ms-user-select: auto;
+                    user-select: auto;
+                    
+                    &::before {
+                        content: " ";
+                        position: absolute;
+                        bottom: 0px;
+                        left: -12px;
+                        z-index: 1;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 0 0 12px 12px;
+                        border-color: transparent transparent #e0e1e1 transparent;
+                    }
+                    &::after {
+                        content: " ";
+                        position: absolute;
+                        bottom: 1px;
+                        left: -11px;
+                        z-index: 0;
+                        width: 10px;
+                        height: 1px;
+                        background-color: transparent;
+                        box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9);
+                    }
+                }
+            }
+
+            .icon {
+                position: absolute;
+                bottom: 15px;
+                width: 30px;
+                height: 30px;
+
+                background-repeat: no-repeat;
+                background-origin: content-box;
+                background-size: cover;
+                border-radius: 15px;
+            }
+            .text {
+                position: absolute;
+                bottom: 17px;
+                min-height: 20px;
+                max-width: 70%;
+                vertical-align: bottom;
+                text-align: left;
+                
+                box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+            }
+        }
+    }
+    #messageContainer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 50px;
+        background-color: rgb(240, 240, 240);
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+        
+        #message {
+            margin: 0px 20px 20px 40px;
+
+            form {
+                position: relative;
+                bottom: 0px;
+
+                .messageBox {
+                    position: absolute;
+                    left: 0px;
+                    right: 80px;
+                    bottom: 15px;
+
+                    #send_message {
+                        position: absolute;
+                        left: 0px;
+                        right: 0px;
+                        width: 100%;
+                        height: 45px;
+                    }
+                }
+                #send_attach {
+                    position: absolute;
+                    top: -10px;
+                    right: 30px;
+                    width: 40px;
+                    height: 40px;
+                    
+                    font-size: 20px;
+                    color: inherit;
+                    background-color: transparent;
+                    border: 0px;
+                    border-radius: 20px;
+                    
+                    transition: background-color 0.2s;
+                    -moz-transition: background-color 0.2s;
+                    -webkit-transition: background-color 0.2s;
+                    -o-transition: background-color 0.2s;
+                    
+                    &:focus {
+                        outline: 0 !important;
+                    }
+                    &:active {
+                        background-color: rgb(200, 200, 200);
+                    }
+                }
+                #send_submit {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    width: 40px;
+                    height: 40px;
+                    
+                    font-size: 20px;
+                    color: inherit;
+                    background-color: transparent;
+                    border: 0px;
+                    border-radius: 20px;
+
+                    transition: background-color 0.2s;
+                    -moz-transition: background-color 0.2s;
+                    -webkit-transition: background-color 0.2s;
+                    -o-transition: background-color 0.2s;
+
+                    &:focus {
+                        outline: 0 !important;
+                    }
+                    &:active {
+                        background-color: rgb(200, 200, 200);
+                    }
+                }
+            }
+        }
+    }
+}
+
+#right_sidebar {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 300px;
+    z-index: 2;
+    overflow-y: auto;
+    
+    background-color: rgb(225, 225, 225);
+    
+    .icon {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 50px;
+        height: 50px;
+
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-size: cover;
+        border-radius: 35px;
+    }
+    .status {
+        position: absolute;
+        left: 45px;
+        top: 45px;
+        width: 12px;
+        height: 12px;
+
+        border-radius: 10px;
+        border: solid 2px rgb(225, 225, 225);
+
+        &[online] {
+            background-color: rgb(0, 200, 0);
+        }
+        &[away] {
+            background-color: rgb(230, 200, 0);
+        }
+        &[offline] {
+            background-color: rgb(150, 150, 150);
+        }
+    }
+    .name {
+        position: absolute;
+        left: 70px;
+        top: 10px;
+        width: 170px;
+        overflow-x: hidden;
+    }
+    .lastActive {
+        position: absolute;
+        left: 70px;
+        top: 35px;
+        width: 200px;
+        overflow-x: hidden;
+        font-size: 14px;
+    }
+    .muteIcon {
+        position: absolute;
+        top: 98px;
+        left: 125px;
+    }
+    .mute {
+        position: absolute;
+        top: 98px;
+        left: 150px;
+        
+        &>label {
+            height: 12px;
+            width: 34px;
+        }
+    }
+    .call {
+        position: absolute;
+        top: 80px;
+        left: 25px;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        border-radius: 20px;
+    }
+    .profiles {
+        position: absolute;
+        top: 130px;
+        width: 100%;
+        padding: 20px;
+        
+        .profile {
+            display: block;
+            color: inherit;
+            margin-bottom: 5px;
+            
+            i {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+#popup_new_chat {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 101;
+    
+    background-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
+
+    transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
+    
+    &[open] {
+        display: block;
+        background-color: rgba(0, 0, 0, 0.3);
+
+        .material.popup {
+            margin-top: 100px;
+            background-color: rgb(250, 250, 250);
+        }
+    }
+    
+    .material.popup {
+        background-color: $complement-1;
+
+        transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        -webkit-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+    }
+
+    form {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        
+        #start_username {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+        }
+        #start_users_list {
+            position: absolute;
+            top: 35px;
+            bottom: 40px;
+            left: 0px;
+            right: 0px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            
+            .user {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 40px;
+                overflow: visible;
+
+                background-color: transparent;
+                cursor: default;
+
+                transition: background-color 0.2s;
+                -moz-transition: background-color 0.2s;
+                -webkit-transition: background-color 0.2s;
+                -o-transition: background-color 0.2s;
+
+                &[muted] {
+                    .muted {
+                        opacity: 1;
+                    }
+                }
+                &[online] {
+                    .status {
+                        background-color: rgb(0, 200, 0);
+                    }
+                }
+                &[away] {
+                    .status {
+                        background-color: rgb(230, 200, 0);
+                    }
+                }
+                &[offline] {
+                    .status {
+                        background-color: rgb(150, 150, 150);
+                    }
+                }
+                &[selected] {
+                    background-color: rgb(200, 200, 200);
+                }
+
+                .icon {
+                    position: absolute;
+                    left: 45px;
+                    top: 2px;
+                    width: 30px;
+                    height: 30px;
+
+                    background-repeat: no-repeat;
+                    background-origin: content-box;
+                    background-size: cover;
+                    border-radius: 35px;
+                }
+                .status {
+                    position: absolute;
+                    left: 66px;
+                    top: 21px;
+                    width: 8px;
+                    height: 8px;
+
+                    border-radius: 10px;
+                    border: solid 2px rgb(240, 240, 240);
+
+                    transition: border-color 0.2s;
+                    -moz-transition: border-color 0.2s;
+                    -webkit-transition: border-color 0.2s;
+                    -o-transition: border-color 0.2s;
+                }
+                .name {
+                    position: absolute;
+                    left: 100px;
+                    top: 10px;
+                    width: 300px;
+                    overflow-x: hidden;
+                }
+                input[type="checkbox"] {
+                    position: absolute;
+                    left: 15px;
+                    top: 8px;
+                }
+            }
+        }
+        #start_cancel {
+            position: absolute;
+//            left: 50%;
+            right: 205px;
+            bottom: 0px;
+            margin-left: -88px;
+        }
+        #start_conversation {
+            position: absolute;
+//            left: 50%;
+            right: 0px;
+            bottom: 0px;
+            margin-left: -88px;
+        }
+    }
+}
+
+
+
+
+
+
+.material.popup {
+    position: relative;
+    width: 500px;
+    height: 400px;
+    margin: 150px auto;
+    padding: 30px 50px 30px 50px;
+//    vertical-align: middle;
+    
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3), 0 11px 7px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 2px;
+    overflow: hidden;
+
+    transition: margin-top 0.5s;
+    -moz-transition: margin-top 0.5s;
+    -webkit-transition: margin-top 0.5s;
+    -o-transition: margin-top 0.5s;
+}

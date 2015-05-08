@@ -2,93 +2,141 @@ function onload () {
 
 }
 
-function submitForm (name) {
-	if (checkInputForErrors(name)) {
-		var xmlhttp;
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				if (xmlhttp.responseText == "success")
-					document.getElementById("inside").innerHTML = "<div class='responseMessage'><i class='mdi mdi-check'></i></div><input type=\"button\" class=\"material light raised\" value=\"Close\" onclick=\"closeForm('register', document.getElementById('registerButton'));\" />";
-			}
-		};
-		xmlhttp.open("POST","/finishConfig", true);
-		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+function openMessaging () {
+    var header = document.getElementsByTagName("header");
+    var card = document.getElementById("main");
+    var tweenTime = 0.5;
 
-		name = document.getElementById("name");
-		var addressLine1 = document.getElementById("address_line_1");
-		var addressLine2 = document.getElementById("address_line_2");
-		var wifiSSID = document.getElementById("WiFi_SSID");
-		var wifiPassword = document.getElementById("WiFi_password");
-		xmlhttp.send("name=" + name.value + "&addressLine1=" + addressLine1.value + "&addressLine2=" + addressLine2.value + "&wifiSSID=" + wifiSSID.value + "&wifiPassword=" + wifiPassword.value);
+    TweenLite.to(header, tweenTime, {
+        height: "0px"
+    });
+    TweenLite.to(card, tweenTime, {
+        top: "-535px",
+        onComplete: function () {
+            window.location.href = "messaging";
+        }
+    });
+}
+
+function submitForm (form) {
+	if (checkInputForErrors(form)) {
+        switch (form) {
+            case "login" :
+                var username = document.getElementById("login_username");
+                var password = document.getElementById("login_password");
+                
+                var xmlhttp;
+                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {// code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        if (xmlhttp.responseText.includes("success")) {
+                            openMessaging();
+                        } else {
+                            username.setAttribute("error", "");
+                            username.nextSibling.innerHTML = "Bad login";
+                            password.setAttribute("error", "");
+                            password.nextSibling.innerHTML = "Bad login";
+                        }
+                    }
+                };
+                xmlhttp.open("POST","/signup", true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                xmlhttp.send("username=" + username.value + "&password=" + password.value);
+                break;
+            case "signup" :
+                
+                break;
+        }
 	}
 }
 
-function checkInputForErrors (name) {
-	var hasError = false;
-	
-	name = document.getElementById("name");
-	var addressLine1 = document.getElementById("address_line_1");
-	var addressLine2 = document.getElementById("address_line_2");
-	var wifiSSID = document.getElementById("WiFi_SSID");
-	var wifiPassword = document.getElementById("WiFi_password");
+function checkInputForErrors (form) {
+    switch (form) {
+        case "login" :
+            var hasError = false;
 
-	if (name.value === "") {
-		name.setAttribute("error", "");
-		name.nextSibling.innerHTML = "Can not be blank";
-		name.focus();
-		hasError = true;
-	} else {
-		name.removeAttribute("error");
-		name.nextSibling.innerHTML = "We're all good";
-	}
-	if (addressLine1.value === "") {
-		addressLine1.setAttribute("error", "");
-		addressLine1.nextSibling.innerHTML = "Can not be blank";
-		addressLine1.focus();
-		hasError = true;
-	} else {
-		addressLine1.removeAttribute("error");
-		addressLine1.nextSibling.innerHTML = "We're all good";
-	}
-	if (addressLine2.value === "") {
-		addressLine2.setAttribute("error", "");
-		addressLine2.nextSibling.innerHTML = "Can not be blank";
-		addressLine2.focus();
-		hasError = true;
-	} else {
-		addressLine2.removeAttribute("error");
-		addressLine2.nextSibling.innerHTML = "We're all good";
-	}
-	if (wifiSSID.value === "") {
-		wifiSSID.setAttribute("error", "");
-		wifiSSID.nextSibling.innerHTML = "Can not be blank";
-		wifiSSID.focus();
-		hasError = true;
-	} else {
-		wifiSSID.removeAttribute("error");
-		wifiSSID.nextSibling.innerHTML = "We're all good";
-	}
-	if (wifiPassword.value === "") {
-		wifiPassword.setAttribute("error", "");
-		wifiPassword.nextSibling.innerHTML = "Can not be blank";
-		wifiPassword.focus();
-		hasError = true;
-	} else if (wifiPassword.value.length < 7) {
-		wifiPassword.setAttribute("error", "");
-		wifiPassword.nextSibling.innerHTML = "Incorrect password";
-		wifiPassword.focus();
-		hasError = true;
-	} else {
-		wifiPassword.removeAttribute("error");
-		wifiPassword.nextSibling.innerHTML = "We're all good";
-	}
+            var username = document.getElementById("login_username");
+            var password = document.getElementById("login_password");
 
-	return !hasError;
+            if (password.value === "") {
+                password.setAttribute("error", "");
+                password.nextSibling.innerHTML = "Can't be blank";
+                password.focus();
+                hasError = true;
+            } else {
+                password.removeAttribute("error");
+                password.nextSibling.innerHTML = "We're all good";
+            }
+            if (username.value === "") {
+                username.setAttribute("error", "");
+                username.nextSibling.innerHTML = "Can't be blank";
+                username.focus();
+                hasError = true;
+            } else {
+                username.removeAttribute("error");
+                username.nextSibling.innerHTML = "We're all good";
+            }
+            return !hasError;
+        case "signup" :
+            /*var*/ hasError = false;
+
+            var email = document.getElementById("signup_email");
+            /*var*/ username = document.getElementById("signup_username");
+            /*var*/ password = document.getElementById("signup_password");
+            var passwordAgain = document.getElementById("signup_password_again");
+
+            if (password.value === "") {
+                password.setAttribute("error", "");
+                password.nextSibling.innerHTML = "Can't be blank";
+                password.focus();
+                hasError = true;
+            } else {
+                password.removeAttribute("error");
+                password.nextSibling.innerHTML = "We're all good";
+            }
+            if (password.value != passwordAgain.value) {
+                password.setAttribute("error", "");
+                password.nextSibling.innerHTML = "Passwords don't match";
+                passwordAgain.setAttribute("error", "");
+                passwordAgain.nextSibling.innerHTML = "Passwords don't match";
+                password.focus();
+                hasError = true;
+            } else if (password.value !== "") {
+                password.removeAttribute("error");
+                password.nextSibling.innerHTML = "We're all good";
+                passwordAgain.removeAttribute("error");
+                passwordAgain.nextSibling.innerHTML = "We're all good";
+            }
+            if (email.value === "") {
+                email.setAttribute("error", "");
+                email.nextSibling.innerHTML = "Can't be blank";
+                email.focus();
+                hasError = true;
+            } else if (!isEmail(email.value)) {
+                email.setAttribute("error", "");
+                email.nextSibling.innerHTML = "Enter a valid email";
+                email.focus();
+                hasError = true;
+            } else {
+                email.removeAttribute("error");
+                email.nextSibling.innerHTML = "We're all good";
+            }
+            if (username.value === "") {
+                username.setAttribute("error", "");
+                username.nextSibling.innerHTML = "Can't be blank";
+                username.focus();
+                hasError = true;
+            } else {
+                username.removeAttribute("error");
+                username.nextSibling.innerHTML = "We're all good";
+            }
+            return !hasError;
+    }
 }
 
 function isEmail (email) {

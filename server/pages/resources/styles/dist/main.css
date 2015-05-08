@@ -54,7 +54,7 @@
       color: rgba(255, 255, 255, 0.3);
       background-color: transparent !important; }
 
-.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised {
+.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised, button.material.raised {
   min-width: 88px;
   height: 36px;
   border-radius: 2px;
@@ -71,34 +71,34 @@
   -moz-transition: background-color 0.2s, -moz-box-shadow 0.2s, box-shadow 0.2s;
   -o-transition: background-color 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
   transition: background-color 0.2s, box-shadow 0.2s, -moz-box-shadow 0.2s, -webkit-box-shadow 0.2s; }
-  .material[type="button"].raised.light, .material[type="submit"].raised.light, .material[type="reset"].raised.light {
+  .material[type="button"].raised.light, .material[type="submit"].raised.light, .material[type="reset"].raised.light, button.material.raised.light {
     color: #414141;
     background-color: #e0e0e0; }
-    .material[type="button"].raised.light:active, .material[type="submit"].raised.light:active, .material[type="reset"].raised.light:active {
+    .material[type="button"].raised.light:active, .material[type="submit"].raised.light:active, .material[type="reset"].raised.light:active, button.material.raised.light:active {
       background-color: #d6d6d6;
       -webkit-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       -moz-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3); }
-    .material[type="button"].raised.light:disabled, .material[type="submit"].raised.light:disabled, .material[type="reset"].raised.light:disabled {
+    .material[type="button"].raised.light:disabled, .material[type="submit"].raised.light:disabled, .material[type="reset"].raised.light:disabled, button.material.raised.light:disabled {
       color: rgba(0, 0, 0, 0.26);
       background-color: rgba(0, 0, 0, 0.12); }
-  .material[type="button"].raised.dark, .material[type="submit"].raised.dark, .material[type="reset"].raised.dark {
+  .material[type="button"].raised.dark, .material[type="submit"].raised.dark, .material[type="reset"].raised.dark, button.material.raised.dark {
     color: white;
     background-color: #00aa00; }
-    .material[type="button"].raised.dark:active, .material[type="submit"].raised.dark:active, .material[type="reset"].raised.dark:active {
+    .material[type="button"].raised.dark:active, .material[type="submit"].raised.dark:active, .material[type="reset"].raised.dark:active, button.material.raised.dark:active {
       background-color: #00dd00;
       -webkit-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       -moz-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3); }
-    .material[type="button"].raised.dark:disabled, .material[type="submit"].raised.dark:disabled, .material[type="reset"].raised.dark:disabled {
+    .material[type="button"].raised.dark:disabled, .material[type="submit"].raised.dark:disabled, .material[type="reset"].raised.dark:disabled, button.material.raised.dark:disabled {
       color: rgba(255, 255, 255, 0.3);
       background-color: rgba(255, 255, 255, 0.12); }
-  .material[type="button"].raised:disabled, .material[type="submit"].raised:disabled, .material[type="reset"].raised:disabled {
+  .material[type="button"].raised:disabled, .material[type="submit"].raised:disabled, .material[type="reset"].raised:disabled, button.material.raised:disabled {
     -webkit-box-shadow: 0px 3px 6px transparent;
     -moz-box-shadow: 0px 3px 6px transparent;
     box-shadow: 0px 3px 6px transparent; }
 
-.material[type="button"].floating, .material[type="submit"].floating, .material[type="reset"].floating {
+.material[type="button"].floating, .material[type="submit"].floating, .material[type="reset"].floating, button.material.floating {
   width: 56px;
   height: 56px;
   padding: 11px 17px 18px 17px;
@@ -117,22 +117,22 @@
   -moz-transition: background-color 0.2s, -moz-box-shadow 0.2s, box-shadow 0.2s;
   -o-transition: background-color 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
   transition: background-color 0.2s, box-shadow 0.2s, -moz-box-shadow 0.2s, -webkit-box-shadow 0.2s; }
-  .material[type="button"].floating.light:active, .material[type="submit"].floating.light:active, .material[type="reset"].floating.light:active {
+  .material[type="button"].floating.light:active, .material[type="submit"].floating.light:active, .material[type="reset"].floating.light:active, button.material.floating.light:active {
     background-color: #009b00; }
-  .material[type="button"].floating.light:disabled, .material[type="submit"].floating.light:disabled, .material[type="reset"].floating.light:disabled {
+  .material[type="button"].floating.light:disabled, .material[type="submit"].floating.light:disabled, .material[type="reset"].floating.light:disabled, button.material.floating.light:disabled {
     color: rgba(255, 255, 255, 0.6);
     background-color: #d1d1d1; }
-  .material[type="button"].floating.dark:active, .material[type="submit"].floating.dark:active, .material[type="reset"].floating.dark:active {
+  .material[type="button"].floating.dark:active, .material[type="submit"].floating.dark:active, .material[type="reset"].floating.dark:active, button.material.floating.dark:active {
     background-color: #00dd00; }
-  .material[type="button"].floating.dark:disabled, .material[type="submit"].floating.dark:disabled, .material[type="reset"].floating.dark:disabled {
+  .material[type="button"].floating.dark:disabled, .material[type="submit"].floating.dark:disabled, .material[type="reset"].floating.dark:disabled, button.material.floating.dark:disabled {
     color: rgba(255, 255, 255, 0.3);
     background-color: #4b4b4b; }
-  .material[type="button"].floating:active, .material[type="submit"].floating:active, .material[type="reset"].floating:active {
+  .material[type="button"].floating:active, .material[type="submit"].floating:active, .material[type="reset"].floating:active, button.material.floating:active {
     background-color: #00dd00;
     -webkit-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3); }
-  .material[type="button"].floating:disabled, .material[type="submit"].floating:disabled, .material[type="reset"].floating:disabled {
+  .material[type="button"].floating:disabled, .material[type="submit"].floating:disabled, .material[type="reset"].floating:disabled, button.material.floating:disabled {
     -webkit-box-shadow: 0px 3px 6px transparent;
     -moz-box-shadow: 0px 3px 6px transparent;
     box-shadow: 0px 3px 6px transparent; }
@@ -182,7 +182,8 @@
       position: relative;
       top: 2px;
       color: red;
-      font-size: 11px; }
+      font-size: 11px;
+      font-family: roboto; }
 
 textarea.material {
   border: 0px;
@@ -728,22 +729,22 @@ input[type=range].material {
 
 @font-face {
   font-family: 'roboto';
-  src: url('fonts/roboto-regular-webfont.eot');
-  src: url('fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/roboto-regular-webfont.woff2') format('woff2'), url('fonts/roboto-regular-webfont.woff') format('woff'), url('fonts/roboto-regular-webfont.ttf') format('truetype'), url('fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
+  src: url('/resources/fonts/roboto-regular-webfont.eot');
+  src: url('/resources/fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'), url('/resources/fonts/roboto-regular-webfont.woff2') format('woff2'), url('/resources/fonts/roboto-regular-webfont.woff') format('woff'), url('/resources/fonts/roboto-regular-webfont.ttf') format('truetype'), url('/resources/fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'robotobold';
-  src: url('fonts/roboto-bold-webfont.eot');
-  src: url('fonts/roboto-bold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/roboto-bold-webfont.woff2') format('woff2'), url('fonts/roboto-bold-webfont.woff') format('woff'), url('fonts/roboto-bold-webfont.ttf') format('truetype'), url('fonts/roboto-bold-webfont.svg#robotobold') format('svg');
+  src: url('/resources/fonts/roboto-bold-webfont.eot');
+  src: url('/resources/fonts/roboto-bold-webfont.eot?#iefix') format('embedded-opentype'), url('/resources/fonts/roboto-bold-webfont.woff2') format('woff2'), url('/resources/fonts/roboto-bold-webfont.woff') format('woff'), url('/resources/fonts/roboto-bold-webfont.ttf') format('truetype'), url('/resources/fonts/roboto-bold-webfont.svg#robotobold') format('svg');
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'robotothin';
-  src: url('Roboto-Thin-webfont.eot');
-  src: url('Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'), url('Roboto-Thin-webfont.woff') format('woff'), url('Roboto-Thin-webfont.ttf') format('truetype'), url('Roboto-Thin-webfont.svg#robotothin') format('svg');
+  src: url('/resources/fonts/Roboto-Thin-webfont.eot');
+  src: url('/resources/fonts/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'), url('/resources/fonts/Roboto-Thin-webfont.woff') format('woff'), url('/resources/fonts/Roboto-Thin-webfont.ttf') format('truetype'), url('/resources/fonts/Roboto-Thin-webfont.svg#robotothin') format('svg');
   font-weight: normal;
   font-style: normal; }
 
@@ -849,7 +850,7 @@ form .row {
 form .row .cell {
   display: inline-block;
   text-align: left;
-  vertical-align: middle; }
+  vertical-align: top; }
 
 form .row .cell {
   width: 220px; }

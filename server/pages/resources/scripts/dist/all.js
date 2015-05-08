@@ -1,3 +1,147 @@
+function onload () {
+
+}
+
+function openMessaging () {
+    var header = document.getElementsByTagName("header");
+    var card = document.getElementById("main");
+    var tweenTime = 0.5;
+
+    TweenLite.to(header, tweenTime, {
+        height: "0px"
+    });
+    TweenLite.to(card, tweenTime, {
+        top: "-535px",
+        onComplete: function () {
+            window.location.href = "messaging";
+        }
+    });
+}
+
+function submitForm (form) {
+	if (checkInputForErrors(form)) {
+        switch (form) {
+            case "login" :
+                var username = document.getElementById("login_username");
+                var password = document.getElementById("login_password");
+                
+                var xmlhttp;
+                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {// code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        if (xmlhttp.responseText.includes("success")) {
+                            openMessaging();
+                        } else {
+                            username.setAttribute("error", "");
+                            username.nextSibling.innerHTML = "Bad login";
+                            password.setAttribute("error", "");
+                            password.nextSibling.innerHTML = "Bad login";
+                        }
+                    }
+                };
+                xmlhttp.open("POST","/signup", true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                xmlhttp.send("username=" + username.value + "&password=" + password.value);
+                break;
+            case "signup" :
+                
+                break;
+        }
+	}
+}
+
+function checkInputForErrors (form) {
+    switch (form) {
+        case "login" :
+            var hasError = false;
+
+            var username = document.getElementById("login_username");
+            var password = document.getElementById("login_password");
+
+            if (password.value === "") {
+                password.setAttribute("error", "");
+                password.nextSibling.innerHTML = "Can't be blank";
+                password.focus();
+                hasError = true;
+            } else {
+                password.removeAttribute("error");
+                password.nextSibling.innerHTML = "We're all good";
+            }
+            if (username.value === "") {
+                username.setAttribute("error", "");
+                username.nextSibling.innerHTML = "Can't be blank";
+                username.focus();
+                hasError = true;
+            } else {
+                username.removeAttribute("error");
+                username.nextSibling.innerHTML = "We're all good";
+            }
+            return !hasError;
+        case "signup" :
+            /*var*/ hasError = false;
+
+            var email = document.getElementById("signup_email");
+            /*var*/ username = document.getElementById("signup_username");
+            /*var*/ password = document.getElementById("signup_password");
+            var passwordAgain = document.getElementById("signup_password_again");
+
+            if (password.value === "") {
+                password.setAttribute("error", "");
+                password.nextSibling.innerHTML = "Can't be blank";
+                password.focus();
+                hasError = true;
+            } else {
+                password.removeAttribute("error");
+                password.nextSibling.innerHTML = "We're all good";
+            }
+            if (password.value != passwordAgain.value) {
+                password.setAttribute("error", "");
+                password.nextSibling.innerHTML = "Passwords don't match";
+                passwordAgain.setAttribute("error", "");
+                passwordAgain.nextSibling.innerHTML = "Passwords don't match";
+                password.focus();
+                hasError = true;
+            } else if (password.value !== "") {
+                password.removeAttribute("error");
+                password.nextSibling.innerHTML = "We're all good";
+                passwordAgain.removeAttribute("error");
+                passwordAgain.nextSibling.innerHTML = "We're all good";
+            }
+            if (email.value === "") {
+                email.setAttribute("error", "");
+                email.nextSibling.innerHTML = "Can't be blank";
+                email.focus();
+                hasError = true;
+            } else if (!isEmail(email.value)) {
+                email.setAttribute("error", "");
+                email.nextSibling.innerHTML = "Enter a valid email";
+                email.focus();
+                hasError = true;
+            } else {
+                email.removeAttribute("error");
+                email.nextSibling.innerHTML = "We're all good";
+            }
+            if (username.value === "") {
+                username.setAttribute("error", "");
+                username.nextSibling.innerHTML = "Can't be blank";
+                username.focus();
+                hasError = true;
+            } else {
+                username.removeAttribute("error");
+                username.nextSibling.innerHTML = "We're all good";
+            }
+            return !hasError;
+    }
+}
+
+function isEmail (email) {
+	return (email.length >= 5 && email.indexOf(" ") == -1 && email.split("@").length == 2 && email.split(".").length == 2 && email.indexOf("@") < email.indexOf(".") - 1 && email.indexOf("@") !== 0 && email.indexOf(".") != email.length - 1);
+}
 function SpecialScroll (applyTo, relativeSpeed) {
 	this.relativeSpeed = relativeSpeed;
     this.applyTo = applyTo;
@@ -9,101 +153,309 @@ function SpecialScroll (applyTo, relativeSpeed) {
 	    }
 	};
 }
+var users = [];
+var chats = {};
+var you = {
+    name: "Clarence Meyer",
+    id: 457,
+    image: "resources/images/profile.png"
+}
+
+var overflowMenu = document.getElementById("overflow");
+var overflowMenuList = document.getElementById("overflow_menu");
 function onload () {
-
+    // TODO: fill users and chats
+    users = [450, 451, 452, 453, 454, 455, 456];
+    chats[450] = new Chat("Isaiah Mcdonalid", OnlineStatus.ONLINE, ChatStatus.NONE, "resources/images/450.jpg", "now", [{sender: 450, message: "Yo! ma homie!", time: "9:32"}, {sender: 450, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 450, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    chats[451] = new Chat("Johnny Appleseed", OnlineStatus.ONLINE, ChatStatus.NONE, "resources/images/451.jpg", "now", [{sender: 451, message: "Yo! ma homie!", time: "9:32"}, {sender: 451, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 451, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    chats[452] = new Chat("Grace Fowler", OnlineStatus.ONLINE, ChatStatus.MUTED, "resources/images/452.jpg", "now", [{sender: 452, message: "Yo! ma homie!", time: "9:32"}, {sender: 452, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 452, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    chats[453] = new Chat("Dylan Nichols", OnlineStatus.OFFLINE, ChatStatus.NONE, "resources/images/453.jpg", "now", [{sender: 453, message: "Yo! ma homie!", time: "9:32"}, {sender: 453, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 453, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    chats[454] = new Chat("Katie Price", OnlineStatus.ONLINE, ChatStatus.NONE, "resources/images/454.jpg", "now", [{sender: 454, message: "Yo! ma homie!", time: "9:32"}, {sender: 454, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 454, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    chats[455] = new Chat("Andrea Rodriquez", OnlineStatus.AWAY, ChatStatus.NONE, "resources/images/455.jpg", "now", [{sender: 455, message: "Yo! ma homie!", time: "9:32"}, {sender: 455, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 455, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    chats[456] = new Chat("Andre Richards", OnlineStatus.ONLINE, ChatStatus.NONE, "resources/images/456.jpg", "now", [{sender: 456, message: "Yo! ma homie!", time: "9:32"}, {sender: 456, message: "how's it going?", time: "9:34"}, {sender: "You", message: "Wazzup?! I'm feeling pretty pumped to try out All Talk! It seems like it takes all the good parts of the other messaging apps and puts them together into one intuitive place.", time: "9:35"}, {sender: 456, message: "IKR! I'm really liking how it's got desktop and mobile clients, with overlay views to boot.", time: "9:35"}, {sender: "You", message: "And, add to that the fact that they won't ever spy on you, I think this thing could really take off!", time: "9:36"}], [{service: "google-plus", username: "j_appleseed@gmail.com", url: "http://plus.google.com"}, {service: "twitter", username: "@j_appleseed", url: "http://twitter.com/j_appleseed"}, {service: "facebook-box", username: "johnny.appleseed", url: "http://facebook.com/johnny.appleseed"}, {service: "twitch", username: "j_appleseed", url: "http://twitch.com"}]);
+    
+    listChats();
+    switchChat(users[0]);
+    
+    if (overflowMenu == undefined)
+        overflowMenu = document.getElementById("overflow");
+    if (overflowMenuList == undefined)
+        overflowMenuList = document.getElementById("overflow_menu");
+    overflowMenu.addEventListener("click", function () {
+        expandOverflow();
+    });
+    
+    if (FABmain == undefined)
+        FABmain = document.getElementById("FAB");
+    FABmain.addEventListener("click", openNewChatDialog);
 }
 
-function submitForm (name) {
-	if (checkInputForErrors(name)) {
-		var xmlhttp;
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				if (xmlhttp.responseText == "success")
-					document.getElementById("inside").innerHTML = "<div class='responseMessage'><i class='mdi mdi-check'></i></div><input type=\"button\" class=\"material light raised\" value=\"Close\" onclick=\"closeForm('register', document.getElementById('registerButton'));\" />";
-			}
-		};
-		xmlhttp.open("POST","/finishConfig", true);
-		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-		name = document.getElementById("name");
-		var addressLine1 = document.getElementById("address_line_1");
-		var addressLine2 = document.getElementById("address_line_2");
-		var wifiSSID = document.getElementById("WiFi_SSID");
-		var wifiPassword = document.getElementById("WiFi_password");
-		xmlhttp.send("name=" + name.value + "&addressLine1=" + addressLine1.value + "&addressLine2=" + addressLine2.value + "&wifiSSID=" + wifiSSID.value + "&wifiPassword=" + wifiPassword.value);
-	}
+var chatList = document.getElementById("chats");
+var fragmentChat = "<div class=\"icon\" style=\"background-image: url({{image}});\"></div><div class=\"status\"></div><div class=\"name\">{{name}}</div><div class=\"lastMessage\">{{lastMessage}}</div><div class=\"time\">{{lastMessageTime}}</div><div class=\"muted\"><i class='mdi mdi-volume-off'></div>";
+function listChats () {
+    if (chatList == undefined)
+        chatList = document.getElementById("chats");
+    
+    for (var i = 0; i < users.length; i++) {
+        var newChat = document.createElement("div");
+        newChat.className = "chat";
+        newChat.setAttribute(chats[users[i]].status.toLowerCase(), "");
+        if (chats[users[i]].chatStatus != "")
+            newChat.setAttribute(chats[users[i]].chatStatus.toLowerCase(), "");
+        newChat.innerHTML = fragmentChat.replace("{{name}}", chats[users[i]].name);
+        newChat.innerHTML = newChat.innerHTML.replace("{{image}}", chats[users[i]].image);
+        if (chats[users[i]].history[chats[users[i]].history.length - 1].sender != "You")
+            newChat.innerHTML = newChat.innerHTML.replace("{{lastMessage}}", chats[users[i]].history[chats[users[i]].history.length - 1].message);
+        else
+            newChat.innerHTML = newChat.innerHTML.replace("{{lastMessage}}", chats[users[i]].history[chats[users[i]].history.length - 1].message);
+        newChat.innerHTML = newChat.innerHTML.replace("{{lastMessageTime}}", chats[users[i]].history[chats[users[i]].history.length - 1].time);
+        var userID = users[i];
+//        newChat.addEventListener("click", (function () { switchChat(userID, newChat); }));
+        newChat.onclick = (function(uid, nchat) {return function() {
+            switchChat(uid, nchat);
+        };})(userID, newChat);
+        
+        chatList.appendChild(newChat);
+        chats[users[i]].chat = newChat;
+    }
 }
 
-function checkInputForErrors (name) {
-	var hasError = false;
-	
-	name = document.getElementById("name");
-	var addressLine1 = document.getElementById("address_line_1");
-	var addressLine2 = document.getElementById("address_line_2");
-	var wifiSSID = document.getElementById("WiFi_SSID");
-	var wifiPassword = document.getElementById("WiFi_password");
-
-	if (name.value === "") {
-		name.setAttribute("error", "");
-		name.nextSibling.innerHTML = "Can not be blank";
-		name.focus();
-		hasError = true;
-	} else {
-		name.removeAttribute("error");
-		name.nextSibling.innerHTML = "We're all good";
-	}
-	if (addressLine1.value === "") {
-		addressLine1.setAttribute("error", "");
-		addressLine1.nextSibling.innerHTML = "Can not be blank";
-		addressLine1.focus();
-		hasError = true;
-	} else {
-		addressLine1.removeAttribute("error");
-		addressLine1.nextSibling.innerHTML = "We're all good";
-	}
-	if (addressLine2.value === "") {
-		addressLine2.setAttribute("error", "");
-		addressLine2.nextSibling.innerHTML = "Can not be blank";
-		addressLine2.focus();
-		hasError = true;
-	} else {
-		addressLine2.removeAttribute("error");
-		addressLine2.nextSibling.innerHTML = "We're all good";
-	}
-	if (wifiSSID.value === "") {
-		wifiSSID.setAttribute("error", "");
-		wifiSSID.nextSibling.innerHTML = "Can not be blank";
-		wifiSSID.focus();
-		hasError = true;
-	} else {
-		wifiSSID.removeAttribute("error");
-		wifiSSID.nextSibling.innerHTML = "We're all good";
-	}
-	if (wifiPassword.value === "") {
-		wifiPassword.setAttribute("error", "");
-		wifiPassword.nextSibling.innerHTML = "Can not be blank";
-		wifiPassword.focus();
-		hasError = true;
-	} else if (wifiPassword.value.length < 7) {
-		wifiPassword.setAttribute("error", "");
-		wifiPassword.nextSibling.innerHTML = "Incorrect password";
-		wifiPassword.focus();
-		hasError = true;
-	} else {
-		wifiPassword.removeAttribute("error");
-		wifiPassword.nextSibling.innerHTML = "We're all good";
-	}
-
-	return !hasError;
+function expandOverflow () {
+    if (overflowMenuList.hasAttribute("open")) {
+        overflowMenuList.removeAttribute("open");
+    } else {
+        overflowMenuList.setAttribute("open", "");
+    }
 }
 
-function isEmail (email) {
-	return (email.length >= 5 && email.indexOf(" ") == -1 && email.split("@").length == 2 && email.split(".").length == 2 && email.indexOf("@") < email.indexOf(".") - 1 && email.indexOf("@") !== 0 && email.indexOf(".") != email.length - 1);
+var shiftDown = false;
+function listenForReturn () {
+    if (event.keyCode === 13 && !shiftDown) {
+        sendMessage('You', you.image, document.getElementById('send_message').value);
+        event.cancelBubble = true;
+        event.returnValue = false;
+        document.getElementById('send_message').value = "";
+        return false;
+    } else if (event.keyCode === 13) {
+        event.cancelBubble = true;
+        event.returnValue = false;
+        document.getElementById('send_message').value += "\n";
+        return false;
+    } else if (event.keyCode === 16) {
+        shiftDown = true;
+    }
+}
+function listenForShiftUp () {
+    if (event.keyCode === 16) {
+        shiftDown = false;
+    }
+}
+
+function sendMessage (sender, image, message) {
+    
+    addMessageToCurrentView(sender, image, Date.now(), message);
+}
+
+var chatHistory = document.getElementById("history");
+var rightSidebar = document.getElementById("right_sidebar");
+var fragmentMessage = "<div class=\"icon\" title=\"{{sender}}\" style=\"background-image: url('{{image}}');\"></div><div class=\"text\" title=\"{{time}}\">{{message}}</div>";
+function switchChat (user, chat) {
+    for (i in chatList.childNodes)
+        if (chatList.childNodes[i].className === "chat")
+            chatList.childNodes[i].removeAttribute("open");
+    if (chat == undefined) {
+        for (var i = 0; i <= chatList.childElementCount; i++) {
+            if (chatList.childNodes[i].className === "chat" && chatList.childNodes[i].getElementsByClassName("name")[0].innerHTML === chats[user].name) {
+                chatList.childNodes[i].setAttribute("open", "");
+                break;
+            }
+        }
+    } else {
+        chat.setAttribute("open", "");
+    }
+    
+    if (chatHistory == undefined)
+        chatHistory = document.getElementById("history");
+    while (chatHistory.firstChild)
+        chatHistory.removeChild(chatHistory.firstChild);
+        
+    for (var i = 0; i < chats[user].history.length; i++) {
+        var newMessage = document.createElement("div");
+        newMessage.className = "message";
+        newMessage.innerHTML = fragmentMessage;
+        if (chats[user].history[i].sender === "You") {
+            newMessage.setAttribute("you", "");
+            newMessage.innerHTML = newMessage.innerHTML.replace("{{sender}}", "You");
+            newMessage.innerHTML = newMessage.innerHTML.replace("{{image}}", you.image);
+            newMessage.innerHTML = newMessage.innerHTML.replace("{{message}}", chats[user].history[i].message);
+        } else {
+            newMessage.setAttribute("other", "");
+            newMessage.innerHTML = newMessage.innerHTML.replace("{{sender}}", chats[chats[user].history[i].sender].name);
+            newMessage.innerHTML = newMessage.innerHTML.replace("{{image}}", chats[chats[user].history[i].sender].image);
+            // TODO: this doesn't work with group messaging
+            newMessage.innerHTML = newMessage.innerHTML.replace("{{message}}", chats[user].history[i].message);
+        }
+        
+        chatHistory.appendChild(newMessage);
+    }
+        
+    if (rightSidebar == undefined)
+        rightSidebar = document.getElementById("right_sidebar");
+    while (rightSidebar.firstChild) {
+        rightSidebar.removeChild(rightSidebar.firstChild);
+    }
+    
+    var icon = document.createElement("div");
+    var status = document.createElement("div");
+    var name = document.createElement("div");
+    var lastActive = document.createElement("div");
+    var icnMute = document.createElement("i");
+    var tglMute = document.createElement("div");
+    var btnCall = document.createElement("button");
+    var profiles = document.createElement("div");
+    
+    icon.className = "icon";
+    status.className = "status";
+    name.className = "name";
+    lastActive.className = "lastActive";
+    icnMute.className = "mdi mdi-bell muteIcon";
+    tglMute.className = "material light switch mute";
+    btnCall.className = "material light flat call";
+    profiles.className = "profiles";
+
+    name.innerHTML = chats[user].name;
+    icon.style.backgroundImage = "url('" + chats[user].image + "')";
+    if (chats[user].status === OnlineStatus.ONLINE) {
+        status.setAttribute("online", "");
+        lastActive.innerHTML = "Active Now";
+    } else if (chats[user].status === OnlineStatus.AWAY) {
+        status.setAttribute("away", "");
+        lastActive.innerHTML = "Last Active " + 3 + "m";
+    } else {
+        status.setAttribute("offline", "");
+        lastActive.innerHTML = "Last Active " + 59 + "m";
+    }
+    tglMute.innerHTML = "<input id=\"tglMute\" type=\"checkbox\" " + ((chats[user].chatStatus === ChatStatus.MUTED) ? "" : "checked") + "><label for=\"tglMute\"></label>";
+    btnCall.innerHTML = "<i class='mdi mdi-phone'></i>";
+    tglMute.title = "Mute chat";
+    btnCall.title = "Start call";
+    tglMute.addEventListener("click", (function () {
+        muteChat(user, (chats[user].chatStatus === ChatStatus.MUTED) ? true : false);
+    }));
+    btnCall.addEventListener("click", (function () {
+        
+    }));
+    
+    for (var i = 0; i < chats[user].profiles.length; i++) {
+        var newProfile = document.createElement("a");
+        newProfile.href = chats[user].profiles[i].url;
+        newProfile.className = "profile";
+        newProfile.innerHTML = "<i class='mdi mdi-" + chats[user].profiles[i].service + "'></i>&nbsp;" + chats[user].profiles[i].username;
+        
+        profiles.appendChild(newProfile);
+    }
+
+    rightSidebar.appendChild(icon);
+    rightSidebar.appendChild(status);
+    rightSidebar.appendChild(name);
+    rightSidebar.appendChild(lastActive);
+    rightSidebar.appendChild(icnMute);
+    rightSidebar.appendChild(tglMute);
+    rightSidebar.appendChild(btnCall);
+    rightSidebar.appendChild(profiles);
+}
+
+function addMessageToCurrentView (sender, image, time, message) {
+    if (chatHistory == undefined)
+        chatHistory = document.getElementById("history");
+
+    var newMessage = document.createElement("div");
+    newMessage.className = "message";
+    newMessage.innerHTML = fragmentMessage;
+    if (sender === "You") {
+        newMessage.setAttribute("you", "");
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{sender}}", "You");
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{image}}", image);
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{time}}", time);
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{message}}", message);
+    } else {
+        newMessage.setAttribute("other", "");
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{sender}}", name);
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{image}}", image);
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{time}}", time);
+        // TODO: this doesn't work with group messaging
+        newMessage.innerHTML = newMessage.innerHTML.replace("{{message}}", message);
+    }
+
+    chatHistory.appendChild(newMessage);
+}
+
+function changeStatus (user, status) {
+    chats[user].status = status;
+}
+
+function muteChat (user, state) {
+    if (state) {
+        chats[user].chatStatus = ChatStatus.NONE;
+        chats[user].chat.removeAttribute(ChatStatus.MUTED);
+    } else {
+        chats[user].chatStatus = ChatStatus.MUTED;
+        chats[user].chat.setAttribute(chats[user].chatStatus.toLowerCase(), "");
+    }
+}
+
+var FABmain = document.getElementById("FAB");
+var newChatDialogFrame = document.getElementById("popup_new_chat");
+var newChatDialog = document.getElementById("actual_popup_new_chat");
+function openNewChatDialog () {
+    if (FABmain == undefined)
+        FABmain = document.getElementById("FAB");
+    if (newChatDialogFrame == undefined)
+        newChatDialogFrame = document.getElementById("popup_new_chat");
+    if (newChatDialog == undefined)
+        newChatDialog = document.getElementById("actual_popup_new_chat");
+    
+    newChatDialog.style.display = "block";
+    newChatDialog.style.left = FABmain.offsetLeft;
+    newChatDialog.style.width = FABmain.offsetWidth;
+    newChatDialog.style.top = FABmain.offsetTop + 70;
+    newChatDialog.style.height = FABmain.offsetHeight;
+    newChatDialog.style.borderRadius = "28px";
+    
+    var tweenTime = 0.5;
+    TweenLite.to(newChatDialog, tweenTime, {
+        top: "0px",
+        left: "0px",
+        width: "500px",
+        height: "400px",
+        borderRadius: "2px";
+    });
+
+    
+    newChatDialogFrame.setAttribute("open", "");
+}
+
+setTimeout(openNewChatDialog, 200);
+var OnlineStatus = Object.freeze({
+    ONLINE : "Online",
+    AWAY : "Away",
+    OFFLINE : "Offline"
+});
+
+var ChatStatus = Object.freeze({
+    MUTED : "Muted",
+    NONE : ""
+});
+
+
+function Chat (name, status, chatStatus, image, lastActive, history, profiles) {
+    this.name = name;
+    this.status = status;
+    this.chatStatus = chatStatus;
+    this.image = image;
+    this.lastActive = lastActive;
+    this.history = history;
+    this.profiles = profiles;
 }
 /** smooth-scroll v5.3.3, by Chris Ferdinandi | http://github.com/cferdinandi/smooth-scroll | Licensed under MIT: http://gomakethings.com/mit/ */
 

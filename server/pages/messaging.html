@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=false" />
+        <meta content="All Talk" name="All Talk">
+        <meta name="theme-color" content="#499379">
+        <link rel='shortcut icon' href="resources/images/favicon.ico">
+        <link rel="icon" sizes="256x256" href="resources/images/icon_256.png">
+
+        <title>All Talk</title>
+
+        <link href="resources/styles/mdi/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="resources/styles/messaging.css" rel="stylesheet">
+        
+        <script src="resources/scripts/greensock-js/plugins/CSSPlugin.min.js"></script>
+        <script src="resources/scripts/greensock-js/easing/EasePack.min.js"></script>
+        <script src="resources/scripts/greensock-js/TweenLite.min.js"></script>
+        <script type="text/javascript" src="resources/scripts/messaging_headers.js"></script>
+        <script type="text/javascript" src="resources/scripts/messaging.js"></script>
+    </head>
+
+	<body onload="onload();">
+		<header id="app_toolbar">
+            <div id="app_title" title="And some bite, too.">All Talk</div>
+            <div id="menu_items">
+                <button class="menu_item">
+                    <div class="icon"><i class='mdi mdi-history' title="Turn history off"></i></div>
+                    <div class="name">Turn history off</div>
+                </button>
+                <button class="menu_item">
+                    <div class="icon"><i class='mdi mdi-account-plus' title="Add people"></i></div>
+                    <div class="name">Add people</div>
+                </button>
+                <button class="menu_item">
+                    <div class="icon"><i class='mdi mdi-package' title="Archive"></i></div>
+                    <div class="name">Archive</div>
+                </button>
+                <div id="overflow">
+                    <div class="icon"><i class='mdi mdi-dots-vertical' title="More"></i></div>
+                    <div id="overflow_menu">
+                        <button class="menu_item">
+                            <div class="icon"><i class='mdi mdi-rename-box' title="Rename"></i></div>
+                            <div class="name">Rename</div>
+                        </button>
+                        <button class="menu_item">
+                            <div class="icon"><i class='mdi mdi-delete' title="Delete"></i></div>
+                            <div class="name">Delete</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="content">
+            <div id="sidebar">
+                <input id="FAB" class="material light floating" value="+" type="button">
+                <div id="chats">
+                </div>
+            </div>
+            <div id="chat">
+                <div id="history">
+                </div>
+                <div id="messageContainer">
+                    <div id="message">
+                        <form>
+                            <div class="messageBox">
+<!--                                <input type="text" class="material light" id="send_message" placeholder="Type a message" autofocus autocomplete="off" onkeydown="listenForReturn();" />-->
+                                <textarea class="material light" id="send_message" placeholder="Type a message" autofocus autocomplete="off" onkeydown="listenForReturn();" onkeyup="listenForShiftUp();"></textarea>
+                            </div>
+                            <button class="" id="send_attach" title="Attach"><i class='mdi mdi-paperclip'></i></button>
+                            <button class="" id="send_submit" title="Send"><i class='mdi mdi-send' onclick="sendMessage('you', you.image, document.getElementById('send_message').value); return false;"></i></button>
+<!--                            <input type="submit" class="material light flat" style="display:none;" onclick="sendMessage('You', you.image, document.getElementById('send_message').value); return false;" />-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="right_sidebar">
+            </div>
+        </div>
+        <div id="popup_new_chat">
+            <div id="actual_popup_new_chat" class="material popup">
+                <form>
+                    <i class='mdi mdi-search'></i><input type="text" class="material light" id="start_username" placeholder="New conversation" autocomplete="off" />
+                    <div id="start_users_list">
+                        <div class="user" online>
+                            <div class="icon" style="background-image: url('resources/images/profile.png');"></div>
+                            <div class="status"></div>
+                            <div class="name">Johnny Appleseed</div>
+                            <input type="checkbox" class="material light" />
+                        </div>
+                        <div class="user" online open>
+                            <div class="icon" style="background-image: url('resources/images/profile.png');"></div>
+                            <div class="status"></div>
+                            <div class="name">Johnny Appleseed</div>
+                            <input type="checkbox" class="material light" />
+                        </div>
+                        <div class="user" online>
+                            <div class="icon" style="background-image: url('resources/images/profile.png');"></div>
+                            <div class="status"></div>
+                            <div class="name">Johnny Appleseed</div>
+                            <input type="checkbox" class="material light" />
+                        </div>
+                    </div>
+                    <button class="material light flat" id="start_cancel"><i class='mdi mdi-message'></i> Cancel</button>
+                    <button class="material light raised" id="start_conversation"><i class='mdi mdi-message'></i> Start conversation</button>
+                </form>
+            </div>
+        </div>
+	</body>
+</html>

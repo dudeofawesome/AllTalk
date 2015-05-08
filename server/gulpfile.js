@@ -55,7 +55,8 @@ gulp.task('stop-mongo', function () {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('pages/resources/scripts/*.js', ['lint', 'scripts']);
+//    gulp.watch('pages/resources/scripts/*.js', ['lint', 'scripts']);
+    gulp.watch('pages/resources/scripts/*.js', ['scripts']);
     gulp.watch('pages/resources/styles/*.scss', ['sass']);
     
     gulp.watch('pages/*.html', ['node-server']);

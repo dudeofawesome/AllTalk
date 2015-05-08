@@ -104,7 +104,7 @@
 // END FLAT BUTTON
 
 // START RAISED BUTTON
-.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised {
+.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised, button.material.raised {
 	min-width: 88px;
 	height: 36px;
 	border-radius: 2px;
@@ -162,7 +162,7 @@
 // END RAISED BUTTON
 
 // START FLOATING BUTTON
-.material[type="button"].floating, .material[type="submit"].floating, .material[type="reset"].floating {
+.material[type="button"].floating, .material[type="submit"].floating, .material[type="reset"].floating, button.material.floating {
 	width: 56px;
 	height: 56px;
 	padding: 11px 17px 18px 17px;
@@ -280,6 +280,7 @@
 			top: 2px;
 			color: rgb(255, 0, 0);
 			font-size: 11px;
+            font-family: roboto;
 		}
 	}
 }

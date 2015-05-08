@@ -4,7 +4,7 @@ module.exports = {
         app.get("/", function (req, res) {
             res.send(index);
         });
-        app.get("/signup", function (req, res) {
+        app.post("/signup", function (req, res) {
         //	console.log("get flyers");
         //	db.fliers.find({school: req}, function(err, items) {
         //		if( err || !items || items.length == 0) res.send("No flyers were found.");
@@ -12,6 +12,17 @@ module.exports = {
         //			res.send("flyers->" + items[0].flyers);
         //		}
         //	});
+            if (req.body.username != "failme") {
+                res.send("success " + "ib87f9n88JYT&*&df89");
+            } else {
+                res.send("fail");
+            }
+        });
+        app.get("/messaging", function (req, res) {
+            var loggedIn = true;
+            if (loggedIn) {
+                res.send(messaging);
+            }
         });
 
         app.listen(WEBSITE_PORT, function(){
@@ -37,14 +48,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 
-var index;
+var index, messaging;
 
 function loadPages () {
 	// TODO: search document for all names encapsulated by {{}} and auto replace them if the var exists in this scope
 	index = fs.readFileSync('./pages/index.html').toString();
 //	configPage = configPage.replaceAll("{{SERVICE_NAME}}", SERVICE_NAME);
 
-//	finishConfigPage = fs.readFileSync('../pages/finish_configure.html').toString();
+	messaging = fs.readFileSync('./pages/messaging.html').toString();
 //	finishConfigPage = finishConfigPage.replaceAll("{{SERVICE_NAME}}", SERVICE_NAME);
 }
 
