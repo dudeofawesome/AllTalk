@@ -258,7 +258,7 @@ function SpecialScroll (applyTo, relativeSpeed) {
 					element[0].setAttribute("user", scope.chat.id);
 				}
 				element.on("click", function (event) {
-					scope.ctrlChat.switchChat(scope.ctrlMessenger.users[scope.$index], element[0]);
+					scope.ctrlChat.switchChat(scope.chat.id, element[0]);
 				});
                 if (scope.$first) {
                     scope.ctrlChat.switchChat(scope.chat.id, element);

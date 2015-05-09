@@ -408,6 +408,12 @@ header#app_toolbar {
                         background-color: transparent;
                         box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9);
                     }
+                    &::selection {
+                        background: lighten($complement-1, 15%);
+                    }
+                    &::-moz-selection {
+                        background: lighten($complement-1, 15%);
+                    }
                 }
             }
 			&[sender=you] {
@@ -450,6 +456,12 @@ header#app_toolbar {
                         height: 1px;
                         background-color: transparent;
                         box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9);
+                    }
+                    &::selection {
+                        background: rgb(225, 225, 225);
+                    }
+                    &::-moz-selection {
+                        background: rgb(225, 225, 225);
                     }
                 }
             }

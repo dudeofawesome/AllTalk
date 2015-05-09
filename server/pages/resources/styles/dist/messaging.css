@@ -1024,6 +1024,10 @@ header#app_toolbar {
           height: 1px;
           background-color: transparent;
           box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9); }
+        #chat chat-history .message[sender=other] .text::selection {
+          background: #7fde7f; }
+        #chat chat-history .message[sender=other] .text::-moz-selection {
+          background: #7fde7f; }
       #chat chat-history .message[sender=you] .icon {
         left: auto;
         right: 0px; }
@@ -1059,6 +1063,10 @@ header#app_toolbar {
           height: 1px;
           background-color: transparent;
           box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9); }
+        #chat chat-history .message[sender=you] .text::selection {
+          background: #e1e1e1; }
+        #chat chat-history .message[sender=you] .text::-moz-selection {
+          background: #e1e1e1; }
       #chat chat-history .message .icon {
         position: absolute;
         bottom: 15px;
