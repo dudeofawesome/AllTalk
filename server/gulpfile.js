@@ -1,5 +1,5 @@
 // Include gulp
-var gulp = require('gulp'); 
+var gulp = require('gulp');
 
 // Include Our Plugins
 var jshint = require('gulp-jshint');
@@ -58,14 +58,16 @@ gulp.task('watch', function() {
 //    gulp.watch('pages/resources/scripts/*.js', ['lint', 'scripts']);
     gulp.watch('pages/resources/scripts/*.js', ['scripts']);
     gulp.watch('pages/resources/styles/*.scss', ['sass']);
-    
+
     gulp.watch('pages/*.html', ['node-server']);
     gulp.watch('*.js', ['node-server']);
     gulp.watch('modules/*.js', ['node-server']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch', 'node-server']);
+gulp.task('default', ['lint', 'sass', 'scripts']);
+
+gulp.task('build-run', ['default', 'watch', 'node-server']);
 
 
 

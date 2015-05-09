@@ -1,4 +1,4 @@
-<html>
+<html ng-app="AllTalk">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=false" />
@@ -10,71 +10,23 @@
         <title>All Talk</title>
 
         <link href="resources/styles/mdi/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="resources/styles/messaging.css" rel="stylesheet">
-        
+        <link href="resources/styles/dist/messaging.css" rel="stylesheet">
+
         <script src="resources/scripts/greensock-js/plugins/CSSPlugin.min.js"></script>
         <script src="resources/scripts/greensock-js/easing/EasePack.min.js"></script>
         <script src="resources/scripts/greensock-js/TweenLite.min.js"></script>
-        <script type="text/javascript" src="resources/scripts/messaging_headers.js"></script>
-        <script type="text/javascript" src="resources/scripts/messaging.js"></script>
     </head>
 
-	<body onload="onload();">
-		<header id="app_toolbar">
-            <div id="app_title" title="And some bite, too.">All Talk</div>
-            <div id="menu_items">
-                <button class="menu_item">
-                    <div class="icon"><i class='mdi mdi-history' title="Turn history off"></i></div>
-                    <div class="name">Turn history off</div>
-                </button>
-                <button class="menu_item">
-                    <div class="icon"><i class='mdi mdi-account-plus' title="Add people"></i></div>
-                    <div class="name">Add people</div>
-                </button>
-                <button class="menu_item">
-                    <div class="icon"><i class='mdi mdi-package' title="Archive"></i></div>
-                    <div class="name">Archive</div>
-                </button>
-                <div id="overflow">
-                    <div class="icon"><i class='mdi mdi-dots-vertical' title="More"></i></div>
-                    <div id="overflow_menu">
-                        <button class="menu_item">
-                            <div class="icon"><i class='mdi mdi-rename-box' title="Rename"></i></div>
-                            <div class="name">Rename</div>
-                        </button>
-                        <button class="menu_item">
-                            <div class="icon"><i class='mdi mdi-delete' title="Delete"></i></div>
-                            <div class="name">Delete</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <!-- <body onload="onload();"> -->
+    <body ng-controller="MessengerController as ctrlMessenger">
+        <app-toolbar></app-toolbar>
         <div id="content">
             <div id="sidebar">
                 <input id="FAB" class="material light floating" value="+" type="button">
-                <div id="chats">
-                </div>
+                <chats-list id="chats"></chats-list>
             </div>
-            <div id="chat">
-                <div id="history">
-                </div>
-                <div id="messageContainer">
-                    <div id="message">
-                        <form>
-                            <div class="messageBox">
-<!--                                <input type="text" class="material light" id="send_message" placeholder="Type a message" autofocus autocomplete="off" onkeydown="listenForReturn();" />-->
-                                <textarea class="material light" id="send_message" placeholder="Type a message" autofocus autocomplete="off" onkeydown="listenForReturn();" onkeyup="listenForShiftUp();"></textarea>
-                            </div>
-                            <button class="" id="send_attach" title="Attach"><i class='mdi mdi-paperclip'></i></button>
-                            <button class="" id="send_submit" title="Send"><i class='mdi mdi-send' onclick="sendMessage('you', you.image, document.getElementById('send_message').value); return false;"></i></button>
-<!--                            <input type="submit" class="material light flat" style="display:none;" onclick="sendMessage('You', you.image, document.getElementById('send_message').value); return false;" />-->
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div id="right_sidebar">
-            </div>
+            <current-chat></current-chat>
+            <right-sidebar></right-sidebar>
         </div>
         <div id="popup_new_chat">
             <div id="actual_popup_new_chat" class="material popup">
@@ -105,5 +57,9 @@
                 </form>
             </div>
         </div>
+
+        <script type="text/javascript" src="resources/scripts/angular/angular.js"></script>
+        <script type="text/javascript" src="resources/scripts/messaging_headers.js"></script>
+        <script type="text/javascript" src="resources/scripts/messaging.js"></script>
 	</body>
 </html>

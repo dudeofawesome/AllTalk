@@ -1,0 +1,31 @@
+<!-- //     for (var i = 0; i < users.length; i++) {
+//         var newChat = document.createElement("div");
+//         newChat.className = "chat";
+//         newChat.setAttribute(chats[users[i]].status.toLowerCase(), "");
+//         if (chats[users[i]].chatStatus != "")
+//             newChat.setAttribute(chats[users[i]].chatStatus.toLowerCase(), "");
+//         newChat.innerHTML = fragmentChat.replace("{{name}}", chats[users[i]].name);
+//         newChat.innerHTML = newChat.innerHTML.replace("{{image}}", chats[users[i]].image);
+//         if (chats[users[i]].history[chats[users[i]].history.length - 1].sender != 457)
+//             newChat.innerHTML = newChat.innerHTML.replace("{{lastMessage}}", chats[users[i]].history[chats[users[i]].history.length - 1].message);
+//         else
+//             newChat.innerHTML = newChat.innerHTML.replace("{{lastMessage}}", chats[users[i]].history[chats[users[i]].history.length - 1].message);
+//         newChat.innerHTML = newChat.innerHTML.replace("{{lastMessageTime}}", chats[users[i]].history[chats[users[i]].history.length - 1].time);
+//         var userID = users[i];
+// //        newChat.addEventListener("click", (function () { switchChat(userID, newChat); }));
+//         newChat.onclick = (function(uid, nchat) {return function() {
+//             switchChat(uid, nchat);
+//         };})(userID, newChat);
+//
+//         chatList.appendChild(newChat);
+//         chats[users[i]].chat = newChat;
+//     } -->
+
+<div class="chat" chat-list-click ng-repeat="chat in ctrlMessenger.chats | orderBy: 'chat.history[chat.history.length - 1].time'">
+    <div class="icon" style="background-image: url({{chat.image}});"></div>
+    <div class="status" online-status="{{chat.status | lowercase}}"></div>
+    <div class="name">{{chat.name}}</div>
+    <div class="lastMessage">{{chat.history[chat.history.length - 1].message}}</div>
+    <div class="time">{{chat.history[chat.history.length - 1].time | date: 'shortTime'}}</div>
+    <div class="muted" chat-status="{{chat.chatStatus | lowercase}}"><i class='mdi mdi-volume-off'></i></div>
+</div>

@@ -10,8 +10,9 @@ var ChatStatus = Object.freeze({
 });
 
 
-function Chat (name, status, chatStatus, image, lastActive, history, profiles) {
+function Chat (name, id, status, chatStatus, image, lastActive, history, profiles) {
     this.name = name;
+    this.id = id;
     this.status = status;
     this.chatStatus = chatStatus;
     this.image = image;

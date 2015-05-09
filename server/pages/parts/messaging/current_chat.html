@@ -1,0 +1,14 @@
+<div id="chat">
+    <chat-history></chat-history>
+    <div id="messageContainer">
+        <div id="message">
+            <form>
+                <div class="messageBox">
+                    <textarea class="material light" id="send_message" placeholder="Type a message" autofocus autocomplete="off" onkeydown="listenForReturn();" onkeyup="listenForShiftUp();"></textarea>
+                </div>
+                <button class="" id="send_attach" title="Attach"><i class='mdi mdi-paperclip'></i></button>
+                <button class="" id="send_submit" title="Send"><i class='mdi mdi-send' onclick="sendMessage('you', you.image, document.getElementById('send_message').value); return false;"></i></button>
+            </form>
+        </div>
+    </div>
+</div>

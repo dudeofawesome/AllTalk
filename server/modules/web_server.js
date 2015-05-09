@@ -1,6 +1,6 @@
 module.exports = {
     startServer: function () {
-        app.use(express.static("./pages/"))
+        app.use(express.static("./pages/"));
         app.get("/", function (req, res) {
             res.send(index);
         });
@@ -45,7 +45,7 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
-})); 
+}));
 
 
 var index, messaging;

@@ -902,14 +902,6 @@ header#app_toolbar {
         background-color: #c8c8c8; }
         #sidebar #chats .chat[open] .status {
           border-color: #c8c8c8; }
-      #sidebar #chats .chat[muted] .muted {
-        opacity: 1; }
-      #sidebar #chats .chat[online] .status {
-        background-color: #00c800; }
-      #sidebar #chats .chat[away] .status {
-        background-color: #e6c800; }
-      #sidebar #chats .chat[offline] .status {
-        background-color: #969696; }
       #sidebar #chats .chat:active {
         background-color: #c8c8c8; }
         #sidebar #chats .chat:active .status {
@@ -932,10 +924,16 @@ header#app_toolbar {
         height: 12px;
         border-radius: 10px;
         border: solid 2px #f0f0f0;
-        transition: border-color 0.2s;
-        -moz-transition: border-color 0.2s;
-        -webkit-transition: border-color 0.2s;
-        -o-transition: border-color 0.2s; }
+        transition: border-color 0.2s, background-color 0.2s;
+        -moz-transition: border-color 0.2s, background-color 0.2s;
+        -webkit-transition: border-color 0.2s, background-color 0.2s;
+        -o-transition: border-color 0.2s, background-color 0.2s; }
+        #sidebar #chats .chat .status[online-status="online"] {
+          background-color: #00c800; }
+        #sidebar #chats .chat .status[online-status="away"] {
+          background-color: #e6c800; }
+        #sidebar #chats .chat .status[online-status="offline"] {
+          background-color: #969696; }
       #sidebar #chats .chat .name {
         position: absolute;
         left: 70px;
@@ -964,6 +962,8 @@ header#app_toolbar {
         right: 10px;
         bottom: 10px;
         opacity: 0; }
+        #sidebar #chats .chat .muted[chat-status="muted"] {
+          opacity: 1; }
 
 #chat {
   position: absolute;
@@ -973,7 +973,7 @@ header#app_toolbar {
   bottom: 0px;
   z-index: 1;
   background-color: #fafafa; }
-  #chat #history {
+  #chat chat-history {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -983,101 +983,98 @@ header#app_toolbar {
     padding: 20px 20px 0px 0px;
     vertical-align: bottom;
     overflow-y: auto; }
-    #chat #history .message {
+    #chat chat-history .message {
       position: relative;
       display: block;
       width: 100%;
       min-height: 45px;
       height: auto; }
-      #chat #history .message[you] {
-        text-align: right; }
-        #chat #history .message[you] .icon {
-          left: auto;
-          right: 0px; }
-        #chat #history .message[you] .text {
-          left: auto;
-          right: 45px;
-          background-color: #7fde7f;
-          padding: 7px 15px 3px 10px;
-          -webkit-touch-callout: auto;
-          -webkit-user-select: auto;
-          -khtml-user-select: auto;
-          -moz-user-select: auto;
-          -ms-user-select: auto;
-          user-select: auto; }
-          #chat #history .message[you] .text::after {
-            content: " ";
-            position: absolute;
-            bottom: 0px;
-            right: -12px;
-            z-index: 1;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 12px 12px 0px;
-            border-color: transparent transparent #7fde7f transparent; }
-          #chat #history .message[you] .text::before {
-            content: " ";
-            position: absolute;
-            bottom: 1px;
-            right: -11px;
-            z-index: 0;
-            width: 10px;
-            height: 1px;
-            background-color: transparent;
-            box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9); }
-      #chat #history .message[other] {
-        text-align: left; }
-        #chat #history .message[other] .icon {
-          left: 0px;
-          right: auto; }
-        #chat #history .message[other] .text {
-          left: 45px;
-          right: auto;
-          background-color: #e1e1e1;
-          padding: 7px 10px 3px 15px;
-          -webkit-touch-callout: auto;
-          -webkit-user-select: auto;
-          -khtml-user-select: auto;
-          -moz-user-select: auto;
-          -ms-user-select: auto;
-          user-select: auto; }
-          #chat #history .message[other] .text::before {
-            content: " ";
-            position: absolute;
-            bottom: 0px;
-            left: -12px;
-            z-index: 1;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 0 12px 12px;
-            border-color: transparent transparent #e0e1e1 transparent; }
-          #chat #history .message[other] .text::after {
-            content: " ";
-            position: absolute;
-            bottom: 1px;
-            left: -11px;
-            z-index: 0;
-            width: 10px;
-            height: 1px;
-            background-color: transparent;
-            box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9); }
-      #chat #history .message .icon {
+      #chat chat-history .message[sender=other] .icon {
+        left: 0px;
+        right: auto; }
+      #chat chat-history .message[sender=other] .text {
+        left: 45px;
+        right: auto;
+        background-color: #e1e1e1;
+        padding: 7px 10px 3px 15px;
+        -webkit-touch-callout: auto;
+        -webkit-user-select: auto;
+        -khtml-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto; }
+        #chat chat-history .message[sender=other] .text::before {
+          content: " ";
+          position: absolute;
+          bottom: 0px;
+          left: -12px;
+          z-index: 1;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 0 12px 12px;
+          border-color: transparent transparent #e0e1e1 transparent; }
+        #chat chat-history .message[sender=other] .text::after {
+          content: " ";
+          position: absolute;
+          bottom: 1px;
+          left: -11px;
+          z-index: 0;
+          width: 10px;
+          height: 1px;
+          background-color: transparent;
+          box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9); }
+      #chat chat-history .message[sender=you] .icon {
+        left: auto;
+        right: 0px; }
+      #chat chat-history .message[sender=you] .text {
+        left: auto;
+        right: 45px;
+        background-color: #7fde7f;
+        padding: 7px 15px 3px 10px;
+        -webkit-touch-callout: auto;
+        -webkit-user-select: auto;
+        -khtml-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto; }
+        #chat chat-history .message[sender=you] .text::after {
+          content: " ";
+          position: absolute;
+          bottom: 0px;
+          right: -12px;
+          z-index: 1;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 12px 12px 0px;
+          border-color: transparent transparent #7fde7f transparent; }
+        #chat chat-history .message[sender=you] .text::before {
+          content: " ";
+          position: absolute;
+          bottom: 1px;
+          right: -11px;
+          z-index: 0;
+          width: 10px;
+          height: 1px;
+          background-color: transparent;
+          box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.9); }
+      #chat chat-history .message .icon {
         position: absolute;
-        top: 0px;
+        bottom: 15px;
         width: 30px;
         height: 30px;
         background-repeat: no-repeat;
         background-origin: content-box;
         background-size: cover;
         border-radius: 15px; }
-      #chat #history .message .text {
+      #chat chat-history .message .text {
         position: absolute;
         bottom: 17px;
         min-height: 20px;
-        max-width: 50%;
+        max-width: 70%;
         vertical-align: bottom;
+        text-align: left;
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37); }
   #chat #messageContainer {
     position: absolute;
@@ -1142,15 +1139,17 @@ header#app_toolbar {
           #chat #messageContainer #message form #send_submit:active {
             background-color: #c8c8c8; }
 
-#right_sidebar {
+right-sidebar {
   position: absolute;
   right: 0px;
   top: 0px;
   bottom: 0px;
   width: 300px;
   z-index: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: #e1e1e1; }
-  #right_sidebar .icon {
+  right-sidebar .icon {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -1160,45 +1159,49 @@ header#app_toolbar {
     background-origin: content-box;
     background-size: cover;
     border-radius: 35px; }
-  #right_sidebar .status {
+  right-sidebar .status {
     position: absolute;
     left: 45px;
     top: 45px;
     width: 12px;
     height: 12px;
     border-radius: 10px;
-    border: solid 2px #f0f0f0; }
-    #right_sidebar .status[online] {
+    border: solid 2px #e1e1e1;
+    transition: border-color 0.2s, background-color 0.2s;
+    -moz-transition: border-color 0.2s, background-color 0.2s;
+    -webkit-transition: border-color 0.2s, background-color 0.2s;
+    -o-transition: border-color 0.2s, background-color 0.2s; }
+    right-sidebar .status[online-status="online"] {
       background-color: #00c800; }
-    #right_sidebar .status[away] {
+    right-sidebar .status[online-status="away"] {
       background-color: #e6c800; }
-    #right_sidebar .status[offline] {
+    right-sidebar .status[online-status="offline"] {
       background-color: #969696; }
-  #right_sidebar .name {
+  right-sidebar .name {
     position: absolute;
     left: 70px;
     top: 10px;
     width: 170px;
     overflow-x: hidden; }
-  #right_sidebar .lastActive {
+  right-sidebar .lastActive {
     position: absolute;
     left: 70px;
     top: 35px;
     width: 200px;
     overflow-x: hidden;
     font-size: 14px; }
-  #right_sidebar .muteIcon {
+  right-sidebar .muteIcon {
     position: absolute;
     top: 98px;
     left: 125px; }
-  #right_sidebar .mute {
+  right-sidebar .mute {
     position: absolute;
     top: 98px;
     left: 150px; }
-    #right_sidebar .mute > label {
-      height: 12px;
-      width: 34px; }
-  #right_sidebar .call {
+    right-sidebar .mute label {
+      height: 10px !important;
+      width: 34px !important; }
+  right-sidebar .call {
     position: absolute;
     top: 80px;
     left: 25px;
@@ -1206,19 +1209,20 @@ header#app_toolbar {
     height: 40px;
     border: 0;
     border-radius: 20px; }
-  #right_sidebar .profiles {
+  right-sidebar .profiles {
     position: absolute;
     top: 130px;
     width: 100%;
     padding: 20px; }
-    #right_sidebar .profiles .profile {
+    right-sidebar .profiles .profile {
       display: block;
       color: inherit;
       margin-bottom: 5px; }
-      #right_sidebar .profiles .profile i {
+      right-sidebar .profiles .profile i {
         text-decoration: none; }
 
 #popup_new_chat {
+  display: none;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -1315,9 +1319,14 @@ header#app_toolbar {
           position: absolute;
           left: 15px;
           top: 8px; }
+    #popup_new_chat form #start_cancel {
+      position: absolute;
+      right: 205px;
+      bottom: 0px;
+      margin-left: -88px; }
     #popup_new_chat form #start_conversation {
       position: absolute;
-      left: 50%;
+      right: 0px;
       bottom: 0px;
       margin-left: -88px; }
 
@@ -1330,6 +1339,7 @@ header#app_toolbar {
   background-color: #fafafa;
   box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3), 0 11px 7px 0 rgba(0, 0, 0, 0.19);
   border-radius: 2px;
+  overflow: hidden;
   transition: margin-top 0.5s;
   -moz-transition: margin-top 0.5s;
   -webkit-transition: margin-top 0.5s;
