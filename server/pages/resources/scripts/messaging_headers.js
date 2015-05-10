@@ -19,4 +19,12 @@ function Chat (name, id, status, chatStatus, image, lastActive, history, profile
     this.lastActive = lastActive;
     this.history = history;
     this.profiles = profiles;
+    this.draftText = "";
+}
+
+function Message (sender, isyou, message, time) {
+    this.sender = sender;
+    this.isyou = isyou;
+    this.message = message;
+    this.time = time;
 }

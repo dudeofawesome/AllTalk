@@ -159,6 +159,7 @@ header#app_toolbar {
                 .menu_item {
                     display: block;
                     color: rgb(90, 90, 90);
+					height: 50px;
                     width: 100%;
                     margin-left: 0px;
                     border-radius: 0px;
@@ -169,6 +170,7 @@ header#app_toolbar {
                     }
                     .name {
                         margin-left: 15px;
+						font-size: 17px;
                         display: inline-block;
                     }
                 }
@@ -202,11 +204,13 @@ header#app_toolbar {
     #FAB {
         position: absolute;
         right: -37px;
-        bottom: 25px
+        bottom: 25px;
+		z-index: 2;
     }
 
     #chats {
         height: 100%;
+		z-index: 1;
         overflow-y: auto;
 
         .chat {
@@ -232,26 +236,6 @@ header#app_toolbar {
                     border-color: rgb(200, 200, 200);
                 }
             }
-//            &[muted] {
-//                .muted {
-//                    opacity: 1;
-//                }
-//            }
-//            &[status="online"] {
-//                .status {
-//                    background-color: rgb(0, 200, 0);
-//                }
-//            }
-//            &[status="away"] {
-//                .status {
-//                    background-color: rgb(230, 200, 0);
-//                }
-//            }
-//            &[status="offline"] {
-//                .status {
-//                    background-color: rgb(150, 150, 150);
-//                }
-//            }
             &:active {
                 background-color: rgb(200, 200, 200);
 
@@ -329,7 +313,7 @@ header#app_toolbar {
                 right: 10px;
                 bottom: 10px;
                 opacity: 0;
-                
+
                 &[chat-status="muted"] {
                     opacity: 1;
                 }
@@ -484,6 +468,8 @@ header#app_toolbar {
                 max-width: 70%;
                 vertical-align: bottom;
                 text-align: left;
+
+				white-space: pre-wrap;
 
                 box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
             }
@@ -708,7 +694,7 @@ right-sidebar {
     }
 
     .material.popup {
-        background-color: $complement-1;
+        background-color: $complement;
 
         transition: background-color 0.5s;
         -moz-transition: background-color 0.5s;
@@ -757,21 +743,6 @@ right-sidebar {
                         opacity: 1;
                     }
                 }
-                &[online] {
-                    .status {
-                        background-color: rgb(0, 200, 0);
-                    }
-                }
-                &[away] {
-                    .status {
-                        background-color: rgb(230, 200, 0);
-                    }
-                }
-                &[offline] {
-                    .status {
-                        background-color: rgb(150, 150, 150);
-                    }
-                }
                 &[selected] {
                     background-color: rgb(200, 200, 200);
                 }
@@ -802,6 +773,16 @@ right-sidebar {
                     -moz-transition: border-color 0.2s;
                     -webkit-transition: border-color 0.2s;
                     -o-transition: border-color 0.2s;
+
+                    &[online-status="online"] {
+                        background-color: rgb(0, 200, 0);
+                    }
+                    &[online-status="away"] {
+                        background-color: rgb(230, 200, 0);
+                    }
+                    &[online-status="offline"] {
+                        background-color: rgb(150, 150, 150);
+                    }
                 }
                 .name {
                     position: absolute;

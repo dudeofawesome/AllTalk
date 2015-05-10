@@ -17,46 +17,17 @@
         <script src="resources/scripts/greensock-js/TweenLite.min.js"></script>
     </head>
 
-    <!-- <body onload="onload();"> -->
     <body ng-controller="MessengerController as ctrlMessenger">
         <app-toolbar></app-toolbar>
         <div id="content">
             <div id="sidebar">
-                <input id="FAB" class="material light floating" value="+" type="button">
+                <FAB popup-new-chat-open></FAB>
                 <chats-list id="chats"></chats-list>
             </div>
             <current-chat></current-chat>
             <right-sidebar></right-sidebar>
         </div>
-        <div id="popup_new_chat">
-            <div id="actual_popup_new_chat" class="material popup">
-                <form>
-                    <i class='mdi mdi-search'></i><input type="text" class="material light" id="start_username" placeholder="New conversation" autocomplete="off" />
-                    <div id="start_users_list">
-                        <div class="user" online>
-                            <div class="icon" style="background-image: url('resources/images/profile.png');"></div>
-                            <div class="status"></div>
-                            <div class="name">Johnny Appleseed</div>
-                            <input type="checkbox" class="material light" />
-                        </div>
-                        <div class="user" online open>
-                            <div class="icon" style="background-image: url('resources/images/profile.png');"></div>
-                            <div class="status"></div>
-                            <div class="name">Johnny Appleseed</div>
-                            <input type="checkbox" class="material light" />
-                        </div>
-                        <div class="user" online>
-                            <div class="icon" style="background-image: url('resources/images/profile.png');"></div>
-                            <div class="status"></div>
-                            <div class="name">Johnny Appleseed</div>
-                            <input type="checkbox" class="material light" />
-                        </div>
-                    </div>
-                    <button class="material light flat" id="start_cancel"><i class='mdi mdi-message'></i> Cancel</button>
-                    <button class="material light raised" id="start_conversation"><i class='mdi mdi-message'></i> Start conversation</button>
-                </form>
-            </div>
-        </div>
+        <popup-new-chat id="popup_new_chat"></popup-new-chat>
 
         <script type="text/javascript" src="resources/scripts/angular/angular.js"></script>
         <script type="text/javascript" src="resources/scripts/messaging_headers.js"></script>

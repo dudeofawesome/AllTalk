@@ -1505,7 +1505,7 @@ right-sidebar {
       background-color: #fafafa; }
   /* line 710, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
   #popup_new_chat .material.popup {
-    background-color: #42cf42;
+    background-color: #00aa00;
     transition: background-color 0.5s;
     -moz-transition: background-color 0.5s;
     -webkit-transition: background-color 0.5s;
@@ -1547,19 +1547,10 @@ right-sidebar {
         /* line 756, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
         #popup_new_chat form #start_users_list .user[muted] .muted {
           opacity: 1; }
-        /* line 761, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
-        #popup_new_chat form #start_users_list .user[online] .status {
-          background-color: #00c800; }
-        /* line 766, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
-        #popup_new_chat form #start_users_list .user[away] .status {
-          background-color: #e6c800; }
-        /* line 771, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
-        #popup_new_chat form #start_users_list .user[offline] .status {
-          background-color: #969696; }
-        /* line 775, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+        /* line 760, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
         #popup_new_chat form #start_users_list .user[selected] {
           background-color: #c8c8c8; }
-        /* line 779, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+        /* line 764, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
         #popup_new_chat form #start_users_list .user .icon {
           position: absolute;
           left: 45px;
@@ -1570,7 +1561,7 @@ right-sidebar {
           background-origin: content-box;
           background-size: cover;
           border-radius: 35px; }
-        /* line 791, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+        /* line 776, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
         #popup_new_chat form #start_users_list .user .status {
           position: absolute;
           left: 66px;
@@ -1583,32 +1574,41 @@ right-sidebar {
           -moz-transition: border-color 0.2s;
           -webkit-transition: border-color 0.2s;
           -o-transition: border-color 0.2s; }
-        /* line 806, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+          /* line 791, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+          #popup_new_chat form #start_users_list .user .status[online-status="online"] {
+            background-color: #00c800; }
+          /* line 794, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+          #popup_new_chat form #start_users_list .user .status[online-status="away"] {
+            background-color: #e6c800; }
+          /* line 797, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+          #popup_new_chat form #start_users_list .user .status[online-status="offline"] {
+            background-color: #969696; }
+        /* line 801, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
         #popup_new_chat form #start_users_list .user .name {
           position: absolute;
           left: 100px;
           top: 10px;
           width: 300px;
           overflow-x: hidden; }
-        /* line 813, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+        /* line 808, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
         #popup_new_chat form #start_users_list .user input[type="checkbox"] {
           position: absolute;
           left: 15px;
           top: 8px; }
-    /* line 820, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+    /* line 815, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
     #popup_new_chat form #start_cancel {
       position: absolute;
       right: 205px;
       bottom: 0px;
       margin-left: -88px; }
-    /* line 827, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+    /* line 822, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
     #popup_new_chat form #start_conversation {
       position: absolute;
       right: 0px;
       bottom: 0px;
       margin-left: -88px; }
 
-/* line 842, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
+/* line 837, /Users/dudeofawesome/Github/AllTalk/server/pages/resources/styles/messaging.scss */
 .material.popup {
   position: relative;
   width: 500px;

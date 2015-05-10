@@ -850,6 +850,7 @@ header#app_toolbar {
         header#app_toolbar #menu_items #overflow #overflow_menu .menu_item {
           display: block;
           color: #5a5a5a;
+          height: 50px;
           width: 100%;
           margin-left: 0px;
           border-radius: 0px;
@@ -858,6 +859,7 @@ header#app_toolbar {
             display: none; }
           header#app_toolbar #menu_items #overflow #overflow_menu .menu_item .name {
             margin-left: 15px;
+            font-size: 17px;
             display: inline-block; }
 
 #content {
@@ -881,9 +883,11 @@ header#app_toolbar {
   #sidebar #FAB {
     position: absolute;
     right: -37px;
-    bottom: 25px; }
+    bottom: 25px;
+    z-index: 2; }
   #sidebar #chats {
     height: 100%;
+    z-index: 1;
     overflow-y: auto; }
     #sidebar #chats .chat {
       position: relative;
@@ -1083,6 +1087,7 @@ header#app_toolbar {
         max-width: 70%;
         vertical-align: bottom;
         text-align: left;
+        white-space: pre-wrap;
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37); }
   #chat #messageContainer {
     position: absolute;
@@ -1250,7 +1255,7 @@ right-sidebar {
       margin-top: 100px;
       background-color: #fafafa; }
   #popup_new_chat .material.popup {
-    background-color: #42cf42;
+    background-color: #00aa00;
     transition: background-color 0.5s;
     -moz-transition: background-color 0.5s;
     -webkit-transition: background-color 0.5s;
@@ -1287,12 +1292,6 @@ right-sidebar {
         -o-transition: background-color 0.2s; }
         #popup_new_chat form #start_users_list .user[muted] .muted {
           opacity: 1; }
-        #popup_new_chat form #start_users_list .user[online] .status {
-          background-color: #00c800; }
-        #popup_new_chat form #start_users_list .user[away] .status {
-          background-color: #e6c800; }
-        #popup_new_chat form #start_users_list .user[offline] .status {
-          background-color: #969696; }
         #popup_new_chat form #start_users_list .user[selected] {
           background-color: #c8c8c8; }
         #popup_new_chat form #start_users_list .user .icon {
@@ -1317,6 +1316,12 @@ right-sidebar {
           -moz-transition: border-color 0.2s;
           -webkit-transition: border-color 0.2s;
           -o-transition: border-color 0.2s; }
+          #popup_new_chat form #start_users_list .user .status[online-status="online"] {
+            background-color: #00c800; }
+          #popup_new_chat form #start_users_list .user .status[online-status="away"] {
+            background-color: #e6c800; }
+          #popup_new_chat form #start_users_list .user .status[online-status="offline"] {
+            background-color: #969696; }
         #popup_new_chat form #start_users_list .user .name {
           position: absolute;
           left: 100px;
