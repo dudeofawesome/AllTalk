@@ -49,6 +49,26 @@ body {
     user-select: none;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+} /* this will style the thumb, ignoring the track */
+
+::-webkit-scrollbar-button {
+    background-color: rgba(0, 0, 0, 0.2);
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+} /* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
+
 header#app_toolbar {
     position: absolute;
     top: 0px;
@@ -208,7 +228,9 @@ header#app_toolbar {
 		z-index: 2;
     }
 
-    #chats {
+	chats-list {
+		position: absolute;
+		width: 100%;
         height: 100%;
 		z-index: 1;
         overflow-y: auto;
@@ -314,6 +336,11 @@ header#app_toolbar {
                 bottom: 10px;
                 opacity: 0;
 
+				transition: opacity 0.2s;
+                -moz-transition: opacity 0.2s;
+                -webkit-transition: opacity 0.2s;
+                -o-transition: opacity 0.2s;
+
                 &[chat-status="muted"] {
                     opacity: 1;
                 }
@@ -342,7 +369,7 @@ header#app_toolbar {
         padding: 20px 20px 0px 0px;
 
         vertical-align: bottom;
-        overflow-y: auto;
+        overflow-y: scroll;
 
         .message {
             position: relative;
