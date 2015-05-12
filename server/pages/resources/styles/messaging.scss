@@ -510,6 +510,7 @@ header#app_toolbar {
         height: 50px;
         background-color: rgb(240, 240, 240);
         box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+		border-top: 1px $complement solid;
 
         #message {
             margin: 0px 20px 20px 40px;
@@ -532,6 +533,99 @@ header#app_toolbar {
                         height: 45px;
                     }
                 }
+				#send_media_dialogue {
+					display: none;
+					position: absolute;
+					bottom: 100%;
+					margin-bottom: 28px;
+					right: 30px;
+					width: 180px;
+					height: 130px;
+					padding: 10px;
+
+					border-radius: 2px;
+					background-color: rgb(240, 240, 240);
+					border: 1px $complement solid;
+					box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+					z-index: 101;
+
+					&::after {
+						content: " ";
+						position: absolute;
+						right: 11px;
+						bottom: -9px;
+						width: 15px;
+						height: 15px;
+						transform: rotate(45deg);
+
+						background-color: rgb(240, 240, 240);
+						border-bottom: 1px $complement solid;
+						border-right: 1px $complement solid;
+						box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.3);
+					}
+					&[open] {
+						display: block;
+					}
+					&[previewing] {
+
+						button {
+							display: none;
+						}
+
+						#send_media_dialogue_preview_img {
+							display: block;
+						}
+						#send_media_dialogue_cancel {
+							display: block;
+						}
+					}
+
+					button {
+						position: absolute;
+						left: 50px;
+						top: 50px;
+					    overflow: hidden;
+
+						input.upload {
+						    position: absolute;
+							height: 50px;
+						    top: 0;
+						    right: 0;
+						    margin: 0;
+						    padding: 0;
+						    cursor: pointer;
+						    opacity: 0;
+						    filter: alpha(opacity=0);
+						}
+					}
+					#send_media_dialogue_preview_img {
+						display: none;
+						position: absolute;
+						top: 0px;
+						left: 0px;
+						right: 0px;
+						bottom: 0px;
+						z-index: 1;
+
+						background-size: cover;
+						background-position: center;
+					}
+					#send_media_dialogue_cancel {
+						display: none;
+						position: absolute;
+						top: 0px;
+						right: 0px;
+						margin: 5px;
+						width: 20px;
+						height: 20px;
+						z-index: 3;
+
+						font-size: 20px;
+						color: white;
+						text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+						cursor: hand;
+					}
+				}
                 #send_attach {
                     position: absolute;
                     top: -10px;
@@ -723,10 +817,10 @@ right-sidebar {
     .material.popup {
         background-color: $complement;
 
-        transition: background-color 0.5s;
-        -moz-transition: background-color 0.5s;
-        -webkit-transition: background-color 0.5s;
-        -o-transition: background-color 0.5s;
+        transition: background-color 0.3s;
+        -moz-transition: background-color 0.3s;
+        -webkit-transition: background-color 0.3s;
+        -o-transition: background-color 0.3s;
     }
 
     form {
@@ -828,9 +922,8 @@ right-sidebar {
         #start_cancel {
             position: absolute;
 //            left: 50%;
-            right: 205px;
+            right: 192px;
             bottom: 0px;
-            margin-left: -88px;
         }
         #start_conversation {
             position: absolute;

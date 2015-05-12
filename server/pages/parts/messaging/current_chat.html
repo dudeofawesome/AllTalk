@@ -6,8 +6,16 @@
                 <div class="messageBox">
                     <textarea class="material light" id="send_message" placeholder="Type a message" autofocus autocomplete="off" ng-model="message" key-listener></textarea>
                 </div>
-                <button class="" id="send_attach" title="Attach"><i class='mdi mdi-paperclip' attach-message></i></button>
-                <button class="" id="send_submit" title="Send"><i class='mdi mdi-send' send-message></i></button>
+                <div id="send_media_dialogue">
+                    <button class="material dark raised">
+                        <span>Upload</span>
+                        <input type="file" class="upload" attach-dialogue />
+                    </button>
+                    <div id="send_media_dialogue_preview_img"></div>
+                    <div id="send_media_dialogue_cancel" cancel-attach-dialogue><i class='mdi mdi-close'></i></div>
+                </div>
+                <button id="send_attach" title="Attach" attach-message><i class='mdi mdi-paperclip'></i></button>
+                <button id="send_submit" title="Send" send-message><i class='mdi mdi-send'></i></button>
             </form>
         </div>
     </div>

@@ -8,7 +8,7 @@
 }
 
 // START FLAT BUTTON
-.material[type="button"].flat, .material[type="submit"].flat, .material[type="reset"].flat, button.material.flat {
+.material[type="button"].flat, .material[type="submit"].flat, .material[type="reset"].flat,.material[type="file"].flat, button.material.flat {
 	min-width: 88px;
 	height: 36px;
 	background-color: transparent;
@@ -26,7 +26,7 @@
 	-o-transition: background-color 0.2s;
 
 	&.light {
-		 color: rgb(65, 65, 65);
+		 color: $complement;
 		 overflow: hidden;
 
 		// &::before {
@@ -42,7 +42,7 @@
 		// 	box-shadow: 0px 0px 0px 0px rgba(153, 153, 153, 0.4);
 		// 	background-color: rgba(153, 153, 153, 0.4);
 		// 	// display: none;
-			
+
 		// 	transition: box-shadow 0.5s, background-color 0.5s;
 		// 	-moz-transition: box-shadow 0.5s, background-color 0.5s;
 		// 	-webkit-transition: box-shadow 0.5s, background-color 0.5s;
@@ -104,7 +104,7 @@
 // END FLAT BUTTON
 
 // START RAISED BUTTON
-.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised, button.material.raised {
+.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised, .material[type="file"].raised, button.material.raised {
 	min-width: 88px;
 	height: 36px;
 	border-radius: 2px;
@@ -117,7 +117,7 @@
 	-webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-	
+
 	-webkit-transition: background-color 0.2s, -webkit-box-shadow 0.2s, box-shadow 0.2s;
 	-moz-transition: background-color 0.2s, -moz-box-shadow 0.2s, box-shadow 0.2s;
 	-o-transition: background-color 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
@@ -488,7 +488,7 @@ textarea.material {
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
-		user-select: none;		
+		user-select: none;
 		padding: 2px;
 		width: 38px;
 		height: 14px;
@@ -518,7 +518,7 @@ textarea.material {
 			-webkit-transition: background 0.4s;
 			-moz-transition: background 0.4s;
 			-o-transition: background 0.4s;
-			transition: background 0.4s;			
+			transition: background 0.4s;
 		}
 		&::after {
 			position: relative;
@@ -535,7 +535,7 @@ textarea.material {
 			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 			-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-			
+
 			-webkit-transition: margin 0.2s, background-color 0.2s, -webkit-box-shadow 0.2s;
 			-moz-transition: margin 0.2s, background-color 0.2s, -moz-box-shadow 0.2s;
 			-o-transition: margin 0.2s, background-color 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
@@ -546,14 +546,14 @@ textarea.material {
 	&:checked {
 		& + label {
 			&::before {
-				background-color: transparentize($complement, 0.5);				
+				background-color: transparentize($complement, 0.5);
 			}
 			&::after {
 				background-color: $complement;
 				margin-left: 18px;
 				-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 				-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-				box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);				
+				box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 			}
 		}
 	}
@@ -711,7 +711,7 @@ input[type=range].material {
 		height: 2px;
 		cursor: pointer;
 		animate: 0.2s;
-		
+
 		-webkit-transition: background-color 0.2s;
 		-moz-transition: background-color 0.2s;
 		-o-transition: background-color 0.2s;
@@ -725,7 +725,7 @@ input[type=range].material {
 		height: 2px;
 		cursor: pointer;
 		animate: 0.2s;
-		
+
 		-webkit-transition: background-color 0.2s;
 		-moz-transition: background-color 0.2s;
 		-o-transition: background-color 0.2s;
@@ -738,7 +738,7 @@ input[type=range].material {
 		height: 2px;
 		cursor: pointer;
 		animate: 0.2s;
-		
+
 		-webkit-transition: background-color 0.2s;
 		-moz-transition: background-color 0.2s;
 		-o-transition: background-color 0.2s;
@@ -757,7 +757,7 @@ input[type=range].material {
 	// 	border-radius: 12px;
 	// 	cursor: pointer;
 	// 	margin-top: -5px;
-		
+
 	// 	-webkit-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 	// 	-moz-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 	// 	-o-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
@@ -771,7 +771,7 @@ input[type=range].material {
 		border-radius: 12px;
 		cursor: pointer;
 		margin-top: -5px;
-		
+
 		-webkit-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 		-moz-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 		-o-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
@@ -787,7 +787,7 @@ input[type=range].material {
 		border-radius: 12px;
 		cursor: pointer;
 		margin-top: -5px;
-		
+
 		-webkit-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 		-moz-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 		-o-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
@@ -801,7 +801,7 @@ input[type=range].material {
 		border-radius: 12px;
 		cursor: pointer;
 		margin-top: -5px;
-		
+
 		-webkit-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 		-moz-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;
 		-o-transition: background-color 0.2s, box-shadow 0.2s, border 0.2s;

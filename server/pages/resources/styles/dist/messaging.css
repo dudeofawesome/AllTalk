@@ -1,7 +1,7 @@
 .material:focus {
   outline: 0 !important; }
 
-.material[type="button"].flat, .material[type="submit"].flat, .material[type="reset"].flat, button.material.flat {
+.material[type="button"].flat, .material[type="submit"].flat, .material[type="reset"].flat, .material[type="file"].flat, button.material.flat {
   min-width: 88px;
   height: 36px;
   background-color: transparent;
@@ -16,23 +16,23 @@
   -moz-transition: background-color 0.2s;
   -webkit-transition: background-color 0.2s;
   -o-transition: background-color 0.2s; }
-  .material[type="button"].flat.light, .material[type="submit"].flat.light, .material[type="reset"].flat.light, button.material.flat.light {
-    color: #414141;
+  .material[type="button"].flat.light, .material[type="submit"].flat.light, .material[type="reset"].flat.light, .material[type="file"].flat.light, button.material.flat.light {
+    color: #00aa00;
     overflow: hidden; }
-    .material[type="button"].flat.light:hover, .material[type="submit"].flat.light:hover, .material[type="reset"].flat.light:hover, button.material.flat.light:hover {
+    .material[type="button"].flat.light:hover, .material[type="submit"].flat.light:hover, .material[type="reset"].flat.light:hover, .material[type="file"].flat.light:hover, button.material.flat.light:hover {
       background-color: rgba(153, 153, 153, 0.2); }
-    .material[type="button"].flat.light:active, .material[type="submit"].flat.light:active, .material[type="reset"].flat.light:active, button.material.flat.light:active {
+    .material[type="button"].flat.light:active, .material[type="submit"].flat.light:active, .material[type="reset"].flat.light:active, .material[type="file"].flat.light:active, button.material.flat.light:active {
       background-color: rgba(153, 153, 153, 0.4); }
-    .material[type="button"].flat.light:disabled, .material[type="submit"].flat.light:disabled, .material[type="reset"].flat.light:disabled, button.material.flat.light:disabled {
+    .material[type="button"].flat.light:disabled, .material[type="submit"].flat.light:disabled, .material[type="reset"].flat.light:disabled, .material[type="file"].flat.light:disabled, button.material.flat.light:disabled {
       color: rgba(0, 0, 0, 0.26);
       background-color: transparent !important; }
-  .material[type="button"].flat.dark, .material[type="submit"].flat.dark, .material[type="reset"].flat.dark, button.material.flat.dark {
+  .material[type="button"].flat.dark, .material[type="submit"].flat.dark, .material[type="reset"].flat.dark, .material[type="file"].flat.dark, button.material.flat.dark {
     color: white; }
-    .material[type="button"].flat.dark:hover, .material[type="submit"].flat.dark:hover, .material[type="reset"].flat.dark:hover, button.material.flat.dark:hover {
+    .material[type="button"].flat.dark:hover, .material[type="submit"].flat.dark:hover, .material[type="reset"].flat.dark:hover, .material[type="file"].flat.dark:hover, button.material.flat.dark:hover {
       background-color: rgba(204, 204, 204, 0.15); }
-    .material[type="button"].flat.dark:active, .material[type="submit"].flat.dark:active, .material[type="reset"].flat.dark:active, button.material.flat.dark:active {
+    .material[type="button"].flat.dark:active, .material[type="submit"].flat.dark:active, .material[type="reset"].flat.dark:active, .material[type="file"].flat.dark:active, button.material.flat.dark:active {
       background-color: rgba(204, 204, 204, 0.25); }
-      .material[type="button"].flat.dark:active::before, .material[type="submit"].flat.dark:active::before, .material[type="reset"].flat.dark:active::before, button.material.flat.dark:active::before {
+      .material[type="button"].flat.dark:active::before, .material[type="submit"].flat.dark:active::before, .material[type="reset"].flat.dark:active::before, .material[type="file"].flat.dark:active::before, button.material.flat.dark:active::before {
         content: " ";
         position: absolute;
         top: 2px;
@@ -41,7 +41,7 @@
         height: 6px;
         border: 3px solid rgba(255, 255, 255, 0.3);
         border-radius: 2px; }
-      .material[type="button"].flat.dark:active::after, .material[type="submit"].flat.dark:active::after, .material[type="reset"].flat.dark:active::after, button.material.flat.dark:active::after {
+      .material[type="button"].flat.dark:active::after, .material[type="submit"].flat.dark:active::after, .material[type="reset"].flat.dark:active::after, .material[type="file"].flat.dark:active::after, button.material.flat.dark:active::after {
         content: " ";
         position: absolute;
         top: 2px;
@@ -50,11 +50,11 @@
         height: 6px;
         border: 3px solid rgba(255, 255, 255, 0.3);
         border-radius: 2px; }
-    .material[type="button"].flat.dark:disabled, .material[type="submit"].flat.dark:disabled, .material[type="reset"].flat.dark:disabled, button.material.flat.dark:disabled {
+    .material[type="button"].flat.dark:disabled, .material[type="submit"].flat.dark:disabled, .material[type="reset"].flat.dark:disabled, .material[type="file"].flat.dark:disabled, button.material.flat.dark:disabled {
       color: rgba(255, 255, 255, 0.3);
       background-color: transparent !important; }
 
-.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised, button.material.raised {
+.material[type="button"].raised, .material[type="submit"].raised, .material[type="reset"].raised, .material[type="file"].raised, button.material.raised {
   min-width: 88px;
   height: 36px;
   border-radius: 2px;
@@ -71,29 +71,29 @@
   -moz-transition: background-color 0.2s, -moz-box-shadow 0.2s, box-shadow 0.2s;
   -o-transition: background-color 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
   transition: background-color 0.2s, box-shadow 0.2s, -moz-box-shadow 0.2s, -webkit-box-shadow 0.2s; }
-  .material[type="button"].raised.light, .material[type="submit"].raised.light, .material[type="reset"].raised.light, button.material.raised.light {
+  .material[type="button"].raised.light, .material[type="submit"].raised.light, .material[type="reset"].raised.light, .material[type="file"].raised.light, button.material.raised.light {
     color: #414141;
     background-color: #e0e0e0; }
-    .material[type="button"].raised.light:active, .material[type="submit"].raised.light:active, .material[type="reset"].raised.light:active, button.material.raised.light:active {
+    .material[type="button"].raised.light:active, .material[type="submit"].raised.light:active, .material[type="reset"].raised.light:active, .material[type="file"].raised.light:active, button.material.raised.light:active {
       background-color: #d6d6d6;
       -webkit-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       -moz-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3); }
-    .material[type="button"].raised.light:disabled, .material[type="submit"].raised.light:disabled, .material[type="reset"].raised.light:disabled, button.material.raised.light:disabled {
+    .material[type="button"].raised.light:disabled, .material[type="submit"].raised.light:disabled, .material[type="reset"].raised.light:disabled, .material[type="file"].raised.light:disabled, button.material.raised.light:disabled {
       color: rgba(0, 0, 0, 0.26);
       background-color: rgba(0, 0, 0, 0.12); }
-  .material[type="button"].raised.dark, .material[type="submit"].raised.dark, .material[type="reset"].raised.dark, button.material.raised.dark {
+  .material[type="button"].raised.dark, .material[type="submit"].raised.dark, .material[type="reset"].raised.dark, .material[type="file"].raised.dark, button.material.raised.dark {
     color: white;
     background-color: #00aa00; }
-    .material[type="button"].raised.dark:active, .material[type="submit"].raised.dark:active, .material[type="reset"].raised.dark:active, button.material.raised.dark:active {
+    .material[type="button"].raised.dark:active, .material[type="submit"].raised.dark:active, .material[type="reset"].raised.dark:active, .material[type="file"].raised.dark:active, button.material.raised.dark:active {
       background-color: #00dd00;
       -webkit-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       -moz-box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3);
       box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.3); }
-    .material[type="button"].raised.dark:disabled, .material[type="submit"].raised.dark:disabled, .material[type="reset"].raised.dark:disabled, button.material.raised.dark:disabled {
+    .material[type="button"].raised.dark:disabled, .material[type="submit"].raised.dark:disabled, .material[type="reset"].raised.dark:disabled, .material[type="file"].raised.dark:disabled, button.material.raised.dark:disabled {
       color: rgba(255, 255, 255, 0.3);
       background-color: rgba(255, 255, 255, 0.12); }
-  .material[type="button"].raised:disabled, .material[type="submit"].raised:disabled, .material[type="reset"].raised:disabled, button.material.raised:disabled {
+  .material[type="button"].raised:disabled, .material[type="submit"].raised:disabled, .material[type="reset"].raised:disabled, .material[type="file"].raised:disabled, button.material.raised:disabled {
     -webkit-box-shadow: 0px 3px 6px transparent;
     -moz-box-shadow: 0px 3px 6px transparent;
     box-shadow: 0px 3px 6px transparent; }
@@ -1122,7 +1122,8 @@ header#app_toolbar {
     right: 0px;
     height: 50px;
     background-color: #f0f0f0;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    border-top: 1px #00aa00 solid; }
     #chat #messageContainer #message {
       margin: 0px 20px 20px 40px; }
       #chat #messageContainer #message form {
@@ -1139,6 +1140,78 @@ header#app_toolbar {
             right: 0px;
             width: 100%;
             height: 45px; }
+        #chat #messageContainer #message form #send_media_dialogue {
+          display: none;
+          position: absolute;
+          bottom: 100%;
+          margin-bottom: 28px;
+          right: 30px;
+          width: 180px;
+          height: 130px;
+          padding: 10px;
+          border-radius: 2px;
+          background-color: #f0f0f0;
+          border: 1px #00aa00 solid;
+          box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+          z-index: 101; }
+          #chat #messageContainer #message form #send_media_dialogue::after {
+            content: " ";
+            position: absolute;
+            right: 11px;
+            bottom: -9px;
+            width: 15px;
+            height: 15px;
+            transform: rotate(45deg);
+            background-color: #f0f0f0;
+            border-bottom: 1px #00aa00 solid;
+            border-right: 1px #00aa00 solid;
+            box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.3); }
+          #chat #messageContainer #message form #send_media_dialogue[open] {
+            display: block; }
+          #chat #messageContainer #message form #send_media_dialogue[previewing] button {
+            display: none; }
+          #chat #messageContainer #message form #send_media_dialogue[previewing] #send_media_dialogue_preview_img {
+            display: block; }
+          #chat #messageContainer #message form #send_media_dialogue[previewing] #send_media_dialogue_cancel {
+            display: block; }
+          #chat #messageContainer #message form #send_media_dialogue button {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            overflow: hidden; }
+            #chat #messageContainer #message form #send_media_dialogue button input.upload {
+              position: absolute;
+              height: 50px;
+              top: 0;
+              right: 0;
+              margin: 0;
+              padding: 0;
+              cursor: pointer;
+              opacity: 0;
+              filter: alpha(opacity=0); }
+          #chat #messageContainer #message form #send_media_dialogue #send_media_dialogue_preview_img {
+            display: none;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: 1;
+            background-size: cover;
+            background-position: center; }
+          #chat #messageContainer #message form #send_media_dialogue #send_media_dialogue_cancel {
+            display: none;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            margin: 5px;
+            width: 20px;
+            height: 20px;
+            z-index: 3;
+            font-size: 20px;
+            color: white;
+            text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+            cursor: hand; }
         #chat #messageContainer #message form #send_attach {
           position: absolute;
           top: -10px;
@@ -1282,10 +1355,10 @@ right-sidebar {
       background-color: #fafafa; }
   #popup_new_chat .material.popup {
     background-color: #00aa00;
-    transition: background-color 0.5s;
-    -moz-transition: background-color 0.5s;
-    -webkit-transition: background-color 0.5s;
-    -o-transition: background-color 0.5s; }
+    transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s; }
   #popup_new_chat form {
     position: relative;
     width: 100%;
@@ -1360,9 +1433,8 @@ right-sidebar {
           top: 8px; }
     #popup_new_chat form #start_cancel {
       position: absolute;
-      right: 205px;
-      bottom: 0px;
-      margin-left: -88px; }
+      right: 192px;
+      bottom: 0px; }
     #popup_new_chat form #start_conversation {
       position: absolute;
       right: 0px;

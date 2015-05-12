@@ -84,7 +84,7 @@
 						scrollTop: element[0].parentElement.scrollHeight
 					});
 				});
-				}
+			}
 		}
 	});
 	app.directive("keyListener", function ($log, $timeout) {
@@ -137,9 +137,38 @@
 			link: function (scope, element, attrs) {
 				element.on('click', function (event) {
 					event.preventDefault();
-					scope.ctrlChat.sendMessage(scope.message);
-					scope.message = "";
-					send_message.focus();
+					if (send_media_dialogue.getAttribute("open") != "")
+						send_media_dialogue.setAttribute("open", "");
+					else
+						send_media_dialogue.removeAttribute("open");
+				});
+			}
+		}
+	});
+	app.directive("attachDialogue", function ($log, $timeout) {
+		return {
+			restrict: 'A',
+			link: function (scope, element, attrs) {
+				element.on('change', function (event) {
+					// event.preventDefault();
+					if (event.srcElement.files && event.srcElement.files[0]) {
+			            var reader = new FileReader();
+			            reader.onload = function (e) {
+							send_media_dialogue_preview_img.style.backgroundImage = "url(" + e.target.result + ")";
+							element[0].parentElement.parentElement.setAttribute("previewing", "");
+			            }
+			            reader.readAsDataURL(event.srcElement.files[0]);
+			        }
+				});
+			}
+		}
+	});
+	app.directive("cancelAttachDialogue", function ($log, $timeout) {
+		return {
+			restrict: 'A',
+			link: function (scope, element, attrs) {
+				element.on('click', function (event) {
+					element[0].parentElement.removeAttribute("previewing");
 				});
 			}
 		}
@@ -269,7 +298,7 @@
 
 					FABmain.style.display = "none";
 
-                    var tweenTime = 0.5;
+                    var tweenTime = 0.3;
                     TweenLite.to(newChatDialog, tweenTime, {
                         top: "0px",
                         left: (window.innerWidth / 2 - 300) + "px",
@@ -293,7 +322,7 @@
 					var _height = FABmain.offsetHeight;
 					FABmain.style.display = "none";
 
-                    var tweenTime = 0.5;
+                    var tweenTime = 0.3;
                     TweenLite.to(newChatDialog, tweenTime, {
                         top: _top,
                         left: _left,
