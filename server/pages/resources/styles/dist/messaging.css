@@ -1115,6 +1115,17 @@ header#app_toolbar {
         text-align: left;
         white-space: pre-wrap;
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37); }
+      #chat chat-history .message .attachment {
+        display: inline-block;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        width: auto;
+        height: auto;
+        margin-bottom: 5px; }
+        #chat chat-history .message .attachment img {
+          max-width: 500px;
+          max-height: 500px; }
   #chat #messageContainer {
     position: absolute;
     bottom: 0px;
@@ -1320,7 +1331,8 @@ right-sidebar {
     width: 40px;
     height: 40px;
     border: 0;
-    border-radius: 20px; }
+    border-radius: 20px;
+    color: #5a5a5a !important; }
   right-sidebar .profiles {
     position: absolute;
     top: 130px;

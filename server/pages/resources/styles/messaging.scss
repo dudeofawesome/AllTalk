@@ -500,6 +500,20 @@ header#app_toolbar {
 
                 box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
             }
+			.attachment {
+				display: inline-block;
+				position: relative;
+				left: 0px;
+				top: 0px;
+				width: auto;
+				height: auto;
+				margin-bottom: 5px;
+
+				img {
+					max-width: 500px;
+					max-height: 500px;
+				}
+			}
         }
     }
     #messageContainer {
@@ -768,6 +782,7 @@ right-sidebar {
         height: 40px;
         border: 0;
         border-radius: 20px;
+		color: #5a5a5a !important;
     }
     .profiles {
         position: absolute;

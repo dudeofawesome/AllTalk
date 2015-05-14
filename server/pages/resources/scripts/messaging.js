@@ -42,8 +42,8 @@
 					document.getElementById('send_message').value = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
 					document.getElementById('send_message').focus();
 				}
-				this.sendMessage = function (message) {
-					$scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history.push(new Message($scope.ctrlMessenger.you.id, true, message, Date.now()));
+				this.sendMessage = function (message, attachment) {
+					$scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history.push(new Message($scope.ctrlMessenger.you.id, true, message, attachment, Date.now()));
 					$scope.$apply();
 				}
 			},
@@ -94,12 +94,7 @@
 				element.on('keypress', function (event) {
 					if (event.keyCode === 13 && !scope.shiftDown) {
 						event.preventDefault();
-						if (scope.message != "" && /\S/.test(scope.message)) {
-							scope.ctrlChat.sendMessage(scope.message);
-							scope.message = "";
-							scope.$apply()
-						}
-						send_message.focus();
+						send_submit.click();
 					}
 				});
 				element.on('keydown', function (event) {
@@ -121,10 +116,15 @@
 			link: function (scope, element, attrs) {
 				element.on('click', function (event) {
 					event.preventDefault();
-					if (scope.message != "" && /\S/.test(scope.message)) {
-						scope.ctrlChat.sendMessage(scope.message);
+					if ((scope.message != "" && /\S/.test(scope.message)) || (scope.attachment && scope.attachment.length > 0)) {
+						scope.ctrlChat.sendMessage(scope.message, scope.attachment);
+						scope.attachment = "";
 						scope.message = "";
-						scope.$apply()
+						send_media_dialogue.removeAttribute("open");
+						send_media_dialogue.removeAttribute("previewing");
+						send_media_dialogue_preview_img.style.backgroundImage = "url(" + e.target.result + ")";
+						send_attachment_input.files.clear();
+						scope.$apply();
 					}
 					send_message.focus();
 				});
@@ -156,6 +156,7 @@
 			            reader.onload = function (e) {
 							send_media_dialogue_preview_img.style.backgroundImage = "url(" + e.target.result + ")";
 							element[0].parentElement.parentElement.setAttribute("previewing", "");
+							scope.attachment = e.target.result;
 			            }
 			            reader.readAsDataURL(event.srcElement.files[0]);
 			        }

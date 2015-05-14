@@ -22,9 +22,10 @@ function Chat (name, id, status, chatStatus, image, lastActive, history, profile
     this.draftText = "";
 }
 
-function Message (sender, isyou, message, time) {
+function Message (sender, isyou, message, attachment, time) {
     this.sender = sender;
     this.isyou = isyou;
     this.message = message;
+    this.attachment = attachment;
     this.time = time;
 }
