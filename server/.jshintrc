@@ -6,5 +6,24 @@
   "quotmark": true,
   "undef": true,
   "unused": true,
-  "trailing": true
+  "trailing": true,
+
+  "globals": {
+      "Chat": true,
+      "Message": true,
+      "OnlineStatus": false,
+      "ChatStatus": false,
+      "document": false,
+      "window": false,
+      "angular": false,
+      "TweenLite": false,
+      "FileReader": false,
+      "DATE": false,
+
+      "send_message": false,
+      "send_submit": false,
+      "send_media_dialogue": false,
+      "send_media_dialogue_preview_img": false,
+      "send_attachment_input": false
+  }
 }

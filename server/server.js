@@ -21,8 +21,9 @@ var failedAuthAttempts = [];
 var disabledSocketIDs = [];
 var connectedSockets = [];
 
-//var database = require('./modules/database');
+var database = require('./modules/database');
 var webServer = require('./modules/web_server');
+var chatServer = require('./modules/chat_server');
 
 function authenticateIDauthKey (ID, authKey) {
 	stopBruteForce(ID);

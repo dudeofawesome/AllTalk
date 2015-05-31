@@ -8,7 +8,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var server = require('gulp-express');
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 var mongoRunning = false;
 
@@ -44,12 +44,24 @@ gulp.task('node-server', function() {
 
 gulp.task('start-mongo', function () {
     if (!mongoRunning) {
-        runCommand('mongod --dbpath ./db/', function () { mongoRunning = true; });
+        var mongod = spawn('mongod', ['--dbpath', './db/']);
+        mongod.stdout.on('data', function (data) {
+            if (data.toString().indexOf('waiting for connections on port 27017') > -1) {
+                mongoRunning = true;
+                console.log('Mongo DB listening on *:27017');
+            }
+        });
     }
 });
 gulp.task('stop-mongo', function () {
     if (mongoRunning) {
-        runCommand('mongo --eval "use admin; db.shutdownServer();"', function () { mongoRunning = false; });
+        var mongod = spawn('mongod', ['--eval', '"use admin; db.shutdownServer();"']);
+        mongod.stdout.on('data', function (data) {
+            if (data !== undefined) {
+                mongoRunning = false;
+                console.log('Mongo DB stopped listening');
+            }
+        });
     }
 });
 
@@ -65,22 +77,5 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts']);
-
+gulp.task('default', ['sass', 'scripts']);
 gulp.task('build-run', ['default', 'watch', 'node-server']);
-
-
-
-
-
-
-function runCommand(command, callback) {
-    return function (cb) {
-        exec(command, function (err, stdout, stderr) {
-            console.log(stdout);
-            console.log(stderr);
-            cb(err);
-            callback();
-        });
-    }
-}

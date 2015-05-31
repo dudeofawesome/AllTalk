@@ -153,8 +153,257 @@ function SpecialScroll (applyTo, relativeSpeed) {
 	    }
 	};
 }
+var socket;
+
+window.onload = function () {
+
+	socket = io.connect("https://" + window.location.hostname + ":22846");
+	// socket = io.connect("https://75.4.22.77:22846");
+	socket.on('get auction items', function(items) {
+		itemsToLoad = items.length;
+
+		for (var i = items.length - 1; i >= 0; i--) {
+			cards[i] = {};
+			cards[i].index = i;
+			cards[i].ID = items[i]._id;
+			cards[i].image = items[i].image;
+			cards[i].name = items[i].name;
+			cards[i].artist = items[i].artist;
+			cards[i].description = items[i].description;
+			cards[i].bidHistory = items[i].bidHistory;
+			// for (var j = 0; j < cards[i].bidHistory.length; j++) {
+				// cards[i].bidHistory[j][0] = parseFloat(cards[i].bidHistory[j][0]);
+			// }
+			var container = document.getElementById("auctionItems");
+
+			var auctionItem = document.createElement("div");
+			auctionItem.className = "auctionItem";
+			cards[i].mouseDown = false;
+			auctionItem.onclick = createClickHandeler(i);
+			auctionItem.onmousedown = createMouseDownHandeler(cards[i], false);
+			auctionItem.onmouseenter = createMouseDownHandeler(cards[i], true);
+			auctionItem.onmouseup = createMouseUpHandeler(cards[i], false);
+			auctionItem.onmouseleave = createMouseUpHandeler(cards[i], true);
+			auctionItem.id = "card" + (items.length - 1 - i);
+
+				var info = document.createElement("div");
+				info.className = "info";
+				auctionItem.insertBefore(info, auctionItem.firstChild);
+
+					var description = document.createElement("div");
+					description.className = "description";
+					description.innerHTML = cards[i].description;
+					info.insertBefore(description, info.firstChild);
+
+					var artist = document.createElement("div");
+					artist.className = "artist";
+					artist.innerHTML = cards[i].artist;
+					info.insertBefore(artist, info.firstChild);
+
+					var name = document.createElement("div");
+					name.className = "name";
+					name.innerHTML = cards[i].name;
+					info.insertBefore(name, info.firstChild);
+
+				var picture = document.createElement("img");
+				picture.className = "picture";
+				picture.style.backgroundImage = "url(" + cards[i].image + ")";
+				auctionItem.insertBefore(picture, auctionItem.firstChild);
+
+			cards[i].dom = container.insertBefore(auctionItem, container.firstChild);
+			cards[i].front = cards[i].dom.innerHTML;
+			cards[i].posFixed = [];
+			cards[i].posFixed[0] = cards[i].dom.offsetLeft + container.offsetLeft - 20;
+			cards[i].posFixed[1] = cards[i].dom.offsetTop + container.offsetTop - 20 - window.pageYOffset;
+			cards[i].posFixed[2] = window.innerWidth - (cards[i].posFixed[0] + cards[i].dom.offsetWidth) - 55;
+			cards[i].posFixed[3] = window.innerHeight - (cards[i].posFixed[1] + cards[i].dom.offsetHeight) - 40 + window.pageYOffset;
+			cards[i].calculateDefaultBid = function() {
+				var defaultBid = (this.bidHistory.length > 1) ? Math.ceil(parseFloat(this.bidHistory[this.bidHistory.length - 1][0]) + (this.bidHistory[this.bidHistory.length - 1][0] - this.bidHistory[this.bidHistory.length - 2][0])) : Math.ceil(parseFloat(this.bidHistory[this.bidHistory.length - 1][0]) + 1);
+				defaultBid = (defaultBid - parseFloat(this.bidHistory[this.bidHistory.length - 1][0]) < 1) ? Math.ceil(parseFloat(this.bidHistory[this.bidHistory.length - 1][0]) + 1) : defaultBid;
+				return defaultBid;
+			};
+			cards[i].calculateDefaultBid();
+			var _image = document.createElement("img");
+			_image.src = cards[i].image;
+			_image.onload = createImageLoadHandeler(_image, i);
+		}
+	});
+	socket.emit('get auction items', "");
+
+	socket.on('new bid', function(text) {
+		if (text.itemID != null) {
+			msg = {};
+			msg.id = text.itemID;
+			msg.bid = text.bid;
+			msg.bidder = text.bidder;
+			cards[msg.id].bidHistory[cards[msg.id].bidHistory.length] = {};
+			cards[msg.id].bidHistory[cards[msg.id].bidHistory.length - 1].bid = parseFloat(msg.bid);
+			cards[msg.id].bidHistory[cards[msg.id].bidHistory.length - 1].bidder = msg.bidder;
+			if (cards[msg.id].dom.innerHTML != cards[msg.id].front) {
+				var bidList = document.getElementById("bidHistory");
+				var _element = document.createElement("div");
+				_element.className = "bidPrice";
+				_element.style.backgroundColor = ((cards[msg.id].bidHistory.length - 1) % 2 == 0) ? "rgb(255, 255, 255)" : "rgb(230, 230, 230)";
+				_element.innerHTML = cards[msg.id].bidHistory[cards[msg.id].bidHistory.length - 1].bid + "<span class=\"bidderName\">Anonymous " + decideAnonAnimal(cards[msg.id].bidHistory[cards[msg.id].bidHistory.length - 1].bidder) + "</span>";
+				bidList.insertBefore(_element, bidList.firstChild);
+				document.getElementById("dollarAmount").value = cards[msg.id].calculateDefaultBid();
+			}
+		}
+		else {
+			if (text == "failed to authenticate bid")
+				logout();
+			else
+				alert(text);
+		}
+	});
+	socket.on('outbid notification', function(msg) {
+		if (localStorage["showNotifications"] == null)
+			localStorage["showNotifications"] = "true";
+		if (localStorage["showNotifications"] === "true") {
+			if (document.getElementById("notificationCount").innerHTML == 0)
+				document.getElementById("notificationCount").style.display = "block";
+			document.getElementById("notificationCount").innerHTML++;
+			var notificationsShade = document.getElementById("notificationsShade");
+			var _element = document.createElement("div");
+			_element.className = "notification";
+			_element.id = "notification" + (notificationsShade.childNodes.length - 5);
+			_element.style.backgroundColor = ((notificationsShade.childNodes.length) % 2 == 0) ? "rgb(255, 255, 255)" : "rgb(230, 230, 230)";
+			_element.innerHTML = "<core-icon class=\"clear\" icon=\"clear\" onclick=\"dismissNotification(" + (notificationsShade.childNodes.length - 5) + ");\"></core-icon><div>You were outbid by an anon. " + decideAnonAnimal(msg.bidder) + "</div><div>The new high bid for item " + convertDBidToLocalID(msg.item) + " is " + parseFloat(msg.price).formatCurrency() + "</div>";
+			_element.onclick = createClickHandeler(convertDBidToLocalID(msg.item));
+			notificationsShade.insertBefore(_element, notificationsShade.lastChild);
+
+			animLength = 0.6;
+			notificationsIcon = document.getElementById("notificationsIcon");
+			if (document.getElementById("header").style.transform == "matrix(1, 0, 0, 1, 0, -60)") {
+				TweenLite.to(notificationsIcon, animLength, {transform: "translateY(50px)", onComplete: function() {
+					TweenLite.to(notificationsIcon, animLength / 5, {transform: "translateY(50px) rotate(30deg)", onComplete: function() {
+						TweenLite.to(notificationsIcon, animLength / 5, {transform: "translateY(50px) rotate(-30deg)", onComplete: function() {
+							TweenLite.to(notificationsIcon, animLength / 5, {transform: "translateY(50px) rotate(30deg)", onComplete: function() {
+								TweenLite.to(notificationsIcon, animLength / 5, {transform: "translateY(50px) rotate(0deg)", onComplete: function() {
+									TweenLite.to(notificationsIcon, animLength, {transform: "translateY(0px)", onComplete: function() {
+
+									}});
+								}});
+							}});
+						}});
+					}});
+				}});
+			}
+			else {
+				TweenLite.to(notificationsIcon, animLength / 5, {transform: "rotate(30deg)", onComplete: function() {
+					TweenLite.to(notificationsIcon, animLength / 5, {transform: "rotate(-30deg)", onComplete: function() {
+						TweenLite.to(notificationsIcon, animLength / 5, {transform: "rotate(30deg)", onComplete: function() {
+							TweenLite.to(notificationsIcon, animLength / 5, {transform: "rotate(0deg)", onComplete: function() {
+
+							}});
+						}});
+					}});
+				}});
+			}
+		}
+	});
+	socket.on('create account', function(msg) {
+		var animLength = 0.5;
+		if (msg == "username already taken") {
+			var username = document.getElementById("createUsername");
+			TweenLite.to(username, animLength, {backgroundColor:"rgb(255, 220, 220)"});
+			TweenLite.to(username, animLength, {border:"2px solid rgb(255, 100, 100)"});
+		}
+		else if (msg == "invalid email") {
+			var email = document.getElementById("createEmail");
+			TweenLite.to(email, animLength, {backgroundColor:"rgb(255, 220, 220)"});
+			TweenLite.to(email, animLength, {border:"2px solid rgb(255, 100, 100)"});
+		}
+	});
+	socket.on('login', function(msg) {
+		if (msg.authKey != null) {
+			localStorage.setItem("authKey", msg.authKey);
+			localStorage.setItem("ID", msg.id);
+			localStorage.setItem("username", msg.username);
+			document.getElementById("usernameDisplay").innerHTML = localStorage["username"];
+			document.getElementById("avatar").src = "https://unicornify.appspot.com/avatar/" + localStorage["ID"] + "?s=128";
+			openPreload();
+		}
+		else {
+			localStorage.setItem("authKey", "");
+			localStorage.setItem("ID", "");
+			showWrongCreds();
+			if (msg == "You've failed too many times.") {
+				alert("You've failed too many times.");
+				console.log("You've failed too many times.");
+			}
+		}
+	});
+	socket.on('reconnect', function(msg) {
+		if (msg == "rejoined session" || msg.id == localStorage["ID"]) {
+			document.getElementById("usernameDisplay").innerHTML = localStorage["username"];
+			document.getElementById("avatar").src = "https://unicornify.appspot.com/avatar/" + localStorage["ID"] + "?s=128";
+			openPreload();
+		}
+		else {
+			localStorage.setItem("authKey", "");
+			localStorage.setItem("ID", "");
+			localStorage.setItem("username", "");
+			openLogin();
+		}
+	});
+	socket.on('change email', function(msg) {
+		if (msg == "Successfully changed email.") {
+			closeAccountSettings();
+		}
+		else {
+			var email = document.getElementById("newEmail");
+			email.error = msg;
+			email.invalid = true;
+		}
+	});
+	socket.on('change password', function(msg) {
+		if (msg == "Successfully changed password.") {
+			closeAccountSettings();
+		}
+		else {
+			if (msg == "The old password was incorrect.") {
+				var password = document.getElementById("oldPassword");
+				password.error = msg;
+				password.invalid = true;
+			}
+			else {
+				var password = document.getElementById("newPassword");
+				password.error = msg;
+				password.invalid = true;
+				password = document.getElementById("newPasswordAgain");
+				password.error = msg;
+				password.invalid = true;
+			}
+		}
+	});
+};
+
+function rejoinSession() {
+	if (localStorage["ID"] != "" && localStorage["authKey"] != "" && localStorage["ID"] != null && localStorage["authKey"] != null) {
+		console.log("attempting to rejoin");
+		socket.emit('reconnect to session', {id: localStorage["ID"], authKey: localStorage["authKey"]});
+		return true;
+	}
+	else return false;
+}
+
+function login() {
+	socket.emit('login', {username: document.getElementById("username").value, password: document.getElementById("password").value});
+}
+
+function logout() {
+	socket.emit('logout', {ID: localStorage["ID"], authKey: localStorage["authKey"]});
+	localStorage.clear();
+	location.reload();
+}
+
+function createAccount() {
+	socket.emit('create account', {username: document.getElementById("createUsername").value, email: document.getElementById("createEmail").value, password: document.getElementById("createPassword").value});
+}
+
 (function () {
-	var app = angular.module("AllTalk", [ ]);
+	var app = angular.module("AllTalk", []);
 	app.controller("MessengerController", function () {
 		this.users = [];
 		this.chats = {};
@@ -180,13 +429,15 @@ function SpecialScroll (applyTo, relativeSpeed) {
 			restrict: "E",
 			templateUrl: "/parts/messaging/current_chat.html",
 			controller: function ($scope) {
-				chatList = document.getElementById("chats");
+				this.chatList = document.getElementById("chats");
 				this.switchChat = function (user, chat) {
-					$scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText = document.getElementById('send_message').value;
+					$scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText = document.getElementById("send_message").value;
 					$scope.ctrlMessenger.currentChat = user;
-					for (i in chatList.childNodes)
-						if (chatList.childNodes[i].className != undefined && chatList.childNodes[i].className.indexOf("chat") !== -1)
-							chatList.childNodes[i].removeAttribute("open");
+					for (var i in this.chatList.childNodes) {
+						if (this.chatList.childNodes[i].className !== undefined && this.chatList.childNodes[i].className.indexOf("chat") !== -1) {
+							this.chatList.childNodes[i].removeAttribute("open");
+						}
+					}
 					$scope.ctrlChatHistory.history = $scope.ctrlMessenger.chats[user].history;
 					chat.setAttribute("open", "");
 
@@ -194,13 +445,13 @@ function SpecialScroll (applyTo, relativeSpeed) {
 
 					$scope.$apply();
 
-					document.getElementById('send_message').value = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
-					document.getElementById('send_message').focus();
-				}
+					document.getElementById("send_message").value = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
+					document.getElementById("send_message").focus();
+				};
 				this.sendMessage = function (message, attachment) {
 					$scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history.push(new Message($scope.ctrlMessenger.you.id, true, message, attachment, Date.now()));
 					$scope.$apply();
-				}
+				};
 			},
 			controllerAs: "ctrlChat"
 		};
@@ -216,22 +467,22 @@ function SpecialScroll (applyTo, relativeSpeed) {
 			controllerAs: "ctrlChatHistory"
 		};
 	});
-	app.directive('sender', function($log, $timeout) {
+	app.directive("sender", function() {
 		return {
 			restrict: "A",
-			link: function (scope, element, attrs) {
+			link: function (scope, element) {
 				if (scope.message.isyou) {
 					element[0].setAttribute("sender", "you");
 				} else {
 					element[0].setAttribute("sender", "other");
 				}
 			}
-		}
+		};
 	});
-	app.directive('resizeHeight', function ($log, $timeout) {
+	app.directive("resizeHeight", function () {
 		return {
 			restrict: "A",
-			link: function (scope, element, attrs) {
+			link: function (scope, element) {
 				scope.$evalAsync(function () {
 					element[0].style.height = element[0].getElementsByClassName("text")[0].offsetHeight + 10;
 					var tweenTime = 0.5;
@@ -240,71 +491,77 @@ function SpecialScroll (applyTo, relativeSpeed) {
 					});
 				});
 			}
-		}
+		};
 	});
-	app.directive("keyListener", function ($log, $timeout) {
+	app.directive("keyListener", function () {
 		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				element.on('keypress', function (event) {
+			restrict: "A",
+			link: function (scope, element) {
+				element.on("keypress", function (event) {
 					if (event.keyCode === 13 && !scope.shiftDown) {
 						event.preventDefault();
 						send_submit.click();
 					}
 				});
-				element.on('keydown', function (event) {
+				element.on("keydown", function (event) {
 					if (event.keyCode === 16) {
 						scope.shiftDown = true;
 					}
 				});
-				element.on('keyup', function (event) {
+				element.on("keyup", function (event) {
 					if (event.keyCode === 16) {
 						scope.shiftDown = false;
 					}
 				});
 			}
-		}
+		};
 	});
-	app.directive("sendMessage", function ($log, $timeout) {
+	app.directive("sendMessage", function () {
 		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				element.on('click', function (event) {
+			restrict: "A",
+			link: function (scope, element) {
+				element.on("click", function (event) {
 					event.preventDefault();
-					if ((scope.message != "" && /\S/.test(scope.message)) || (scope.attachment && scope.attachment.length > 0)) {
+					if ((scope.message !== "" && /\S/.test(scope.message)) || (scope.attachment && scope.attachment.length > 0)) {
 						scope.ctrlChat.sendMessage(scope.message, scope.attachment);
 						scope.attachment = "";
 						scope.message = "";
 						send_media_dialogue.removeAttribute("open");
 						send_media_dialogue.removeAttribute("previewing");
-						send_media_dialogue_preview_img.style.backgroundImage = "url(" + e.target.result + ")";
-						send_attachment_input.files.clear();
+						send_media_dialogue_preview_img.style.backgroundImage = "url(" + event.target.result + ")";
+						if (send_attachment_input.files.length > 0) {
+							for (var i = 0; i < send_attachment_input.files.length; i++) {
+								send_attachment_input.files[i] = undefined;
+							}
+						}
 						scope.$apply();
 					}
 					send_message.focus();
 				});
 			}
-		}
+		};
 	});
-	app.directive("attachMessage", function ($log, $timeout) {
+	app.directive("attachMessage", function () {
 		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				element.on('click', function (event) {
+			restrict: "A",
+			link: function (scope, element) {
+				element.on("click", function (event) {
 					event.preventDefault();
-					if (send_media_dialogue.getAttribute("open") != "")
+					if (send_media_dialogue.getAttribute("open") !== "") {
 						send_media_dialogue.setAttribute("open", "");
-					else
+					}
+					else {
 						send_media_dialogue.removeAttribute("open");
+					}
 				});
 			}
-		}
+		};
 	});
-	app.directive("attachDialogue", function ($log, $timeout) {
+	app.directive("attachDialogue", function () {
 		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				element.on('change', function (event) {
+			restrict: "A",
+			link: function (scope, element) {
+				element.on("change", function (event) {
 					// event.preventDefault();
 					if (event.srcElement.files && event.srcElement.files[0]) {
 			            var reader = new FileReader();
@@ -312,32 +569,23 @@ function SpecialScroll (applyTo, relativeSpeed) {
 							send_media_dialogue_preview_img.style.backgroundImage = "url(" + e.target.result + ")";
 							element[0].parentElement.parentElement.setAttribute("previewing", "");
 							scope.attachment = e.target.result;
-			            }
+			            };
 			            reader.readAsDataURL(event.srcElement.files[0]);
 			        }
 				});
 			}
-		}
+		};
 	});
-	app.directive("cancelAttachDialogue", function ($log, $timeout) {
+	app.directive("cancelAttachDialogue", function () {
 		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				element.on('click', function (event) {
+			restrict: "A",
+			link: function (scope, element) {
+				element.on("click", function () {
 					element[0].parentElement.removeAttribute("previewing");
 				});
 			}
-		}
+		};
 	});
-	// app.directive('ready', function($log, $timeout) {
-	// 	return {
-	//     	restrict: 'A',
-	//     	link: function(scope, element, attrs) {
-	// 			element[0].parentElement.style.height = element[0].offsetHeight + 10;
-	// 			element[0].parentElement.parentElement.scrollTop = element[0].parentElement.parentElement.scrollHeight;
-	//     	}
-	//   	}
-	// });
 	app.directive("chatsList", function () {
 		return {
 			restrict: "E",
@@ -349,23 +597,24 @@ function SpecialScroll (applyTo, relativeSpeed) {
 			controllerAs: "ctrlChatList"
 		};
 	});
-	app.directive('chatListClick', function($log, $timeout) {
+	app.directive("chatListClick", function() {
 		return {
-	    	restrict: 'A',
+	    	restrict: "A",
 	    	link: function(scope, element, attrs) {
-				if (scope.chat.user != undefined) {
-					element[0].setAttribute("user", scope.chat.id);
+				if (scope.chat.user !== undefined) {
+					attrs.user = scope.chat.id;
+					// element[0].setAttribute("user", scope.chat.id);
 				}
-				element.on("click", function (event) {
+				element.on("click", function () {
 					scope.ctrlChat.switchChat(scope.chat.id, element[0]);
 				});
 				// TODO: change to set the actual current chat active
                 if (scope.chat.id === scope.ctrlMessenger.currentChat) {
-                    element[0].setAttribute("open", "");
-//                    scope.ctrlChat.switchChat(scope.chat.id, element);
+					attrs.open = "";
+                    // element[0].setAttribute("open", "");
                 }
 	    	}
-	  	}
+		};
 	});
 	app.directive("appToolbar", function () {
 		return {
@@ -381,19 +630,18 @@ function SpecialScroll (applyTo, relativeSpeed) {
 	});
 	app.directive("openOverflow", function () {
 		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				element.on("click", function (event) {
-					var overflowMenu = document.getElementById("overflow");
+			restrict: "A",
+			link: function (scope, element) {
+				element.on("click", function () {
 					var overflowMenuList = document.getElementById("overflow_menu");
 					if (overflowMenuList.hasAttribute("open")) {
 						overflowMenuList.removeAttribute("open");
 					} else {
 						overflowMenuList.setAttribute("open", "");
 					}
-				})
+				});
 			}
-		}
+		};
 	});
 
 
@@ -411,13 +659,13 @@ function SpecialScroll (applyTo, relativeSpeed) {
     app.directive("chatStatusSetter", function () {
         return {
             restrict: "A",
-            link: function (scope, element, attrs) {
-                element.on("change", function (event) {
+            link: function (scope, element) {
+                element.on("change", function () {
                     scope.ctrlMessenger.chats[scope.ctrlMessenger.currentChat].chatStatus = (!this.checked ? ChatStatus.MUTED : ChatStatus.NONE);
                     scope.$apply();
                 });
             }
-        }
+        };
     });
 
 
@@ -425,11 +673,11 @@ function SpecialScroll (applyTo, relativeSpeed) {
         return {
             restrict: "E",
             template: "<input id=\"FAB\" class=\"material light floating\" value=\"+\" type=\"button\">",
-            controller: function ($scope) {
-                this.openPopup
-            },
+            // controller: function ($scope) {
+            //     this.openPopup
+            // },
             controllerAs: "ctrlFAB"
-        }
+        };
     });
     app.directive("popupNewChat", function () {
         return {
@@ -497,27 +745,27 @@ function SpecialScroll (applyTo, relativeSpeed) {
                 };
             },
             controllerAs: "ctrlPopupNewChat"
-        }
+        };
     });
     app.directive("popupNewChatOpen", function () {
         return {
             restrict: "A",
-            link: function (scope, element, attrs) {
-                element.on("click", function (event) {
+            link: function (scope, element) {
+                element.on("click", function () {
                     scope.ctrlPopupNewChat.open();
                 });
             }
-        }
+        };
     });
     app.directive("popupNewChatClose", function () {
         return {
             restrict: "A",
-            link: function (scope, element, attrs) {
-                element.on("click", function (event) {
+            link: function (scope, element) {
+                element.on("click", function () {
                     scope.ctrlPopupNewChat.close();
                 });
             }
-        }
+        };
     });
 })();
 

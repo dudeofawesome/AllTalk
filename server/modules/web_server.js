@@ -26,7 +26,7 @@ module.exports = {
         });
 
         app.listen(WEBSITE_PORT, function(){
-            console.log('listening on *:' + WEBSITE_PORT);
+            console.log('web server listening on *:' + WEBSITE_PORT);
         });
     },
     stopServer: function () {
