@@ -1,9 +1,10 @@
-var bcrypt = require("bcrypt-nodejs");
+var bcrypt = require('bcrypt-nodejs');
 
-function hashPassword (password) {
-	return bcrypt.hashSync(password);
-}
-
-function comparePassword (correct, testing) {
-	return bcrypt.compareSync(testing, correct);
-}
+module.exports = {
+	hashPassword: function (password) {
+		return bcrypt.hashSync(password);
+	},
+	comparePassword: function (correct, testing) {
+		return bcrypt.compareSync(testing, correct);
+	}
+};

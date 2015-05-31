@@ -9,6 +9,7 @@ module.exports = {
         if (db === undefined) {
             db = require("mongojs").connect(databaseUrl, collections);
         }
+        return this;
     },
     getUsers: function (callback) {
         db.users.find(function(err, users) {
@@ -24,7 +25,7 @@ module.exports = {
             if (err) {
                 callback(err);
             } else {
-                callback(user);
+                callback(user[0]);
             }
 		});
     },
@@ -33,7 +34,7 @@ module.exports = {
             if (err) {
                 callback(err);
             } else {
-                callback(user);
+                callback(user[0]);
             }
 		});
     },

@@ -12,29 +12,40 @@ var app = require("express")();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 // var bcrypt = require("bcrypt-nodejs");
+var database = require("./database");
 
 
 var connectedSockets = [];
 
-io.on("connection", function (socket) {
-	console.log("new user connected");
-	connectedSockets[socket.id] = true;
-	socket.on("get friends", function() {
-		console.log("get auction items");
-		db.items.find(function(err, items) {
-			if( err || !items || items.length === 0) {
-				io.to(socket.id).emit("get auction items", "No items were found.");
-			}
-			else {
-				io.to(socket.id).emit("get auction items", items);
-			}
-		});
-	});
-    socket.on("disconnect", function () {
-		connectedSockets[socket.id] = undefined;
-	});
-});
+module.exports = {
+	init: function () {
+		io.on("connection", function (socket) {
+			console.log("new user connected");
+			connectedSockets[socket.id] = true;
+			socket.on("get user", function(msg) {
+				console.log("get user");
+				database.getUserByID(msg._id, function (user) {
+					io.emit("get user", user);
+				})
+			});
+			socket.on("message", function (msg) {
 
-server.listen(PORT, function(){
-	console.log("chat server listening on *:" + PORT);
-});
+			});
+		    socket.on("disconnect", function () {
+				connectedSockets[socket.id] = undefined;
+			});
+		});
+
+		this.startServer();
+		return this;
+	},
+	startServer: function () {
+		server.listen(PORT, function(){
+			console.log("chat server listening on *:" + PORT);
+		});
+	},
+	stopServer: function () {
+		server.close();
+		return true;
+	}
+};

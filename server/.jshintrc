@@ -19,6 +19,8 @@
       "TweenLite": false,
       "FileReader": false,
       "DATE": false,
+      "describe": false,
+      "it": false,
 
       "send_message": false,
       "send_submit": false,

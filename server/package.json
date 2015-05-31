@@ -4,8 +4,8 @@
   "description": "The server for a new, open source chat client with a focus on usability.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "mocha modules/* && mocha pages/resources/scripts/*",
+    "start": "cd ./server && gulp build-run"
   },
   "repository": {
     "type": "git",

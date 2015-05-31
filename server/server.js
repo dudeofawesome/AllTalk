@@ -3,6 +3,7 @@ var CHAT_PORT = 35937;
 var fs = require('fs');
 
 var bcrypt = require('bcrypt-nodejs');
+var utils = require('utils');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
@@ -21,9 +22,9 @@ var failedAuthAttempts = [];
 var disabledSocketIDs = [];
 var connectedSockets = [];
 
-var database = require('./modules/database');
-var webServer = require('./modules/web_server');
-var chatServer = require('./modules/chat_server');
+var database = require('./modules/database').init();
+var webServer = require('./modules/web_server').init();
+var chatServer = require('./modules/chat_server').init();
 
 function authenticateIDauthKey (ID, authKey) {
 	stopBruteForce(ID);
@@ -42,7 +43,7 @@ function authenticateIDauthKey (ID, authKey) {
 		return false;
 }
 
-function stopBruteForce(ID) {
+function stopBruteForce (ID) {
 	if (failedAuthAttempts[ID] == null) {
 		failedAuthAttempts[ID] = 1;
 	}
@@ -55,7 +56,7 @@ function stopBruteForce(ID) {
 	}
 }
 
-function determineID(username) {
+function determineID (username) {
 	// TODO this DB get may have scaling issues once there are more users
 	var id = "";
 	db.users.find({username: username}, function(err, users) {
@@ -88,21 +89,17 @@ function validatePassword(password) {
 	if (longEnough && shortEnough && hasDigits && hasLetters)
 		return true;
 	else {
-		if (!longEnough)
+		if (!longEnough) {
 			return "Password is too short.";
-		if (!shortEnough)
+		}
+		if (!shortEnough) {
 			return "Password is too long.";
-		if (!hasDigits)
+		}
+		if (!hasDigits) {
 			return "Password must have numbers";
-		if (!hasLetters)
+		}
+		if (!hasLetters) {
 			return "Password must have letters.";
+		}
 	}
-}
-
-function hashPassword (password) {
-	return bcrypt.hashSync(password);
-}
-
-function comparePassword (correct, testing) {
-	return bcrypt.compareSync(testing, correct);
 }
