@@ -30,13 +30,9 @@ module.exports = {
             res.send(index);
         });
         app.post("/signup", function (req, res) {
-            // console.log("get flyers");
-            // db.fliers.find({school: req}, function(err, items) {
-            // 	if( err || !items || items.length == 0) res.send("No flyers were found.");
-            // 	else {
-            // 		res.send("flyers->" + items[0].flyers);
-            // 	}
-            // });
+            res.send("just go login");
+        });
+        app.post("/login", function (req, res) {
             if (req.body.username != "failme") {
                 res.send("success " + "ib87f9n88JYT&*&df89");
             } else {

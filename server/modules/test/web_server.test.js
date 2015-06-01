@@ -9,8 +9,14 @@ describe("web_server.js tests", function () {
         testing.should.be.an.instanceOf(Object);
         done();
     });
+    it("signup page loads", function (done) {
+        supertest(testing.getApp()).post("/signup").expect(200).end(function (err, res) {
+            res.status.should.equal(200);
+            done();
+        });
+    });
     it("login page loads", function (done) {
-        supertest(testing.getApp()).get("/").expect(200).end(function (err, res) {
+        supertest(testing.getApp()).post("/login").expect(200).end(function (err, res) {
             res.status.should.equal(200);
             done();
         });
