@@ -1,7 +1,9 @@
 var gulp = require('gulp');
 
 var jshint = require('gulp-jshint');
+var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -16,9 +18,23 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter('default'));
 });
 
+gulp.task('test', function () {
+    return gulp.src('*.js', {read: false})
+        .pipe(mocha({reporter: 'default'}));
+});
+
 gulp.task('sass', function () {
     return gulp.src('pages/resources/styles/*.scss')
         .pipe(sass())
+        .pipe(gulp.dest('pages/resources/styles/dist'));
+});
+
+gulp.task('autoprefixer', function () {
+    return gulp.src('pages/resources/styles/dist/*.css')
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         .pipe(gulp.dest('pages/resources/styles/dist'));
 });
 
@@ -67,5 +83,5 @@ gulp.task('watch', function () {
     gulp.watch('modules/*.js', ['node-server']);
 });
 
-gulp.task('default', ['sass', 'scripts']);
-gulp.task('build-run', ['default', 'watch', 'node-server']);
+gulp.task('default', ['lint', 'test', 'sass', 'scripts']);
+gulp.task('build-run', ['sass', 'scripts', 'watch', 'node-server']);
