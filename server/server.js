@@ -3,7 +3,7 @@ var CHAT_PORT = 35937;
 var fs = require('fs');
 
 var bcrypt = require('bcrypt-nodejs');
-var utils = require('utils');
+// var utils = require('utils');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;

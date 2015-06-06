@@ -19,8 +19,8 @@ gulp.task('lint', function () {
 });
 
 gulp.task('test', function () {
-    return gulp.src('*.js', {read: false})
-        .pipe(mocha({reporter: 'default'}));
+    return gulp.src('*/test/*.js', {read: false})
+        .pipe(mocha());
 });
 
 gulp.task('sass', function () {
