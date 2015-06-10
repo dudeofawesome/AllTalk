@@ -1,7 +1,3 @@
-function onload () {
-
-}
-
 function openMessaging () {
     var header = document.getElementsByTagName("header");
     var card = document.getElementById("main");
@@ -24,7 +20,7 @@ function submitForm (form) {
             case "login" :
                 var username = document.getElementById("login_username");
                 var password = document.getElementById("login_password");
-                
+
                 var xmlhttp;
                 if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
@@ -49,7 +45,7 @@ function submitForm (form) {
                 xmlhttp.send("username=" + username.value + "&password=" + password.value);
                 break;
             case "signup" :
-                
+
                 break;
         }
 	}

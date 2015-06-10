@@ -56,5 +56,8 @@ module.exports = {
     },
     getApp: function () {
         return app;
+    },
+    getServer: function () {
+        return server;
     }
 };

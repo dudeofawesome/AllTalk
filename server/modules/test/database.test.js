@@ -6,6 +6,9 @@ describe("database.js tests", function () {
     it("connect to database", function (done) {
         testing = testing.init();
         testing.should.be.an.instanceOf(Object);
+        var testing2 = require("../database").init();
+        testing.should.equal(testing2);
+
         done();
     });
     it("get users", function (done) {
@@ -19,6 +22,7 @@ describe("database.js tests", function () {
             users[0].should.have.property("lastActive");
             users[0].should.have.property("conversations");
             users[0].should.have.property("profiles");
+
             done();
         });
     });
@@ -40,6 +44,7 @@ describe("database.js tests", function () {
                 user.lastActive.should.equal(users[0].lastActive);
                 user.conversations.should.eql(users[0].conversations);
                 user.profiles.should.eql(users[0].profiles);
+
                 done();
             });
         });
@@ -62,6 +67,7 @@ describe("database.js tests", function () {
                 user.lastActive.should.equal(users[0].lastActive);
                 user.conversations.should.eql(users[0].conversations);
                 user.profiles.should.eql(users[0].profiles);
+
                 done();
             });
         });
@@ -77,5 +83,9 @@ describe("database.js tests", function () {
         testing.getConversationsByUserID(undefined, function (conversations) {
             done();
         });
+    });
+    it("disconnect from database", function (done) {
+        testing.disconnect();
+        done();
     });
 });
