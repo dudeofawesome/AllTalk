@@ -3,12 +3,15 @@ var fs = require('fs');
 // var bcrypt = require('-nodejs');
 // var utils = require('./modules/utils');
 var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags: 'w'});
-var log_stdout = process.stdout;
-console.log = function (d) {
-    log_file.write(util.format(d) + '\n');
-    log_stdout.write(util.format(d) + '\n');
-};
+(function () {
+    fs.mkdirSync('logs');
+    var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags: 'w'});
+    var log_stdout = process.stdout;
+    console.log = function (d) {
+        log_file.write(util.format(d) + '\n');
+        log_stdout.write(util.format(d) + '\n');
+    };
+})();
 
 // var GCM = require('gcm').GCM;
 // var apiKey = 'AIzaSyBg4mLnceWpKL8-Lpo6nUjGfx6v86Sovtk';
