@@ -1,4 +1,4 @@
-var WEBSITE_PORT = 8080;
+var WEBSITE_PORT = 80;
 
 var fs = require("fs");
 

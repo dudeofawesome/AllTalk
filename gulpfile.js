@@ -1,35 +1,28 @@
 var gulp = require('gulp');
-
-var jshint = require('gulp-jshint');
-var mocha = require('gulp-mocha');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var concat = require('gulp-concat');
-// var uglify = require('gulp-uglify');
-// var rename = require('gulp-rename');
-var server = require('gulp-express');
-var spawn = require('child_process').spawn;
-
 var mongoRunning = false;
 
 gulp.task('lint', function () {
+    var jshint = require('gulp-jshint');
     return gulp.src('*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
 gulp.task('test', function () {
+    var mocha = require('gulp-mocha');
     return gulp.src('**/test/*.js', {read: false})
         .pipe(mocha());
 });
 
 gulp.task('sass', function () {
+    var sass = require('gulp-sass');
     return gulp.src('pages/resources/styles/*.scss')
         .pipe(sass())
         .pipe(gulp.dest('pages/resources/styles/dist'));
 });
 
 gulp.task('autoprefixer', function () {
+    var autoprefixer = require('gulp-autoprefixer');
     return gulp.src('pages/resources/styles/dist/*.css')
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
@@ -39,7 +32,10 @@ gulp.task('autoprefixer', function () {
 });
 
 gulp.task('scripts', function () {
+    var concat = require('gulp-concat');
     // TODO add uglify back in once it works
+    // var uglify = require('gulp-uglify');
+    // var rename = require('gulp-rename');
     // TODO seperate each view's scripts
     // return gulp.src('pages/resources/scripts/*.js')
     //     .pipe(concat('all.js'))
@@ -53,14 +49,15 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('node-server', function () {
-    gulp.start('start-mongo');
-    if (server !== undefined) {
-        server.stop();
-    }
-    server.run(['server.js']);
+    var gls = require('gulp-live-server');
+    // TODO switch to another DB server
+    // gulp.start('start-mongo');
+    var server = gls.new('server.js');
+    server.start();
 });
 
 gulp.task('start-mongo', function () {
+    var spawn = require('child_process').spawn;
     if (!mongoRunning) {
         var mongod = spawn('mongod', ['--dbpath', './db/']);
         mongod.stdout.on('data', function (data) {
@@ -73,6 +70,7 @@ gulp.task('start-mongo', function () {
 });
 
 gulp.task('stop-mongo', function () {
+    var spawn = require('child_process').spawn;
     if (mongoRunning) {
         var mongod = spawn('mongod', ['--eval', '"use admin; db.shutdownServer();"']);
         mongod.stdout.on('data', function (data) {
