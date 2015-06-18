@@ -1,3 +1,4 @@
-server/db/**
-server/certificates/**
+db/**
+certificates/**
 **/logs/**
+**/node_modules/**
