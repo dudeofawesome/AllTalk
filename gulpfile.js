@@ -70,6 +70,7 @@ gulp.task('start-mongo', function () {
 });
 
 gulp.task('stop-mongo', function () {
+    var spawn = require('child_process').spawn;
     if (mongoRunning) {
         var mongod = spawn('mongod', ['--eval', '"use admin; db.shutdownServer();"']);
         mongod.stdout.on('data', function (data) {
