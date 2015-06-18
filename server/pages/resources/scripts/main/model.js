@@ -15,7 +15,7 @@ function openMessaging () {
 }
 
 function submitForm (form) {
-	if (checkInputForErrors(form)) {
+    if (checkInputForErrors(form)) {
         switch (form) {
             case "login" :
                 var username = document.getElementById("login_username");
@@ -48,7 +48,7 @@ function submitForm (form) {
 
                 break;
         }
-	}
+    }
 }
 
 function checkInputForErrors (form) {
@@ -136,5 +136,5 @@ function checkInputForErrors (form) {
 }
 
 function isEmail (email) {
-	return (email.length >= 5 && email.indexOf(" ") == -1 && email.split("@").length == 2 && email.split(".").length == 2 && email.indexOf("@") < email.indexOf(".") - 1 && email.indexOf("@") !== 0 && email.indexOf(".") != email.length - 1);
+    return (email.length >= 5 && email.indexOf(" ") == -1 && email.split("@").length == 2 && email.split(".").length == 2 && email.indexOf("@") < email.indexOf(".") - 1 && email.indexOf("@") !== 0 && email.indexOf(".") != email.length - 1);
 }

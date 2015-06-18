@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({
 var index, messaging;
 
 function loadPages () {
-	index = fs.readFileSync("./pages/index.html").toString();
-	messaging = fs.readFileSync("./pages/messaging.html").toString();
+    index = fs.readFileSync("./pages/index.html").toString();
+    messaging = fs.readFileSync("./pages/messaging.html").toString();
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
-var Utils = require("./utils");
+var Utils = require('./utils');
 
-var databaseUrl = "mongodb://localhost:27017/AllTalk";
-var collections = ["users", "conversations", "attachments"];
+var databaseUrl = 'mongodb://localhost:27017/AllTalk';
+var collections = ['users', 'conversations', 'attachments'];
 var db;
 var testDB = {};
 
@@ -14,10 +14,10 @@ module.exports = {
         }
         if (!this.modes.TEST) {
             if (db === undefined) {
-                db = require("mongojs").connect(databaseUrl, collections);
+                db = require('mongojs').connect(databaseUrl, collections);
             }
         } else {
-            var tmpDB = require("mongojs").connect(databaseUrl, collections);
+            var tmpDB = require('mongojs').connect(databaseUrl, collections);
             for (var i = 0; i < collections.length; i++) {
                 testDB[collections[i]] = {};
             }
@@ -53,7 +53,7 @@ module.exports = {
         }
     },
     getUsers: function (callback) {
-        db.users.find({}, function(err, users) {
+        db.users.find({}, function (err, users) {
             if (err) {
                 callback(err);
             } else {
@@ -62,38 +62,38 @@ module.exports = {
         });
     },
     getUser: function (username, callback) {
-        db.users.find({username: username}, function(err, user) {
+        db.users.find({username: username}, function (err, user) {
             if (err) {
                 callback(err);
             } else {
                 callback(user[0]);
             }
-		});
+        });
     },
     getUserByID: function (ID, callback) {
-        db.users.find({_id: db.ObjectId(ID)}, function(err, user) {
+        db.users.find({_id: db.ObjectId(ID)}, function (err, user) {
             if (err) {
                 callback(err);
             } else {
                 callback(user[0]);
             }
-		});
+        });
     },
     addUser: function (user, callback) {
-        db.users.find({username: user.username}, function(err, users) {
-			//verify there are no other users with username and that the email is valid
-			if (users.length === 0) {
-				db.users.save({username: user.username, password: Utils.hashPassword(user.password), email: user.email}, function(err, saved) {
-					if (err) {
+        db.users.find({username: user.username}, function (err, users) {
+            // verify there are no other users with username and that the email is valid
+            if (users.length === 0) {
+                db.users.save({username: user.username, password: Utils.hashPassword(user.password), email: user.email}, function (err, saved) {
+                    if (err) {
                         callback(err);
-					} else {
-						callback(saved._id);
-					}
-				});
-			} else {
-				callback("User already exists");
-			}
-		});
+                    } else {
+                        callback(saved._id);
+                    }
+                });
+            } else {
+                callback('User already exists');
+            }
+        });
     },
     getConversationsByUserID: function (ID, callback) {
         db.users.find({_id: ID}, function (err, user) {
