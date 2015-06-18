@@ -6,7 +6,8 @@ var db;
 var testDB = {};
 
 module.exports = {
-    modes: {LOG: false, TEST: false},
+    // TODO change modes.TEST to false
+    modes: {LOG: false, TEST: true},
 
     init: function (modes) {
         if (modes !== undefined) {
@@ -17,31 +18,36 @@ module.exports = {
                 db = require('mongojs').connect(databaseUrl, collections);
             }
         } else {
-            var tmpDB = require('mongojs').connect(databaseUrl, collections);
+            // var tmpDB = require('mongojs').connect(databaseUrl, collections);
+            // for (var i = 0; i < collections.length; i++) {
+            //     testDB[collections[i]] = {};
+            // }
+            // tmpDB.users.find({}, function (err, users) {
+            //     if (err) {
+            //         console.log(err);
+            //     } else {
+            //         testDB.users = users;
+            //     }
+            // });
+            // tmpDB.conversations.find({}, function (err, conversations) {
+            //     if (err) {
+            //         console.log(err);
+            //     } else {
+            //         testDB.conversations = conversations;
+            //     }
+            // });
+            // tmpDB.attachments.find({}, function (err, attachments) {
+            //     if (err) {
+            //         console.log(err);
+            //     } else {
+            //         testDB.attachments = attachments;
+            //     }
+            // });
+
+            var tmpDB = {};
             for (var i = 0; i < collections.length; i++) {
                 testDB[collections[i]] = {};
             }
-            tmpDB.users.find({}, function (err, users) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    testDB.users = users;
-                }
-            });
-            tmpDB.conversations.find({}, function (err, conversations) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    testDB.conversations = conversations;
-                }
-            });
-            tmpDB.attachments.find({}, function (err, attachments) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    testDB.attachments = attachments;
-                }
-            });
         }
         return this;
     },

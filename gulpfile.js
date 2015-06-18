@@ -7,7 +7,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 // var uglify = require('gulp-uglify');
 // var rename = require('gulp-rename');
-var server = require('gulp-express');
+var gls = require('gulp-live-server');
 var spawn = require('child_process').spawn;
 
 var mongoRunning = false;
@@ -53,11 +53,10 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('node-server', function () {
-    gulp.start('start-mongo');
-    if (server !== undefined) {
-        server.stop();
-    }
-    server.run(['server.js']);
+    // TODO switch to another DB server
+    // gulp.start('start-mongo');
+    var server = gls.new('server.js');
+    server.start();
 });
 
 gulp.task('start-mongo', function () {
