@@ -4,7 +4,7 @@
   "description": "The server for a new, open source chat client with a focus on usability.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha modules/* && mocha pages/resources/scripts/*",
+    "test": "mocha modules/* pages/resources/scripts/main/* pages/resources/scripts/messaging/*",
     "start": "gulp build-run"
   },
   "repository": {
