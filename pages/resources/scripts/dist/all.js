@@ -588,10 +588,9 @@ window.onload = function () {
     socket = io(); // jshint ignore:line
 
     socket.on('message', function (msg) {
-        alert('new message:' + msg);
-        var scope = angular.element(document.getElementsByTagName('html')[0]).scope();
-        // scope.ctrlMessenger.chats[msg.conversationID].history.push(msg.sender, (msg.sender === scope.ctrlMessenger.you.id) ? true : false, msg.message, msg.attachment, msg.time);
-        // scope.$apply();
+        var scope = angular.element(document.getElementsByTagName('html')[0]).scope().$$childHead;
+        scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, (msg.sender === scope.ctrlMessenger.you.id) ? true : false, msg.message, msg.attachment, msg.time));
+        scope.$apply();
     });
     socket.on('login', function (msg) {
 
