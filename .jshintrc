@@ -28,6 +28,7 @@
       "send_submit": false,
       "send_media_dialogue": false,
       "send_media_dialogue_preview_img": false,
-      "send_attachment_input": false
+      "send_attachment_input": false,
+      "model": false
   }
 }

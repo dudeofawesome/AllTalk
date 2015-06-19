@@ -10,7 +10,7 @@ gulp.task('lint', function () {
 
 gulp.task('test', function () {
     var mocha = require('gulp-mocha');
-    return gulp.src('**/test/*.js', {read: false})
+    return gulp.src(['modules/test/*', 'pages/resources/scripts/main/test/*', 'pages/resources/scripts/messaging/test/*'], {read: false})
         .pipe(mocha());
 });
 

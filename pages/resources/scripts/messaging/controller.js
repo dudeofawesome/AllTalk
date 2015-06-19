@@ -58,13 +58,12 @@
             restrict: 'E',
             templateUrl: '/parts/messaging/chat_history.html',
             controller: function ($scope) {
-//                this.history = [];
-                 this.history = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history;
+                this.history = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history;
             },
             controllerAs: 'ctrlChatHistory'
         };
     });
-    app.directive('sender', function() {
+    app.directive('sender', function () {
         return {
             restrict: 'A',
             link: function (scope, element) {
@@ -146,8 +145,7 @@
                     event.preventDefault();
                     if (send_media_dialogue.getAttribute('open') !== '') {
                         send_media_dialogue.setAttribute('open', '');
-                    }
-                    else {
+                    } else {
                         send_media_dialogue.removeAttribute('open');
                     }
                 });
@@ -188,16 +186,15 @@
             restrict: 'E',
             templateUrl: '/parts/messaging/chats_list.html',
             controller: function ($scope) {
-//                this.chats = [];
                 this.chats = $scope.ctrlMessenger.chats;
             },
             controllerAs: 'ctrlChatList'
         };
     });
-    app.directive('chatListClick', function() {
+    app.directive('chatListClick', function () {
         return {
             restrict: 'A',
-            link: function(scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 if (scope.chat.user !== undefined) {
                     attrs.user = scope.chat.id;
                     // element[0].setAttribute('user', scope.chat.id);
@@ -241,13 +238,11 @@
         };
     });
 
-
     app.directive('rightSidebar', function () {
         return {
             restrict: 'E',
             templateUrl: '/parts/messaging/right_sidebar.html',
             controller: function ($scope) {
-//                this.user = {};
                 this.user = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat];
             },
             controllerAs: 'ctrlRightSidebar'
@@ -264,7 +259,6 @@
             }
         };
     });
-
 
     app.directive('fab', function () {
         return {

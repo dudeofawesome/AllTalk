@@ -29,17 +29,16 @@ module.exports = {
 
         io.on('connection', function (socket) {
             // TODO ensure the user is properly authenticated now, so that we don't have to worry about it later
-            console.log('new user connected');
             connectedSockets[socket.id] = true;
             socket.on('get user', function (msg) {
-                console.log('get user');
                 database.getUserByID(msg._id, function (user) {
+                    // TODO check to make sure users are friends before retrieving data
                     io.emit('get user', user);
                 });
             });
             socket.on('message', function (msg) {
-                console.log('new message');
                 database.storeMessage(msg);
+                // TODO only broadcast to users in the currnent chat
                 socket.broadcast.emit('message', msg);
             });
             socket.on('disconnect', function () {

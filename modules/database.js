@@ -6,14 +6,13 @@ var db;
 var testDB = {};
 
 module.exports = {
-    // TODO change modes.TEST to false
-    modes: {LOG: false, TEST: true},
+    modes: {LOG: false, TEST: false},
 
     init: function (modes) {
         if (modes !== undefined) {
-            this.modes = modes;
+            module.exports.modes = modes;
         }
-        if (!this.modes.TEST) {
+        if (!module.exports.modes.TEST) {
             if (db === undefined) {
                 db = require('mongojs').connect(databaseUrl, collections);
             }
@@ -44,10 +43,58 @@ module.exports = {
             //     }
             // });
 
-            var tmpDB = {};
             for (var i = 0; i < collections.length; i++) {
-                testDB[collections[i]] = {};
+                testDB[collections[i]] = {
+                    data: {
+                        foo: 'foo',
+                        bar: 'bar'
+                    },
+                    find: function (query, callback) {
+                        var err = {};
+
+                        // var queryKeys = Object.keys(query);
+                        var response = [];
+                        // var dataKeys = Object.keys(this.data);
+                        // for (var i = 0; i < queryKeys.length; i++) {
+                        //     for (var j = 0; j < dataKeys.length; j++) {
+                        //         if (queryKeys[i] === dataKeys[j]) {
+                        //             if (query[queryKeys[i]] !== '' || query[queryKeys[i]] !== undefined) {
+                        //                 response.push(this.data[dataKeys[j]]);
+                        //             }
+                        //         }
+                        //     }
+                        // }
+
+                        callback(err, response);
+                    },
+                    save: function (newDoc, callback) {
+                        var err = {};
+
+                        callback(err);
+                    },
+                    update: function (query, updateDoc, callback) {
+                        var err = {};
+
+                        // var queryKeys = Object.keys(query);
+                        var response = [];
+                        // var dataKeys = Object.keys(this.data);
+                        // for (var i = 0; i < queryKeys.length; i++) {
+                        //     for (var j = 0; j < dataKeys.length; j++) {
+                        //         if (queryKeys[i] === dataKeys[j]) {
+                        //             if (query[queryKeys[i]] !== '' || query[queryKeys[i]] !== undefined) {
+                        //                 response.push(this.data[dataKeys[j]]);
+                        //             }
+                        //         }
+                        //     }
+                        // }
+
+                        callback(err, response);
+                    }
+                };
             }
+            testDB.close = function () {
+                return;
+            };
         }
         return this;
     },
@@ -59,70 +106,97 @@ module.exports = {
         }
     },
     getUsers: function (callback) {
-        db.users.find({}, function (err, users) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(users);
-            }
-        });
+        if (!module.exports.modes.TEST) {
+            db.users.find({}, function (err, users) {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback(users);
+                }
+            });
+        } else {
+
+        }
     },
     getUser: function (username, callback) {
-        db.users.find({username: username}, function (err, user) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(user[0]);
-            }
-        });
+        if (!module.exports.modes.TEST) {
+            db.users.find({username: username}, function (err, user) {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback(user[0]);
+                }
+            });
+        } else {
+
+        }
     },
     getUserByID: function (ID, callback) {
-        db.users.find({_id: db.ObjectId(ID)}, function (err, user) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(user[0]);
-            }
-        });
+        if (!module.exports.modes.TEST) {
+            db.users.find({_id: db.ObjectId(ID)}, function (err, user) {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback(user[0]);
+                }
+            });
+        } else {
+
+        }
     },
     addUser: function (user, callback) {
-        db.users.find({username: user.username}, function (err, users) {
-            // verify there are no other users with username and that the email is valid
-            if (users.length === 0) {
-                db.users.save({username: user.username, password: Utils.hashPassword(user.password), email: user.email}, function (err, saved) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(saved._id);
-                    }
-                });
-            } else {
-                callback('User already exists');
+        if (!module.exports.modes.TEST) {
+            db.users.find({username: user.username}, function (err, users) {
+                // verify there are no other users with username and that the email is valid
+                if (users.length === 0) {
+                    db.users.save({username: user.username, password: Utils.hashPassword(user.password), email: user.email}, function (err, saved) {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(saved._id);
+                        }
+                    });
+                } else {
+                    callback('User already exists');
+                }
+            });
+        } else {
+            for (var i = 0; i < testDB.users.data.length; i++) {
+                if (testDB.users.data[i].username === user.username) {
+                    callback('User already exists');
+                    return;
+                }
             }
-        });
+            testDB.users.data.push({username: user.username});
+            callback(testDB.users.data.length);
+        }
     },
     getConversationsByUserID: function (ID, callback) {
-        db.users.find({_id: ID}, function (err, user) {
-            if (err) {
-                callback(err);
-            } else {
-                var returnConversations = [];
-                for (var i = 0; i < user.conversations.length; i++) {
-                    db.conversations.find({_id: user.conversations[i]}, function (err, conversation) {
-                        if (!err) {
-                            returnConversations.push(conversation);
-                            if (returnConversations.length === user.conversations.length) {
-                                callback(returnConversations);
+        if (!module.exports.modes.TEST) {
+            db.users.find({_id: ID}, function (err, user) {
+                if (err) {
+                    callback(err);
+                } else {
+                    var returnConversations = [];
+                    for (var i = 0; i < user.conversations.length; i++) {
+                        db.conversations.find({_id: user.conversations[i]}, function (err, conversation) {
+                            if (!err) {
+                                returnConversations.push(conversation);
+                                if (returnConversations.length === user.conversations.length) {
+                                    callback(returnConversations);
+                                }
                             }
-                        }
-                    }); // jshint ignore:line
+                        }); // jshint ignore:line
+                    }
+                    callback(user.conversations);
                 }
-                callback(user.conversations);
-            }
-        });
+            });
+        } else {
+
+        }
     },
     storeMessage: function (msg) {
-        if (!this.modes.TEST) {
+        if (!module.exports.modes.TEST) {
             db.conversations.update({_id: db.ObjectId(msg.conversationID)}, {$push: {history: {sender: msg.sender, message: msg.message, time: msg.time}}}, function (err, saved) {
                 if (err) {
                     console.log(err);
@@ -133,7 +207,7 @@ module.exports = {
         } else {
             for (var i = 0; i < testDB.conversations.length; i++) {
                 if (testDB.conversations[i]._id === msg.conversationID) {
-                    testDB.conversations[i].history.push({sender: msg.sender, message: msg.message, time: msg.time});
+                    testDB.conversations.data[i].history.push({sender: msg.sender, message: msg.message, time: msg.time});
                 }
             }
         }

@@ -4,7 +4,9 @@ var fs = require('fs');
 // var utils = require('./modules/utils');
 var util = require('util');
 (function () {
-    fs.mkdirSync('logs');
+    try {
+        fs.mkdirSync('logs');
+    } catch (err) { }
     var log_file = fs.createWriteStream(__dirname + '/logs/debug.log', {flags: 'w'});
     var log_stdout = process.stdout;
     console.log = function (d) {
@@ -91,7 +93,8 @@ module.exports = {
     chatServer: require('./modules/chat_server'),
 
     startServers: function () {
-        this.database.init();
+        // TODO change modes.TEST to false
+        this.database.init({LOG: false, TEST: true});
         this.webServer.init();
         this.chatServer.init(this.webServer.getServer());
 
