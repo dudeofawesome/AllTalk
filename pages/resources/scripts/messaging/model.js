@@ -8,12 +8,10 @@ var model = { // jshint ignore:line
 
 window.onload = function () {
     socket = io(); // jshint ignore:line
+    var scope = angular.element(document.getElementsByTagName('html')[0]).scope().$$childHead;
 
     socket.on('message', function (msg) {
-        var scope = angular.element(document.getElementsByTagName('html')[0]).scope().$$childHead;
-        // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
-        scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
-        scope.$apply();
+        scope.ctrlChat.addMessage(msg);
     });
     socket.on('login', function (msg) {
 

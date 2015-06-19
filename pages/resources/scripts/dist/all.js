@@ -207,6 +207,11 @@ function isEmail (email) {
             restrict: 'E',
             templateUrl: '/parts/messaging/current_chat.html',
             controller: function ($scope) {
+                this.sounds = {
+                    newMessage: new Audio('/resources/audio/new-message.mp3')
+                };
+                this.sounds.newMessage.volume = 0.5;
+
                 this.chatList = document.getElementById('chats');
                 this.switchChat = function (user, chat) {
                     $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText = document.getElementById('send_message').value;
@@ -230,6 +235,12 @@ function isEmail (email) {
                     model.sendMessage({conversationID: $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].id, sender: $scope.ctrlMessenger.you.id, message: message, time: Date.now()});
                     $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history.push(new Message($scope.ctrlMessenger.you.id, true, message, attachment, Date.now()));
                     $scope.$apply();
+                };
+                this.addMessage = function (msg) {
+                    // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
+                    $scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
+                    $scope.$apply();
+                    this.sounds.newMessage.play();
                 };
             },
             controllerAs: 'ctrlChat'
@@ -584,12 +595,10 @@ var model = { // jshint ignore:line
 
 window.onload = function () {
     socket = io(); // jshint ignore:line
+    var scope = angular.element(document.getElementsByTagName('html')[0]).scope().$$childHead;
 
     socket.on('message', function (msg) {
-        var scope = angular.element(document.getElementsByTagName('html')[0]).scope().$$childHead;
-        // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
-        scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
-        scope.$apply();
+        scope.ctrlChat.addMessage(msg);
     });
     socket.on('login', function (msg) {
 
