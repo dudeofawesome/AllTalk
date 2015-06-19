@@ -8,9 +8,6 @@ var options = {
     transports: ['websocket'],
     'force new connection': true
 };
-var chatUser1 = {name: 'Tom'};
-var chatUser2 = {name: 'Sally'};
-var chatUser3 = {name: 'Dana'};
 
 describe('chat_server.js tests', function () {
     it('starting chat server', function (done) {
@@ -21,6 +18,7 @@ describe('chat_server.js tests', function () {
     it('connect to chat server', function (done) {
         var client1 = io.connect(socketURL, options);
         client1.on('connect', function () {
+            client1.disconnect();
             done();
         });
     });
@@ -35,6 +33,7 @@ describe('chat_server.js tests', function () {
         var client1 = io.connect(socketURL, options);
         client1.on('connect', function () {
             client1.emit('message', testMsg);
+            client1.disconnect();
             done();
         });
     });
@@ -52,12 +51,14 @@ describe('chat_server.js tests', function () {
             msg.sender.should.equal(testMsg.sender);
             msg.message.should.equal(testMsg.message);
             msg.time.should.equal(testMsg.time);
+            client1.disconnect();
             done();
         });
         client1.on('connect', function () {
             var client2 = io.connect(socketURL, options);
             client2.on('connect', function () {
                 client2.emit('message', testMsg);
+                client2.disconnect();
             });
         });
     });

@@ -50,6 +50,7 @@ module.exports = {
         return this;
     },
     startServer: function () {
+        // TODO change modes.TEST to false
         database.init({LOG: false, TEST: true});
 
         server.listen(PORT, function () {
@@ -57,7 +58,6 @@ module.exports = {
         });
     },
     stopServer: function () {
-        database.disconnect();
         server.close();
         return true;
     }

@@ -99,10 +99,8 @@ module.exports = {
         return this;
     },
     disconnect: function () {
-        if (!this.modes.TEST) {
-            if (db !== undefined) {
-                db.close();
-            }
+        if (db !== undefined) {
+            db.close();
         }
     },
     getUsers: function (callback) {
