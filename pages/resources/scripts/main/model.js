@@ -1,15 +1,15 @@
 function openMessaging () {
-    var header = document.getElementsByTagName("header");
-    var card = document.getElementById("main");
+    var header = document.getElementsByTagName('header');
+    var card = document.getElementById('main');
     var tweenTime = 0.5;
 
     TweenLite.to(header, tweenTime, {
-        height: "0px"
+        height: '0px'
     });
     TweenLite.to(card, tweenTime, {
-        top: "-535px",
+        top: '-535px',
         onComplete: function () {
-            window.location.href = "messaging";
+            window.location.href = 'messaging';
         }
     });
 }
@@ -17,35 +17,65 @@ function openMessaging () {
 function submitForm (form) {
     if (checkInputForErrors(form)) {
         switch (form) {
-            case "login" :
-                var username = document.getElementById("login_username");
-                var password = document.getElementById("login_password");
+            case 'login' :
+                var username = document.getElementById('login_username');
+                var password = document.getElementById('login_password');
 
                 var xmlhttp;
                 if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
                 } else {// code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
                 }
                 xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        if (xmlhttp.responseText.includes("success")) {
+                        if (xmlhttp.responseText.includes('success')) {
                             openMessaging();
                         } else {
-                            username.setAttribute("error", "");
-                            username.nextSibling.innerHTML = "Bad login";
-                            password.setAttribute("error", "");
-                            password.nextSibling.innerHTML = "Bad login";
+                            username.setAttribute('error', '');
+                            username.nextSibling.innerHTML = 'Bad login';
+                            password.setAttribute('error', '');
+                            password.nextSibling.innerHTML = 'Bad login';
                         }
                     }
                 };
-                xmlhttp.open("POST","/signup", true);
-                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.open('POST','/login', true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-                xmlhttp.send("username=" + username.value + "&password=" + password.value);
+                xmlhttp.send('username=' + username.value + '&password=' + password.value);
                 break;
-            case "signup" :
+            case 'signup' :
+                var username = document.getElementById('signup_username');
+                var password = document.getElementById('signup_password');
+                var passwordAgain = document.getElementById('signup_password_again');
+                var email = document.getElementById('signup_email');
 
+                var xmlhttp;
+                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {// code for IE6, IE5
+                    xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        if (xmlhttp.responseText.includes('success')) {
+                            openMessaging();
+                        } else {
+                            username.setAttribute('error', '');
+                            username.nextSibling.innerHTML = 'Just go login';
+                            password.setAttribute('error', '');
+                            password.nextSibling.innerHTML = 'You can use anything';
+                            passwordAgain.setAttribute('error', '');
+                            passwordAgain.nextSibling.innerHTML = '"asdf"';
+                            email.setAttribute('error', '');
+                            email.nextSibling.innerHTML = '"password"';
+                        }
+                    }
+                };
+                xmlhttp.open('POST', '/signup', true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+                xmlhttp.send('username=' + username.value + '&password=' + password.value);
                 break;
         }
     }
@@ -53,88 +83,88 @@ function submitForm (form) {
 
 function checkInputForErrors (form) {
     switch (form) {
-        case "login" :
+        case 'login' :
             var hasError = false;
 
-            var username = document.getElementById("login_username");
-            var password = document.getElementById("login_password");
+            var username = document.getElementById('login_username');
+            var password = document.getElementById('login_password');
 
-            if (password.value === "") {
-                password.setAttribute("error", "");
-                password.nextSibling.innerHTML = "Can't be blank";
+            if (password.value === '') {
+                password.setAttribute('error', '');
+                password.nextSibling.innerHTML = 'Can\'t be blank';
                 password.focus();
                 hasError = true;
             } else {
-                password.removeAttribute("error");
-                password.nextSibling.innerHTML = "We're all good";
+                password.removeAttribute('error');
+                password.nextSibling.innerHTML = 'We\'re all good';
             }
-            if (username.value === "") {
-                username.setAttribute("error", "");
-                username.nextSibling.innerHTML = "Can't be blank";
+            if (username.value === '') {
+                username.setAttribute('error', '');
+                username.nextSibling.innerHTML = 'Can\'t be blank';
                 username.focus();
                 hasError = true;
             } else {
-                username.removeAttribute("error");
-                username.nextSibling.innerHTML = "We're all good";
+                username.removeAttribute('error');
+                username.nextSibling.innerHTML = 'We\'re all good';
             }
             return !hasError;
-        case "signup" :
+        case 'signup' :
             /*var*/ hasError = false;
 
-            var email = document.getElementById("signup_email");
-            /*var*/ username = document.getElementById("signup_username");
-            /*var*/ password = document.getElementById("signup_password");
-            var passwordAgain = document.getElementById("signup_password_again");
+            var email = document.getElementById('signup_email');
+            /*var*/ username = document.getElementById('signup_username');
+            /*var*/ password = document.getElementById('signup_password');
+            var passwordAgain = document.getElementById('signup_password_again');
 
-            if (password.value === "") {
-                password.setAttribute("error", "");
-                password.nextSibling.innerHTML = "Can't be blank";
+            if (password.value === '') {
+                password.setAttribute('error', '');
+                password.nextSibling.innerHTML = 'Can\'t be blank';
                 password.focus();
                 hasError = true;
             } else {
-                password.removeAttribute("error");
-                password.nextSibling.innerHTML = "We're all good";
+                password.removeAttribute('error');
+                password.nextSibling.innerHTML = 'We\'re all good';
             }
             if (password.value != passwordAgain.value) {
-                password.setAttribute("error", "");
-                password.nextSibling.innerHTML = "Passwords don't match";
-                passwordAgain.setAttribute("error", "");
-                passwordAgain.nextSibling.innerHTML = "Passwords don't match";
+                password.setAttribute('error', '');
+                password.nextSibling.innerHTML = 'Passwords don\'t match';
+                passwordAgain.setAttribute('error', '');
+                passwordAgain.nextSibling.innerHTML = 'Passwords don\'t match';
                 password.focus();
                 hasError = true;
-            } else if (password.value !== "") {
-                password.removeAttribute("error");
-                password.nextSibling.innerHTML = "We're all good";
-                passwordAgain.removeAttribute("error");
-                passwordAgain.nextSibling.innerHTML = "We're all good";
+            } else if (password.value !== '') {
+                password.removeAttribute('error');
+                password.nextSibling.innerHTML = 'We\'re all good';
+                passwordAgain.removeAttribute('error');
+                passwordAgain.nextSibling.innerHTML = 'We\'re all good';
             }
-            if (email.value === "") {
-                email.setAttribute("error", "");
-                email.nextSibling.innerHTML = "Can't be blank";
+            if (email.value === '') {
+                email.setAttribute('error', '');
+                email.nextSibling.innerHTML = 'Can\'t be blank';
                 email.focus();
                 hasError = true;
             } else if (!isEmail(email.value)) {
-                email.setAttribute("error", "");
-                email.nextSibling.innerHTML = "Enter a valid email";
+                email.setAttribute('error', '');
+                email.nextSibling.innerHTML = 'Enter a valid email';
                 email.focus();
                 hasError = true;
             } else {
-                email.removeAttribute("error");
-                email.nextSibling.innerHTML = "We're all good";
+                email.removeAttribute('error');
+                email.nextSibling.innerHTML = 'We\'re all good';
             }
-            if (username.value === "") {
-                username.setAttribute("error", "");
-                username.nextSibling.innerHTML = "Can't be blank";
+            if (username.value === '') {
+                username.setAttribute('error', '');
+                username.nextSibling.innerHTML = 'Can\'t be blank';
                 username.focus();
                 hasError = true;
             } else {
-                username.removeAttribute("error");
-                username.nextSibling.innerHTML = "We're all good";
+                username.removeAttribute('error');
+                username.nextSibling.innerHTML = 'We\'re all good';
             }
             return !hasError;
     }
 }
 
 function isEmail (email) {
-    return (email.length >= 5 && email.indexOf(" ") == -1 && email.split("@").length == 2 && email.split(".").length == 2 && email.indexOf("@") < email.indexOf(".") - 1 && email.indexOf("@") !== 0 && email.indexOf(".") != email.length - 1);
+    return (email.length >= 5 && email.indexOf(' ') == -1 && email.split('@').length == 2 && email.split('.').length == 2 && email.indexOf('@') < email.indexOf('.') - 1 && email.indexOf('@') !== 0 && email.indexOf('.') != email.length - 1);
 }
