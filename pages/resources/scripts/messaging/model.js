@@ -7,13 +7,12 @@ var model = { // jshint ignore:line
 };
 
 window.onload = function () {
-    // socket = io.connect('https://' + window.location.hostname + ':25585');
-    // socket = io.connect('http://' + window.location.hostname + ':25585');
     socket = io(); // jshint ignore:line
 
     socket.on('message', function (msg) {
         var scope = angular.element(document.getElementsByTagName('html')[0]).scope().$$childHead;
-        scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, (msg.sender === scope.ctrlMessenger.you.id) ? true : false, msg.message, msg.attachment, msg.time));
+        // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
+        scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
         scope.$apply();
     });
     socket.on('login', function (msg) {
