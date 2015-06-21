@@ -1,14 +1,13 @@
 var OnlineStatus = Object.freeze({ // jshint ignore:line
-    ONLINE : "Online",
-    AWAY : "Away",
-    OFFLINE : "Offline"
+    ONLINE: 'Online',
+    AWAY: 'Away',
+    OFFLINE: 'Offline'
 });
 
 var ChatStatus = Object.freeze({ // jshint ignore:line
-    MUTED : "Muted",
-    NONE : ""
+    MUTED: 'Muted',
+    NONE: ''
 });
-
 
 function Chat (name, id, status, chatStatus, image, lastActive, history, profiles) { // jshint ignore:line
     this.name = name;
@@ -19,7 +18,7 @@ function Chat (name, id, status, chatStatus, image, lastActive, history, profile
     this.lastActive = lastActive;
     this.history = history;
     this.profiles = profiles;
-    this.draftText = "";
+    this.draftText = '';
 }
 
 function Message (sender, isyou, message, attachment, time) { // jshint ignore:line

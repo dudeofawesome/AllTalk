@@ -58,7 +58,9 @@
                     // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
                     $scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
                     $scope.$apply();
-                    this.sounds.newMessage.play();
+                    if ($scope.ctrlMessenger.chats[msg.conversationID].chatStatus !== ChatStatus.MUTED) {
+                        this.sounds.newMessage.play();
+                    }
                 };
             },
             controllerAs: 'ctrlChat'

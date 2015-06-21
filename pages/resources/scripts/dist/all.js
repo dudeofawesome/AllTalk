@@ -240,7 +240,9 @@ function isEmail (email) {
                     // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
                     $scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
                     $scope.$apply();
-                    this.sounds.newMessage.play();
+                    if ($scope.ctrlMessenger.chats[msg.conversationID].chatStatus !== ChatStatus.MUTED) {
+                        this.sounds.newMessage.play();
+                    }
                 };
             },
             controllerAs: 'ctrlChat'
@@ -554,16 +556,15 @@ function isEmail (email) {
 })();
 
 var OnlineStatus = Object.freeze({ // jshint ignore:line
-    ONLINE : "Online",
-    AWAY : "Away",
-    OFFLINE : "Offline"
+    ONLINE: 'Online',
+    AWAY: 'Away',
+    OFFLINE: 'Offline'
 });
 
 var ChatStatus = Object.freeze({ // jshint ignore:line
-    MUTED : "Muted",
-    NONE : ""
+    MUTED: 'Muted',
+    NONE: ''
 });
-
 
 function Chat (name, id, status, chatStatus, image, lastActive, history, profiles) { // jshint ignore:line
     this.name = name;
@@ -574,7 +575,7 @@ function Chat (name, id, status, chatStatus, image, lastActive, history, profile
     this.lastActive = lastActive;
     this.history = history;
     this.profiles = profiles;
-    this.draftText = "";
+    this.draftText = '';
 }
 
 function Message (sender, isyou, message, attachment, time) { // jshint ignore:line
