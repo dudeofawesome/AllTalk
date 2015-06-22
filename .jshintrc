@@ -20,6 +20,8 @@
       "FileReader": false,
       "DATE": false,
       "Audio": false,
+      "ActiveXObject": false,
+      "XMLHttpRequest": false,
       "describe": false,
       "it": false,
       "localStorage": false,

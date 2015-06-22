@@ -12,16 +12,16 @@ function SpecialScroll (applyTo, relativeSpeed) {
 function openMessaging () {
     var header = document.getElementsByTagName('header');
     var card = document.getElementById('main');
-    var tweenTime = 0.5;
+    var tweenTime = 0.7;
 
     TweenLite.to(header, tweenTime, {
-        height: '0px'
-    });
-    TweenLite.to(card, tweenTime, {
-        top: '-535px',
+        height: '0px',
         onComplete: function () {
             window.location.href = 'messaging';
         }
+    });
+    TweenLite.to(card, tweenTime / 2, {
+        top: '-595px'
     });
 }
 
@@ -38,7 +38,7 @@ function submitForm (form) {
                 } else {// code for IE6, IE5
                     xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
                 }
-                xmlhttp.onreadystatechange = function() {
+                xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         if (xmlhttp.responseText.includes('success')) {
                             openMessaging();
@@ -50,7 +50,7 @@ function submitForm (form) {
                         }
                     }
                 };
-                xmlhttp.open('POST','/login', true);
+                xmlhttp.open('POST', '/login', true);
                 xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
                 xmlhttp.send('username=' + username.value + '&password=' + password.value);
@@ -67,7 +67,7 @@ function submitForm (form) {
                 } else {// code for IE6, IE5
                     xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
                 }
-                xmlhttp.onreadystatechange = function() {
+                xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         if (xmlhttp.responseText.includes('success')) {
                             openMessaging();
