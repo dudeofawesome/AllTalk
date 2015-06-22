@@ -19,6 +19,7 @@
       "TweenLite": false,
       "FileReader": false,
       "DATE": false,
+      "Audio": false,
       "describe": false,
       "it": false,
       "localStorage": false,

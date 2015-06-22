@@ -240,6 +240,8 @@ function isEmail (email) {
                     // TODO check is sender is really not you // (msg.sender === scope.ctrlMessenger.you.id) ? true : false
                     $scope.ctrlMessenger.chats[msg.conversationID].history.push(new Message(msg.sender, false, msg.message, msg.attachment, msg.time));
                     $scope.$apply();
+                    document.title = 'All Talk - new message';
+                    // TODO don't play notification sound excesively
                     if ($scope.ctrlMessenger.chats[msg.conversationID].chatStatus !== ChatStatus.MUTED) {
                         this.sounds.newMessage.play();
                     }
