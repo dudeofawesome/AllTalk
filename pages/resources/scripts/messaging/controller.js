@@ -24,7 +24,7 @@
         return {
             restrict: 'E',
             templateUrl: '/parts/messaging/current_chat.html',
-            controller: function ($scope) {
+            controller: function ($scope, $element) {
                 this.sounds = {
                     newMessage: new Audio('/resources/audio/new-message.mp3')
                 };
@@ -64,6 +64,14 @@
                         this.sounds.newMessage.play();
                     }
                 };
+
+                window.addEventListener('resize', function () {
+                    // TODO change this to be more efficient, and to work when an animation is occuring that changes the side of the current chat
+                    $scope.ctrlChatHistory.history = [];
+                    $scope.$apply();
+                    $scope.ctrlChatHistory.history = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history;
+                    $scope.$apply();
+                });
             },
             controllerAs: 'ctrlChat'
         };
@@ -398,5 +406,9 @@
                 });
             }
         };
+    });
+
+    window.addEventListener('resize', function () {
+
     });
 })();

@@ -33,6 +33,9 @@
     font-style: normal;
 }
 
+$ease-out-quart: ease-out;
+$ease-in-quart:  ease-in;
+
 body {
     background-color: rgb(220, 220, 220);
     overflow-x: hidden;
@@ -254,10 +257,10 @@ navigation-drawer {
     background-color: rgb(225, 225, 225);
     overflow-x: visible;
 
-    transition: margin-left 0.5s;
-    -moz-transition: margin-left 0.5s;
-    -webkit-transition: margin-left 0.5s;
-    -o-transition: margin-left 0.5s;
+    transition: margin-left 0.5s $ease-out-quart;
+    -moz-transition: margin-left 0.5s $ease-out-quart;
+    -webkit-transition: margin-left 0.5s $ease-out-quart;
+    -o-transition: margin-left 0.5s $ease-out-quart;
 
     &[open] {
         margin-left: 0px;
@@ -273,10 +276,10 @@ navigation-drawer {
         bottom: 25px;
         z-index: 2;
 
-        transition: margin-right 0.5s;
-        -moz-transition: margin-right 0.5s;
-        -webkit-transition: margin-right 0.5s;
-        -o-transition: margin-right 0.5s;
+        transition: margin-right 0.5s $ease-out-quart;
+        -moz-transition: margin-right 0.5s $ease-out-quart;
+        -webkit-transition: margin-right 0.5s $ease-out-quart;
+        -o-transition: margin-right 0.5s $ease-out-quart;
     }
 
     chats-list {
@@ -410,10 +413,10 @@ navigation-drawer {
 
     background-color: rgb(250, 250, 250);
 
-    transition: left 0.5s, right 0.5s;
-    -moz-transition: left 0.5s, right 0.5s;
-    -webkit-transition: left 0.5s, right 0.5s;
-    -o-transition: left 0.5s, right 0.5s;
+    transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
+    -moz-transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
+    -webkit-transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
+    -o-transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
 
     chat-history {
         position: absolute;
@@ -768,10 +771,10 @@ right-sidebar {
 
     background-color: rgb(225, 225, 225);
 
-    transition: margin-right 0.5s;
-    -moz-transition: margin-right 0.5s;
-    -webkit-transition: margin-right 0.5s;
-    -o-transition: margin-right 0.5s;
+    transition: margin-right 0.5s $ease-out-quart;
+    -moz-transition: margin-right 0.5s $ease-out-quart;
+    -webkit-transition: margin-right 0.5s $ease-out-quart;
+    -o-transition: margin-right 0.5s $ease-out-quart;
 
     .icon {
         position: absolute;
@@ -1036,6 +1039,12 @@ right-sidebar {
     }
     navigation-drawer {
         margin-left: -295px;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+
+        transition: margin-left 0.5s $ease-in-quart;
+        -moz-transition: margin-left 0.5s $ease-in-quart;
+        -webkit-transition: margin-left 0.5s $ease-in-quart;
+        -o-transition: margin-left 0.5s $ease-in-quart;
 
         #FAB {
             margin-right: 38px;
@@ -1043,6 +1052,11 @@ right-sidebar {
     }
     #chat {
         left: 0px;
+
+        transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        -moz-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        -webkit-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        -o-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
 
         #messageContainer #message {
             margin-left: 5px;
@@ -1053,9 +1067,19 @@ right-sidebar {
 @media (max-width: 599px) {
     right-sidebar {
         margin-right: -300px;
+
+        transition: margin-right 0.5s $ease-in-quart;
+        -moz-transition: margin-right 0.5s $ease-in-quart;
+        -webkit-transition: margin-right 0.5s $ease-in-quart;
+        -o-transition: margin-right 0.5s $ease-in-quart;
     }
     #chat {
         right: 0px;
+
+        transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        -moz-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        -webkit-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        -o-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
     }
 }
 

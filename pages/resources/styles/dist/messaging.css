@@ -927,10 +927,10 @@ navigation-drawer {
   z-index: 3;
   background-color: #e1e1e1;
   overflow-x: visible;
-  transition: margin-left 0.5s;
-  -moz-transition: margin-left 0.5s;
-  -webkit-transition: margin-left 0.5s;
-  -o-transition: margin-left 0.5s; }
+  transition: margin-left 0.5s ease-out;
+  -moz-transition: margin-left 0.5s ease-out;
+  -webkit-transition: margin-left 0.5s ease-out;
+  -o-transition: margin-left 0.5s ease-out; }
   navigation-drawer[open] {
     margin-left: 0px; }
     navigation-drawer[open] #FAB {
@@ -940,10 +940,10 @@ navigation-drawer {
     right: -37px;
     bottom: 25px;
     z-index: 2;
-    transition: margin-right 0.5s;
-    -moz-transition: margin-right 0.5s;
-    -webkit-transition: margin-right 0.5s;
-    -o-transition: margin-right 0.5s; }
+    transition: margin-right 0.5s ease-out;
+    -moz-transition: margin-right 0.5s ease-out;
+    -webkit-transition: margin-right 0.5s ease-out;
+    -o-transition: margin-right 0.5s ease-out; }
   navigation-drawer chats-list {
     position: absolute;
     width: 100%;
@@ -1042,10 +1042,10 @@ navigation-drawer {
   bottom: 0px;
   z-index: 1;
   background-color: #fafafa;
-  transition: left 0.5s, right 0.5s;
-  -moz-transition: left 0.5s, right 0.5s;
-  -webkit-transition: left 0.5s, right 0.5s;
-  -o-transition: left 0.5s, right 0.5s; }
+  transition: left 0.5s ease-out, right 0.5s ease-out;
+  -moz-transition: left 0.5s ease-out, right 0.5s ease-out;
+  -webkit-transition: left 0.5s ease-out, right 0.5s ease-out;
+  -o-transition: left 0.5s ease-out, right 0.5s ease-out; }
   #chat chat-history {
     position: absolute;
     top: 0px;
@@ -1319,10 +1319,10 @@ right-sidebar {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #e1e1e1;
-  transition: margin-right 0.5s;
-  -moz-transition: margin-right 0.5s;
-  -webkit-transition: margin-right 0.5s;
-  -o-transition: margin-right 0.5s; }
+  transition: margin-right 0.5s ease-out;
+  -moz-transition: margin-right 0.5s ease-out;
+  -webkit-transition: margin-right 0.5s ease-out;
+  -o-transition: margin-right 0.5s ease-out; }
   right-sidebar .icon {
     position: absolute;
     left: 10px;
@@ -1518,19 +1518,36 @@ right-sidebar {
   header#app_toolbar #app_title {
     margin-left: 25px; }
   navigation-drawer {
-    margin-left: -295px; }
+    margin-left: -295px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+    transition: margin-left 0.5s ease-in;
+    -moz-transition: margin-left 0.5s ease-in;
+    -webkit-transition: margin-left 0.5s ease-in;
+    -o-transition: margin-left 0.5s ease-in; }
     navigation-drawer #FAB {
       margin-right: 38px; }
   #chat {
-    left: 0px; }
+    left: 0px;
+    transition: left 0.5s ease-in, right 0.5s ease-in;
+    -moz-transition: left 0.5s ease-in, right 0.5s ease-in;
+    -webkit-transition: left 0.5s ease-in, right 0.5s ease-in;
+    -o-transition: left 0.5s ease-in, right 0.5s ease-in; }
     #chat #messageContainer #message {
       margin-left: 5px; } }
 
 @media (max-width: 599px) {
   right-sidebar {
-    margin-right: -300px; }
+    margin-right: -300px;
+    transition: margin-right 0.5s ease-in;
+    -moz-transition: margin-right 0.5s ease-in;
+    -webkit-transition: margin-right 0.5s ease-in;
+    -o-transition: margin-right 0.5s ease-in; }
   #chat {
-    right: 0px; } }
+    right: 0px;
+    transition: left 0.5s ease-in, right 0.5s ease-in;
+    -moz-transition: left 0.5s ease-in, right 0.5s ease-in;
+    -webkit-transition: left 0.5s ease-in, right 0.5s ease-in;
+    -o-transition: left 0.5s ease-in, right 0.5s ease-in; } }
 
 .material.popup {
   position: relative;
