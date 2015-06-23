@@ -68,6 +68,26 @@
             controllerAs: 'ctrlChat'
         };
     });
+    app.directive('navigationDrawer', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/parts/messaging/navigation_drawer.html',
+            controller: function ($scope, $element) {
+                var navDrawerExpanded = false;
+                var navigationDrawer = $element[0];
+                this.toggleNavDrawer = function () {
+                    if (navDrawerExpanded) {
+                        navigationDrawer.removeAttribute('open');
+                        navDrawerExpanded = false;
+                    } else {
+                        navigationDrawer.setAttribute('open', '');
+                        navDrawerExpanded = true;
+                    }
+                };
+            },
+            controllerAs: 'ctrlNavDrawer'
+        };
+    });
     app.directive('chatHistory', function () {
         return {
             restrict: 'E',
@@ -228,7 +248,13 @@
     app.directive('appToolbar', function () {
         return {
             restrict: 'E',
-            templateUrl: '/parts/messaging/app_toolbar.html'
+            templateUrl: '/parts/messaging/app_toolbar.html',
+            controller: function ($scope) {
+                nav_drawer_icon.addEventListener('click', function () {
+                    $scope.ctrlNavDrawer.toggleNavDrawer();
+                });
+            },
+            controllerAs: 'ctrlAppToolbar'
         };
     });
     app.directive('toolbarMenuItem', function () {

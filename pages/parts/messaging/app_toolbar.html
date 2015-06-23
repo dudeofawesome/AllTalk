@@ -1,4 +1,7 @@
 <header id="app_toolbar">
+    <button id="nav_drawer_icon">
+        <div class="icon"><i class='mdi mdi-menu'></i></div>
+    </button>
     <div id="app_title" title="And some bite, too.">All Talk</div>
     <div id="menu_items">
         <toolbar-menu-item ng-repeat="menuItem in ctrlMessenger.toolbarItems | orderBy:'importance' | limitTo:3"></toolbar-menu-item>

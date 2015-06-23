@@ -33,6 +33,8 @@
       "send_media_dialogue": false,
       "send_media_dialogue_preview_img": false,
       "send_attachment_input": false,
+      "nav_drawer_icon": false,
+      "sidebar": false,
       "model": false
   }
 }

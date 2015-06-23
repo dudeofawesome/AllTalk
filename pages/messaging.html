@@ -20,10 +20,7 @@
     <body ng-controller="MessengerController as ctrlMessenger">
         <app-toolbar></app-toolbar>
         <div id="content">
-            <div id="sidebar">
-                <FAB popup-new-chat-open></FAB>
-                <chats-list id="chats"></chats-list>
-            </div>
+            <navigation-drawer></navigation-drawer>
             <current-chat></current-chat>
             <right-sidebar></right-sidebar>
         </div>

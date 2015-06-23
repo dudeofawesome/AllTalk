@@ -83,6 +83,40 @@ header#app_toolbar {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
     cursor: default;
 
+    #nav_drawer_icon {
+        position: absolute;
+        margin-top: -14px;
+        opacity: 0;
+        width: 60px;
+        height: 60px;
+        border: 0;
+        background-color: transparent;
+        color: inherit;
+        font-size: inherit;
+        border-radius: 35px;
+        margin-left: -35px;
+
+        transition: opacity 0.5s, background-color 0.2s;;
+        -moz-transition: opacity 0.5s, background-color 0.2s;;
+        -webkit-transition: opacity 0.5s, background-color 0.2s;;
+        -o-transition: opacity 0.5s, background-color 0.2s;;
+
+        &:focus {
+            outline: 0 !important;
+        }
+        &:active {
+            background-color: rgba(153, 153, 153, 0.4);
+        }
+    }
+    #app_title {
+        margin-top: -3px;
+        margin-left: 0px;
+
+        transition: margin-left 0.5s;
+        -moz-transition: margin-left 0.5s;
+        -webkit-transition: margin-left 0.5s;
+        -o-transition: margin-left 0.5s;
+    }
     #menu_items {
         position: absolute;
         right: 97px;
@@ -209,7 +243,7 @@ header#app_toolbar {
     overflow: hidden;
 }
 
-#sidebar {
+navigation-drawer {
     position: absolute;
     left: 0px;
     top: 0px;
@@ -219,13 +253,30 @@ header#app_toolbar {
 
     background-color: rgb(225, 225, 225);
     overflow-x: visible;
-//    overflow-y: hidden;
+
+    transition: margin-left 0.5s;
+    -moz-transition: margin-left 0.5s;
+    -webkit-transition: margin-left 0.5s;
+    -o-transition: margin-left 0.5s;
+
+    &[open] {
+        margin-left: 0px;
+
+        #FAB {
+            margin-right: 10px;
+        }
+    }
 
     #FAB {
         position: absolute;
         right: -37px;
         bottom: 25px;
         z-index: 2;
+
+        transition: margin-right 0.5s;
+        -moz-transition: margin-right 0.5s;
+        -webkit-transition: margin-right 0.5s;
+        -o-transition: margin-right 0.5s;
     }
 
     chats-list {
@@ -358,6 +409,11 @@ header#app_toolbar {
     z-index: 1;
 
     background-color: rgb(250, 250, 250);
+
+    transition: left 0.5s, right 0.5s;
+    -moz-transition: left 0.5s, right 0.5s;
+    -webkit-transition: left 0.5s, right 0.5s;
+    -o-transition: left 0.5s, right 0.5s;
 
     chat-history {
         position: absolute;
@@ -528,6 +584,11 @@ header#app_toolbar {
 
         #message {
             margin: 0px 20px 20px 40px;
+
+            transition: margin-left 0.5s;
+            -moz-transition: margin-left 0.5s;
+            -webkit-transition: margin-left 0.5s;
+            -o-transition: margin-left 0.5s;
 
             form {
                 position: relative;
@@ -706,6 +767,11 @@ right-sidebar {
     overflow-y: auto;
 
     background-color: rgb(225, 225, 225);
+
+    transition: margin-right 0.5s;
+    -moz-transition: margin-right 0.5s;
+    -webkit-transition: margin-right 0.5s;
+    -o-transition: margin-right 0.5s;
 
     .icon {
         position: absolute;
@@ -947,13 +1013,11 @@ right-sidebar {
         }
         #start_cancel {
             position: absolute;
-//            left: 50%;
             right: 192px;
             bottom: 0px;
         }
         #start_conversation {
             position: absolute;
-//            left: 50%;
             right: 0px;
             bottom: 0px;
             margin-left: -88px;
@@ -961,7 +1025,39 @@ right-sidebar {
     }
 }
 
+@media (max-width: 999px) {
+    header#app_toolbar {
+        #nav_drawer_icon {
+            opacity: 1;
+        }
+        #app_title{
+            margin-left: 25px;
+        }
+    }
+    navigation-drawer {
+        margin-left: -295px;
 
+        #FAB {
+            margin-right: 38px;
+        }
+    }
+    #chat {
+        left: 0px;
+
+        #messageContainer #message {
+            margin-left: 5px;
+        }
+    }
+}
+
+@media (max-width: 599px) {
+    right-sidebar {
+        margin-right: -300px;
+    }
+    #chat {
+        right: 0px;
+    }
+}
 
 
 
@@ -972,7 +1068,7 @@ right-sidebar {
     height: 400px;
     margin: 150px auto;
     padding: 30px 50px 30px 50px;
-//    vertical-align: middle;
+   // vertical-align: middle;
 
     background-color: rgb(250, 250, 250);
     box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3), 0 11px 7px 0 rgba(0, 0, 0, 0.19);

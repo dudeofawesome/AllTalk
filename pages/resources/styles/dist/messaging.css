@@ -795,6 +795,33 @@ header#app_toolbar {
   font-size: 27px;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
   cursor: default; }
+  header#app_toolbar #nav_drawer_icon {
+    position: absolute;
+    margin-top: -14px;
+    opacity: 0;
+    width: 60px;
+    height: 60px;
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    border-radius: 35px;
+    margin-left: -35px;
+    transition: opacity 0.5s, background-color 0.2s;
+    -moz-transition: opacity 0.5s, background-color 0.2s;
+    -webkit-transition: opacity 0.5s, background-color 0.2s;
+    -o-transition: opacity 0.5s, background-color 0.2s; }
+    header#app_toolbar #nav_drawer_icon:focus {
+      outline: 0 !important; }
+    header#app_toolbar #nav_drawer_icon:active {
+      background-color: rgba(153, 153, 153, 0.4); }
+  header#app_toolbar #app_title {
+    margin-top: -3px;
+    margin-left: 0px;
+    transition: margin-left 0.5s;
+    -moz-transition: margin-left 0.5s;
+    -webkit-transition: margin-left 0.5s;
+    -o-transition: margin-left 0.5s; }
   header#app_toolbar #menu_items {
     position: absolute;
     right: 97px;
@@ -891,7 +918,7 @@ header#app_toolbar {
   z-index: 0;
   overflow: hidden; }
 
-#sidebar {
+navigation-drawer {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -899,19 +926,31 @@ header#app_toolbar {
   width: 295px;
   z-index: 3;
   background-color: #e1e1e1;
-  overflow-x: visible; }
-  #sidebar #FAB {
+  overflow-x: visible;
+  transition: margin-left 0.5s;
+  -moz-transition: margin-left 0.5s;
+  -webkit-transition: margin-left 0.5s;
+  -o-transition: margin-left 0.5s; }
+  navigation-drawer[open] {
+    margin-left: 0px; }
+    navigation-drawer[open] #FAB {
+      margin-right: 10px; }
+  navigation-drawer #FAB {
     position: absolute;
     right: -37px;
     bottom: 25px;
-    z-index: 2; }
-  #sidebar chats-list {
+    z-index: 2;
+    transition: margin-right 0.5s;
+    -moz-transition: margin-right 0.5s;
+    -webkit-transition: margin-right 0.5s;
+    -o-transition: margin-right 0.5s; }
+  navigation-drawer chats-list {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
     overflow-y: auto; }
-    #sidebar chats-list .chat {
+    navigation-drawer chats-list .chat {
       position: relative;
       display: block;
       width: 100%;
@@ -924,15 +963,15 @@ header#app_toolbar {
       -moz-transition: background-color 0.2s;
       -webkit-transition: background-color 0.2s;
       -o-transition: background-color 0.2s; }
-      #sidebar chats-list .chat[open] {
+      navigation-drawer chats-list .chat[open] {
         background-color: #c8c8c8; }
-        #sidebar chats-list .chat[open] .status {
+        navigation-drawer chats-list .chat[open] .status {
           border-color: #c8c8c8; }
-      #sidebar chats-list .chat:active {
+      navigation-drawer chats-list .chat:active {
         background-color: #c8c8c8; }
-        #sidebar chats-list .chat:active .status {
+        navigation-drawer chats-list .chat:active .status {
           border-color: #c8c8c8; }
-      #sidebar chats-list .chat .icon {
+      navigation-drawer chats-list .chat .icon {
         position: absolute;
         left: 10px;
         top: 10px;
@@ -942,7 +981,7 @@ header#app_toolbar {
         background-origin: content-box;
         background-size: cover;
         border-radius: 35px; }
-      #sidebar chats-list .chat .status {
+      navigation-drawer chats-list .chat .status {
         position: absolute;
         left: 45px;
         top: 45px;
@@ -954,19 +993,19 @@ header#app_toolbar {
         -moz-transition: border-color 0.2s, background-color 0.2s;
         -webkit-transition: border-color 0.2s, background-color 0.2s;
         -o-transition: border-color 0.2s, background-color 0.2s; }
-        #sidebar chats-list .chat .status[online-status="online"] {
+        navigation-drawer chats-list .chat .status[online-status="online"] {
           background-color: #00c800; }
-        #sidebar chats-list .chat .status[online-status="away"] {
+        navigation-drawer chats-list .chat .status[online-status="away"] {
           background-color: #e6c800; }
-        #sidebar chats-list .chat .status[online-status="offline"] {
+        navigation-drawer chats-list .chat .status[online-status="offline"] {
           background-color: #969696; }
-      #sidebar chats-list .chat .name {
+      navigation-drawer chats-list .chat .name {
         position: absolute;
         left: 70px;
         top: 10px;
         width: 170px;
         overflow-x: hidden; }
-      #sidebar chats-list .chat .lastMessage {
+      navigation-drawer chats-list .chat .lastMessage {
         position: absolute;
         left: 70px;
         bottom: 10px;
@@ -975,7 +1014,7 @@ header#app_toolbar {
         white-space: nowrap;
         text-overflow: ellipsis;
         font-size: 14px; }
-      #sidebar chats-list .chat .time {
+      navigation-drawer chats-list .chat .time {
         position: absolute;
         right: 10px;
         top: 10px;
@@ -983,7 +1022,7 @@ header#app_toolbar {
         overflow-x: hidden;
         text-align: right;
         font-size: 12px; }
-      #sidebar chats-list .chat .muted {
+      navigation-drawer chats-list .chat .muted {
         position: absolute;
         right: 10px;
         bottom: 10px;
@@ -992,7 +1031,7 @@ header#app_toolbar {
         -moz-transition: opacity 0.2s;
         -webkit-transition: opacity 0.2s;
         -o-transition: opacity 0.2s; }
-        #sidebar chats-list .chat .muted[chat-status="muted"] {
+        navigation-drawer chats-list .chat .muted[chat-status="muted"] {
           opacity: 1; }
 
 #chat {
@@ -1002,7 +1041,11 @@ header#app_toolbar {
   top: 0px;
   bottom: 0px;
   z-index: 1;
-  background-color: #fafafa; }
+  background-color: #fafafa;
+  transition: left 0.5s, right 0.5s;
+  -moz-transition: left 0.5s, right 0.5s;
+  -webkit-transition: left 0.5s, right 0.5s;
+  -o-transition: left 0.5s, right 0.5s; }
   #chat chat-history {
     position: absolute;
     top: 0px;
@@ -1136,7 +1179,11 @@ header#app_toolbar {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
     border-top: 1px #29bb43 solid; }
     #chat #messageContainer #message {
-      margin: 0px 20px 20px 40px; }
+      margin: 0px 20px 20px 40px;
+      transition: margin-left 0.5s;
+      -moz-transition: margin-left 0.5s;
+      -webkit-transition: margin-left 0.5s;
+      -o-transition: margin-left 0.5s; }
       #chat #messageContainer #message form {
         position: relative;
         bottom: 0px; }
@@ -1271,7 +1318,11 @@ right-sidebar {
   z-index: 2;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #e1e1e1; }
+  background-color: #e1e1e1;
+  transition: margin-right 0.5s;
+  -moz-transition: margin-right 0.5s;
+  -webkit-transition: margin-right 0.5s;
+  -o-transition: margin-right 0.5s; }
   right-sidebar .icon {
     position: absolute;
     left: 10px;
@@ -1460,6 +1511,26 @@ right-sidebar {
       right: 0px;
       bottom: 0px;
       margin-left: -88px; }
+
+@media (max-width: 999px) {
+  header#app_toolbar #nav_drawer_icon {
+    opacity: 1; }
+  header#app_toolbar #app_title {
+    margin-left: 25px; }
+  navigation-drawer {
+    margin-left: -295px; }
+    navigation-drawer #FAB {
+      margin-right: 38px; }
+  #chat {
+    left: 0px; }
+    #chat #messageContainer #message {
+      margin-left: 5px; } }
+
+@media (max-width: 599px) {
+  right-sidebar {
+    margin-right: -300px; }
+  #chat {
+    right: 0px; } }
 
 .material.popup {
   position: relative;
