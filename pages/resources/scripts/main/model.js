@@ -3,14 +3,16 @@ function openMessaging () {
     var card = document.getElementById('main');
     var tweenTime = 0.7;
 
-    TweenLite.to(header, tweenTime, {
-        height: '0px',
+    TweenLite.to(header, tweenTime / 2, {
+        ease: Power3.easeOut,
+        height: '0px'
+    });
+    TweenLite.to(card, tweenTime, {
+        ease: Power3.easeOut,
+        top: '-555px',
         onComplete: function () {
             window.location.href = 'messaging';
         }
-    });
-    TweenLite.to(card, tweenTime / 2, {
-        top: '-595px'
     });
 }
 

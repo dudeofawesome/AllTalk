@@ -26,6 +26,7 @@
       "it": false,
       "localStorage": false,
       "alert": false,
+      "Power3": false,
 
       "send_message": false,
       "send_submit": false,

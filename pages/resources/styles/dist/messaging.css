@@ -1341,9 +1341,17 @@ right-sidebar {
     right-sidebar .profiles .profile {
       display: block;
       color: inherit;
-      margin-bottom: 5px; }
+      margin-bottom: 5px;
+      transition: color 0.5s;
+      -moz-transition: color 0.5s;
+      -webkit-transition: color 0.5s;
+      -o-transition: color 0.5s; }
+      right-sidebar .profiles .profile .no-underline {
+        opacity: 0; }
       right-sidebar .profiles .profile i {
         text-decoration: none; }
+      right-sidebar .profiles .profile:hover {
+        color: #29bb43; }
 
 #popup_new_chat {
   display: none;
