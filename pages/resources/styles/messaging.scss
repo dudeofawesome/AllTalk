@@ -33,8 +33,9 @@
     font-style: normal;
 }
 
-$ease-out-quart: ease-out;
-$ease-in-quart:  ease-in;
+$ease-out: ease-out;
+$ease-in: ease-in;
+$ease-time: 0.3s;
 
 body {
     background-color: rgb(220, 220, 220);
@@ -99,10 +100,10 @@ header#app_toolbar {
         border-radius: 35px;
         margin-left: -35px;
 
-        transition: opacity 0.5s, background-color 0.2s;;
-        -moz-transition: opacity 0.5s, background-color 0.2s;;
-        -webkit-transition: opacity 0.5s, background-color 0.2s;;
-        -o-transition: opacity 0.5s, background-color 0.2s;;
+        transition: opacity $ease-time, background-color 0.2s;;
+        -moz-transition: opacity $ease-time, background-color 0.2s;;
+        -webkit-transition: opacity $ease-time, background-color 0.2s;;
+        -o-transition: opacity $ease-time, background-color 0.2s;;
 
         &:focus {
             outline: 0 !important;
@@ -115,10 +116,10 @@ header#app_toolbar {
         margin-top: -3px;
         margin-left: 0px;
 
-        transition: margin-left 0.5s;
-        -moz-transition: margin-left 0.5s;
-        -webkit-transition: margin-left 0.5s;
-        -o-transition: margin-left 0.5s;
+        transition: margin-left $ease-time;
+        -moz-transition: margin-left $ease-time;
+        -webkit-transition: margin-left $ease-time;
+        -o-transition: margin-left $ease-time;
     }
     #menu_items {
         position: absolute;
@@ -257,10 +258,10 @@ navigation-drawer {
     background-color: rgb(225, 225, 225);
     overflow-x: visible;
 
-    transition: margin-left 0.5s $ease-out-quart;
-    -moz-transition: margin-left 0.5s $ease-out-quart;
-    -webkit-transition: margin-left 0.5s $ease-out-quart;
-    -o-transition: margin-left 0.5s $ease-out-quart;
+    transition: margin-left $ease-time $ease-out;
+    -moz-transition: margin-left $ease-time $ease-out;
+    -webkit-transition: margin-left $ease-time $ease-out;
+    -o-transition: margin-left $ease-time $ease-out;
 
     &[open] {
         margin-left: 0px;
@@ -276,10 +277,10 @@ navigation-drawer {
         bottom: 25px;
         z-index: 2;
 
-        transition: margin-right 0.5s $ease-out-quart;
-        -moz-transition: margin-right 0.5s $ease-out-quart;
-        -webkit-transition: margin-right 0.5s $ease-out-quart;
-        -o-transition: margin-right 0.5s $ease-out-quart;
+        transition: margin-right $ease-time $ease-out;
+        -moz-transition: margin-right $ease-time $ease-out;
+        -webkit-transition: margin-right $ease-time $ease-out;
+        -o-transition: margin-right $ease-time $ease-out;
     }
 
     chats-list {
@@ -413,10 +414,10 @@ navigation-drawer {
 
     background-color: rgb(250, 250, 250);
 
-    transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
-    -moz-transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
-    -webkit-transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
-    -o-transition: left 0.5s $ease-out-quart, right 0.5s $ease-out-quart;
+    transition: left $ease-time $ease-out, right $ease-time $ease-out;
+    -moz-transition: left $ease-time $ease-out, right $ease-time $ease-out;
+    -webkit-transition: left $ease-time $ease-out, right $ease-time $ease-out;
+    -o-transition: left $ease-time $ease-out, right $ease-time $ease-out;
 
     chat-history {
         position: absolute;
@@ -588,10 +589,10 @@ navigation-drawer {
         #message {
             margin: 0px 20px 20px 40px;
 
-            transition: margin-left 0.5s;
-            -moz-transition: margin-left 0.5s;
-            -webkit-transition: margin-left 0.5s;
-            -o-transition: margin-left 0.5s;
+            transition: margin-left $ease-time;
+            -moz-transition: margin-left $ease-time;
+            -webkit-transition: margin-left $ease-time;
+            -o-transition: margin-left $ease-time;
 
             form {
                 position: relative;
@@ -771,10 +772,10 @@ right-sidebar {
 
     background-color: rgb(225, 225, 225);
 
-    transition: margin-right 0.5s $ease-out-quart;
-    -moz-transition: margin-right 0.5s $ease-out-quart;
-    -webkit-transition: margin-right 0.5s $ease-out-quart;
-    -o-transition: margin-right 0.5s $ease-out-quart;
+    transition: margin-right $ease-time $ease-out;
+    -moz-transition: margin-right $ease-time $ease-out;
+    -webkit-transition: margin-right $ease-time $ease-out;
+    -o-transition: margin-right $ease-time $ease-out;
 
     .icon {
         position: absolute;
@@ -863,10 +864,10 @@ right-sidebar {
             display: block;
             color: inherit;
             margin-bottom: 5px;
-            transition: color 0.5s;
-            -moz-transition: color 0.5s;
-            -webkit-transition: color 0.5s;
-            -o-transition: color 0.5s;
+            transition: color $ease-time;
+            -moz-transition: color $ease-time;
+            -webkit-transition: color $ease-time;
+            -o-transition: color $ease-time;
 
             .no-underline {
                 opacity: 0;
@@ -894,10 +895,10 @@ right-sidebar {
     background-color: rgba(0, 0, 0, 0);
     overflow: hidden;
 
-    transition: background-color 0.5s;
-    -moz-transition: background-color 0.5s;
-    -webkit-transition: background-color 0.5s;
-    -o-transition: background-color 0.5s;
+    transition: background-color $ease-time;
+    -moz-transition: background-color $ease-time;
+    -webkit-transition: background-color $ease-time;
+    -o-transition: background-color $ease-time;
 
     &[open] {
         display: block;
@@ -1041,10 +1042,24 @@ right-sidebar {
         margin-left: -295px;
         box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
 
-        transition: margin-left 0.5s $ease-in-quart;
-        -moz-transition: margin-left 0.5s $ease-in-quart;
-        -webkit-transition: margin-left 0.5s $ease-in-quart;
-        -o-transition: margin-left 0.5s $ease-in-quart;
+        transition: margin-left $ease-time $ease-in;
+        -moz-transition: margin-left $ease-time $ease-in;
+        -webkit-transition: margin-left $ease-time $ease-in;
+        -o-transition: margin-left $ease-time $ease-in;
+
+        &[open] {
+            transition: margin-left $ease-time $ease-out;
+            -moz-transition: margin-left $ease-time $ease-out;
+            -webkit-transition: margin-left $ease-time $ease-out;
+            -o-transition: margin-left $ease-time $ease-out;
+
+            #FAB {
+                transition: margin-left $ease-time $ease-out;
+                -moz-transition: margin-left $ease-time $ease-out;
+                -webkit-transition: margin-left $ease-time $ease-out;
+                -o-transition: margin-left $ease-time $ease-out;
+            }
+        }
 
         #FAB {
             margin-right: 38px;
@@ -1053,10 +1068,10 @@ right-sidebar {
     #chat {
         left: 0px;
 
-        transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
-        -moz-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
-        -webkit-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
-        -o-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        transition: left $ease-time $ease-in, right $ease-time $ease-in;
+        -moz-transition: left $ease-time $ease-in, right $ease-time $ease-in;
+        -webkit-transition: left $ease-time $ease-in, right $ease-time $ease-in;
+        -o-transition: left $ease-time $ease-in, right $ease-time $ease-in;
 
         #messageContainer #message {
             margin-left: 5px;
@@ -1068,18 +1083,18 @@ right-sidebar {
     right-sidebar {
         margin-right: -300px;
 
-        transition: margin-right 0.5s $ease-in-quart;
-        -moz-transition: margin-right 0.5s $ease-in-quart;
-        -webkit-transition: margin-right 0.5s $ease-in-quart;
-        -o-transition: margin-right 0.5s $ease-in-quart;
+        transition: margin-right $ease-time $ease-in;
+        -moz-transition: margin-right $ease-time $ease-in;
+        -webkit-transition: margin-right $ease-time $ease-in;
+        -o-transition: margin-right $ease-time $ease-in;
     }
     #chat {
         right: 0px;
 
-        transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
-        -moz-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
-        -webkit-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
-        -o-transition: left 0.5s $ease-in-quart, right 0.5s $ease-in-quart;
+        transition: left $ease-time $ease-in, right $ease-time $ease-in;
+        -moz-transition: left $ease-time $ease-in, right $ease-time $ease-in;
+        -webkit-transition: left $ease-time $ease-in, right $ease-time $ease-in;
+        -o-transition: left $ease-time $ease-in, right $ease-time $ease-in;
     }
 }
 
@@ -1099,8 +1114,8 @@ right-sidebar {
     border-radius: 2px;
     overflow: hidden;
 
-    transition: margin-top 0.5s;
-    -moz-transition: margin-top 0.5s;
-    -webkit-transition: margin-top 0.5s;
-    -o-transition: margin-top 0.5s;
+    transition: margin-top $ease-time;
+    -moz-transition: margin-top $ease-time;
+    -webkit-transition: margin-top $ease-time;
+    -o-transition: margin-top $ease-time;
 }

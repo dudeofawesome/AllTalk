@@ -807,10 +807,10 @@ header#app_toolbar {
     font-size: inherit;
     border-radius: 35px;
     margin-left: -35px;
-    transition: opacity 0.5s, background-color 0.2s;
-    -moz-transition: opacity 0.5s, background-color 0.2s;
-    -webkit-transition: opacity 0.5s, background-color 0.2s;
-    -o-transition: opacity 0.5s, background-color 0.2s; }
+    transition: opacity 0.3s, background-color 0.2s;
+    -moz-transition: opacity 0.3s, background-color 0.2s;
+    -webkit-transition: opacity 0.3s, background-color 0.2s;
+    -o-transition: opacity 0.3s, background-color 0.2s; }
     header#app_toolbar #nav_drawer_icon:focus {
       outline: 0 !important; }
     header#app_toolbar #nav_drawer_icon:active {
@@ -818,10 +818,10 @@ header#app_toolbar {
   header#app_toolbar #app_title {
     margin-top: -3px;
     margin-left: 0px;
-    transition: margin-left 0.5s;
-    -moz-transition: margin-left 0.5s;
-    -webkit-transition: margin-left 0.5s;
-    -o-transition: margin-left 0.5s; }
+    transition: margin-left 0.3s;
+    -moz-transition: margin-left 0.3s;
+    -webkit-transition: margin-left 0.3s;
+    -o-transition: margin-left 0.3s; }
   header#app_toolbar #menu_items {
     position: absolute;
     right: 97px;
@@ -927,10 +927,10 @@ navigation-drawer {
   z-index: 3;
   background-color: #e1e1e1;
   overflow-x: visible;
-  transition: margin-left 0.5s ease-out;
-  -moz-transition: margin-left 0.5s ease-out;
-  -webkit-transition: margin-left 0.5s ease-out;
-  -o-transition: margin-left 0.5s ease-out; }
+  transition: margin-left 0.3s ease-out;
+  -moz-transition: margin-left 0.3s ease-out;
+  -webkit-transition: margin-left 0.3s ease-out;
+  -o-transition: margin-left 0.3s ease-out; }
   navigation-drawer[open] {
     margin-left: 0px; }
     navigation-drawer[open] #FAB {
@@ -940,10 +940,10 @@ navigation-drawer {
     right: -37px;
     bottom: 25px;
     z-index: 2;
-    transition: margin-right 0.5s ease-out;
-    -moz-transition: margin-right 0.5s ease-out;
-    -webkit-transition: margin-right 0.5s ease-out;
-    -o-transition: margin-right 0.5s ease-out; }
+    transition: margin-right 0.3s ease-out;
+    -moz-transition: margin-right 0.3s ease-out;
+    -webkit-transition: margin-right 0.3s ease-out;
+    -o-transition: margin-right 0.3s ease-out; }
   navigation-drawer chats-list {
     position: absolute;
     width: 100%;
@@ -1042,10 +1042,10 @@ navigation-drawer {
   bottom: 0px;
   z-index: 1;
   background-color: #fafafa;
-  transition: left 0.5s ease-out, right 0.5s ease-out;
-  -moz-transition: left 0.5s ease-out, right 0.5s ease-out;
-  -webkit-transition: left 0.5s ease-out, right 0.5s ease-out;
-  -o-transition: left 0.5s ease-out, right 0.5s ease-out; }
+  transition: left 0.3s ease-out, right 0.3s ease-out;
+  -moz-transition: left 0.3s ease-out, right 0.3s ease-out;
+  -webkit-transition: left 0.3s ease-out, right 0.3s ease-out;
+  -o-transition: left 0.3s ease-out, right 0.3s ease-out; }
   #chat chat-history {
     position: absolute;
     top: 0px;
@@ -1180,10 +1180,10 @@ navigation-drawer {
     border-top: 1px #29bb43 solid; }
     #chat #messageContainer #message {
       margin: 0px 20px 20px 40px;
-      transition: margin-left 0.5s;
-      -moz-transition: margin-left 0.5s;
-      -webkit-transition: margin-left 0.5s;
-      -o-transition: margin-left 0.5s; }
+      transition: margin-left 0.3s;
+      -moz-transition: margin-left 0.3s;
+      -webkit-transition: margin-left 0.3s;
+      -o-transition: margin-left 0.3s; }
       #chat #messageContainer #message form {
         position: relative;
         bottom: 0px; }
@@ -1319,10 +1319,10 @@ right-sidebar {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #e1e1e1;
-  transition: margin-right 0.5s ease-out;
-  -moz-transition: margin-right 0.5s ease-out;
-  -webkit-transition: margin-right 0.5s ease-out;
-  -o-transition: margin-right 0.5s ease-out; }
+  transition: margin-right 0.3s ease-out;
+  -moz-transition: margin-right 0.3s ease-out;
+  -webkit-transition: margin-right 0.3s ease-out;
+  -o-transition: margin-right 0.3s ease-out; }
   right-sidebar .icon {
     position: absolute;
     left: 10px;
@@ -1393,10 +1393,10 @@ right-sidebar {
       display: block;
       color: inherit;
       margin-bottom: 5px;
-      transition: color 0.5s;
-      -moz-transition: color 0.5s;
-      -webkit-transition: color 0.5s;
-      -o-transition: color 0.5s; }
+      transition: color 0.3s;
+      -moz-transition: color 0.3s;
+      -webkit-transition: color 0.3s;
+      -o-transition: color 0.3s; }
       right-sidebar .profiles .profile .no-underline {
         opacity: 0; }
       right-sidebar .profiles .profile i {
@@ -1414,10 +1414,10 @@ right-sidebar {
   z-index: 101;
   background-color: transparent;
   overflow: hidden;
-  transition: background-color 0.5s;
-  -moz-transition: background-color 0.5s;
-  -webkit-transition: background-color 0.5s;
-  -o-transition: background-color 0.5s; }
+  transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s; }
   #popup_new_chat[open] {
     display: block;
     background-color: rgba(0, 0, 0, 0.3); }
@@ -1520,34 +1520,44 @@ right-sidebar {
   navigation-drawer {
     margin-left: -295px;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-    transition: margin-left 0.5s ease-in;
-    -moz-transition: margin-left 0.5s ease-in;
-    -webkit-transition: margin-left 0.5s ease-in;
-    -o-transition: margin-left 0.5s ease-in; }
+    transition: margin-left 0.3s ease-in;
+    -moz-transition: margin-left 0.3s ease-in;
+    -webkit-transition: margin-left 0.3s ease-in;
+    -o-transition: margin-left 0.3s ease-in; }
+    navigation-drawer[open] {
+      transition: margin-left 0.3s ease-out;
+      -moz-transition: margin-left 0.3s ease-out;
+      -webkit-transition: margin-left 0.3s ease-out;
+      -o-transition: margin-left 0.3s ease-out; }
+      navigation-drawer[open] #FAB {
+        transition: margin-left 0.3s ease-out;
+        -moz-transition: margin-left 0.3s ease-out;
+        -webkit-transition: margin-left 0.3s ease-out;
+        -o-transition: margin-left 0.3s ease-out; }
     navigation-drawer #FAB {
       margin-right: 38px; }
   #chat {
     left: 0px;
-    transition: left 0.5s ease-in, right 0.5s ease-in;
-    -moz-transition: left 0.5s ease-in, right 0.5s ease-in;
-    -webkit-transition: left 0.5s ease-in, right 0.5s ease-in;
-    -o-transition: left 0.5s ease-in, right 0.5s ease-in; }
+    transition: left 0.3s ease-in, right 0.3s ease-in;
+    -moz-transition: left 0.3s ease-in, right 0.3s ease-in;
+    -webkit-transition: left 0.3s ease-in, right 0.3s ease-in;
+    -o-transition: left 0.3s ease-in, right 0.3s ease-in; }
     #chat #messageContainer #message {
       margin-left: 5px; } }
 
 @media (max-width: 599px) {
   right-sidebar {
     margin-right: -300px;
-    transition: margin-right 0.5s ease-in;
-    -moz-transition: margin-right 0.5s ease-in;
-    -webkit-transition: margin-right 0.5s ease-in;
-    -o-transition: margin-right 0.5s ease-in; }
+    transition: margin-right 0.3s ease-in;
+    -moz-transition: margin-right 0.3s ease-in;
+    -webkit-transition: margin-right 0.3s ease-in;
+    -o-transition: margin-right 0.3s ease-in; }
   #chat {
     right: 0px;
-    transition: left 0.5s ease-in, right 0.5s ease-in;
-    -moz-transition: left 0.5s ease-in, right 0.5s ease-in;
-    -webkit-transition: left 0.5s ease-in, right 0.5s ease-in;
-    -o-transition: left 0.5s ease-in, right 0.5s ease-in; } }
+    transition: left 0.3s ease-in, right 0.3s ease-in;
+    -moz-transition: left 0.3s ease-in, right 0.3s ease-in;
+    -webkit-transition: left 0.3s ease-in, right 0.3s ease-in;
+    -o-transition: left 0.3s ease-in, right 0.3s ease-in; } }
 
 .material.popup {
   position: relative;
@@ -1559,7 +1569,7 @@ right-sidebar {
   box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3), 0 11px 7px 0 rgba(0, 0, 0, 0.19);
   border-radius: 2px;
   overflow: hidden;
-  transition: margin-top 0.5s;
-  -moz-transition: margin-top 0.5s;
-  -webkit-transition: margin-top 0.5s;
-  -o-transition: margin-top 0.5s; }
+  transition: margin-top 0.3s;
+  -moz-transition: margin-top 0.3s;
+  -webkit-transition: margin-top 0.3s;
+  -o-transition: margin-top 0.3s; }
