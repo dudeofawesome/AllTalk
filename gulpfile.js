@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var mongoRunning = false;
+var server;
 
 gulp.task('lint', function () {
     var jshint = require('gulp-jshint');
@@ -52,7 +53,10 @@ gulp.task('node-server', function () {
     var gls = require('gulp-live-server');
     // TODO switch to another DB server
     // gulp.start('start-mongo');
-    var server = gls.new('server.js');
+    if (server) {
+        server.stop();
+    }
+    server = gls.new('server.js');
     server.start();
 });
 
