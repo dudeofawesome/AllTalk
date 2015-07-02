@@ -23,5 +23,6 @@ window.onload = function () {
         scope.ctrlMessenger.chats = chats;
         // TODO: for through each chat and add it to the list
         scope.$apply();
+        scope.ctrlChat.switchChat(scope.ctrlMessenger.currentChat, document.getElementById('chats').firstElementChild);
     });
 };

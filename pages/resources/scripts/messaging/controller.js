@@ -9,7 +9,7 @@
             image: 'resources/images/457.jpg'
         };
         this.users = [456, 450, 451, 452, 453, 455];
-        this.currentChat = 456;
+        this.currentChat = 450;
 
         this.toolbarItems = [{icon: 'account-plus', title: 'Add people', importance: 0}, {icon: 'history', title: 'Turn history off', importance: 1}, {icon: 'package', title: 'Archive', importance: 2}, {icon: 'rename-box', title: 'Rename', importance: 3}, {icon: 'delete', title: 'Delete', importance: 4}];
     });
