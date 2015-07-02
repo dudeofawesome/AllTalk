@@ -750,11 +750,11 @@ input[type=range].material {
 
 body {
   background-color: gainsboro;
-  overflow-x: hidden;
-  font-family: "robotothin", sans-serif;
-  font-weight: 100;
   color: #5a5a5a;
+  font-family: 'robotothin', sans-serif;
+  font-weight: 100;
   margin: 0px;
+  overflow-x: hidden;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -768,20 +768,16 @@ body {
 ::-webkit-scrollbar-track {
   background-color: transparent; }
 
-/* the new scrollbar will have a flat appearance with the set background color */
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px; }
 
-/* this will style the thumb, ignoring the track */
 ::-webkit-scrollbar-button {
   background-color: rgba(0, 0, 0, 0.2); }
 
-/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 ::-webkit-scrollbar-corner {
   background-color: transparent; }
 
-/* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
 header#app_toolbar {
   position: absolute;
   top: 0px;
@@ -816,19 +812,23 @@ header#app_toolbar {
     header#app_toolbar #nav_drawer_icon:active {
       background-color: rgba(153, 153, 153, 0.4); }
   header#app_toolbar #app_title {
-    margin-top: -3px;
     margin-left: 0px;
-    transition: margin-left 0.3s;
+    margin-top: -3px;
     -moz-transition: margin-left 0.3s;
     -webkit-transition: margin-left 0.3s;
-    -o-transition: margin-left 0.3s; }
+    -o-transition: margin-left 0.3s;
+    transition: margin-left 0.3s; }
   header#app_toolbar #menu_items {
     position: absolute;
     right: 97px;
     top: 5px;
     width: 300px;
     height: 60px;
-    text-align: right; }
+    text-align: right;
+    transition: right 0.3s;
+    -moz-transition: right 0.3s;
+    -webkit-transition: right 0.3s;
+    -o-transition: right 0.3s; }
     header#app_toolbar #menu_items .menu_item {
       display: inline-block;
       width: 60px;
@@ -849,7 +849,7 @@ header#app_toolbar {
         background-color: rgba(153, 153, 153, 0.4); }
       header#app_toolbar #menu_items .menu_item .name {
         display: none;
-        font-family: "robotothin", sans-serif;
+        font-family: 'robotothin', sans-serif;
         font-weight: 100; }
     header#app_toolbar #menu_items #overflow {
       display: inline-block;
@@ -993,11 +993,11 @@ navigation-drawer {
         -moz-transition: border-color 0.2s, background-color 0.2s;
         -webkit-transition: border-color 0.2s, background-color 0.2s;
         -o-transition: border-color 0.2s, background-color 0.2s; }
-        navigation-drawer chats-list .chat .status[online-status="online"] {
+        navigation-drawer chats-list .chat .status[online-status='online'] {
           background-color: #00c800; }
-        navigation-drawer chats-list .chat .status[online-status="away"] {
+        navigation-drawer chats-list .chat .status[online-status='away'] {
           background-color: #e6c800; }
-        navigation-drawer chats-list .chat .status[online-status="offline"] {
+        navigation-drawer chats-list .chat .status[online-status='offline'] {
           background-color: #969696; }
       navigation-drawer chats-list .chat .name {
         position: absolute;
@@ -1031,7 +1031,7 @@ navigation-drawer {
         -moz-transition: opacity 0.2s;
         -webkit-transition: opacity 0.2s;
         -o-transition: opacity 0.2s; }
-        navigation-drawer chats-list .chat .muted[chat-status="muted"] {
+        navigation-drawer chats-list .chat .muted[chat-status='muted'] {
           opacity: 1; }
 
 #chat {
@@ -1077,7 +1077,7 @@ navigation-drawer {
         -ms-user-select: auto;
         user-select: auto; }
         #chat chat-history .message[sender=other] .text::before {
-          content: " ";
+          content: ' ';
           position: absolute;
           bottom: 0px;
           left: -12px;
@@ -1088,7 +1088,7 @@ navigation-drawer {
           border-width: 0 0 12px 12px;
           border-color: transparent transparent #e0e1e1 transparent; }
         #chat chat-history .message[sender=other] .text::after {
-          content: " ";
+          content: ' ';
           position: absolute;
           bottom: 1px;
           left: -11px;
@@ -1116,7 +1116,7 @@ navigation-drawer {
         -ms-user-select: auto;
         user-select: auto; }
         #chat chat-history .message[sender=you] .text::after {
-          content: " ";
+          content: ' ';
           position: absolute;
           bottom: 0px;
           right: -12px;
@@ -1127,7 +1127,7 @@ navigation-drawer {
           border-width: 0 12px 12px 0px;
           border-color: transparent transparent #b0ebba transparent; }
         #chat chat-history .message[sender=you] .text::before {
-          content: " ";
+          content: ' ';
           position: absolute;
           bottom: 1px;
           right: -11px;
@@ -1213,7 +1213,7 @@ navigation-drawer {
           box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
           z-index: 101; }
           #chat #messageContainer #message form #send_media_dialogue::after {
-            content: " ";
+            content: ' ';
             position: absolute;
             right: 11px;
             bottom: -9px;
@@ -1345,11 +1345,11 @@ right-sidebar {
     -moz-transition: border-color 0.2s, background-color 0.2s;
     -webkit-transition: border-color 0.2s, background-color 0.2s;
     -o-transition: border-color 0.2s, background-color 0.2s; }
-    right-sidebar .status[online-status="online"] {
+    right-sidebar .status[online-status='online'] {
       background-color: #00c800; }
-    right-sidebar .status[online-status="away"] {
+    right-sidebar .status[online-status='away'] {
       background-color: #e6c800; }
-    right-sidebar .status[online-status="offline"] {
+    right-sidebar .status[online-status='offline'] {
       background-color: #969696; }
   right-sidebar .name {
     position: absolute;
@@ -1486,11 +1486,11 @@ right-sidebar {
           -moz-transition: border-color 0.2s;
           -webkit-transition: border-color 0.2s;
           -o-transition: border-color 0.2s; }
-          #popup_new_chat form #start_users_list .user .status[online-status="online"] {
+          #popup_new_chat form #start_users_list .user .status[online-status='online'] {
             background-color: #00c800; }
-          #popup_new_chat form #start_users_list .user .status[online-status="away"] {
+          #popup_new_chat form #start_users_list .user .status[online-status='away'] {
             background-color: #e6c800; }
-          #popup_new_chat form #start_users_list .user .status[online-status="offline"] {
+          #popup_new_chat form #start_users_list .user .status[online-status='offline'] {
             background-color: #969696; }
         #popup_new_chat form #start_users_list .user .name {
           position: absolute;
@@ -1498,7 +1498,7 @@ right-sidebar {
           top: 10px;
           width: 300px;
           overflow-x: hidden; }
-        #popup_new_chat form #start_users_list .user input[type="checkbox"] {
+        #popup_new_chat form #start_users_list .user input[type='checkbox'] {
           position: absolute;
           left: 15px;
           top: 8px; }
@@ -1552,6 +1552,8 @@ right-sidebar {
     -moz-transition: margin-right 0.3s ease-in;
     -webkit-transition: margin-right 0.3s ease-in;
     -o-transition: margin-right 0.3s ease-in; }
+  header#app_toolbar #menu_items {
+    right: 83px; }
   #chat {
     right: 0px;
     transition: left 0.3s ease-in, right 0.3s ease-in;

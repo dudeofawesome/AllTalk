@@ -1,0 +1,9 @@
+linters:
+    ZeroUnit:
+        enabled: false
+    Indentation:
+        width: 4
+    LeadingZero:
+        enabled: true
+    NestingDepth:
+        enabled: false
