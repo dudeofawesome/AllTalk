@@ -15,7 +15,7 @@ function openMessaging () {
         ease: Power4.easeIn,
         top: '-917px',
         onComplete: function () {
-            // window.location.href = 'messaging';
+            window.location.href = 'messaging';
         }
     });
 }
