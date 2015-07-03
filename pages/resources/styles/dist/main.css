@@ -827,6 +827,8 @@ form {
   padding-top: 0px;
   padding-bottom: 30px;
   text-align: center; }
+  .header .logo {
+    width: 130px; }
 
 form label {
   font-size: 15px; }
