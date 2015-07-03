@@ -14,15 +14,19 @@ function openMessaging () {
     var card = document.getElementById('main');
     var tweenTime = 0.7;
 
-    TweenLite.to(header, tweenTime / 2, {
-        ease: Power3.easeOut,
+    TweenLite.to(header, tweenTime, {
+        ease: Power4.easeIn,
         height: '0px'
     });
     TweenLite.to(card, tweenTime, {
-        ease: Power3.easeOut,
-        top: '-555px',
+        ease: Power4.easeIn,
+        marginTop: '252px'
+    });
+    TweenLite.to(card, tweenTime, {
+        ease: Power4.easeIn,
+        top: '-917px',
         onComplete: function () {
-            window.location.href = 'messaging';
+            // window.location.href = 'messaging';
         }
     });
 }
