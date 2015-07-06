@@ -1,12 +1,7 @@
 var Utils = require('./utils');
-var credentials = require('./secrets/database');
-
-var databaseUrl = 'mongodb://' + credentials.username + ':' + credentials.password + '@ds051970.mongolab.com:51970/all-talk';
 var collections = ['users', 'conversations', 'attachments'];
 var db;
 var testDB = {};
-// TODO remove this when Chat is no longer required
-var headers = require('./headers');
 
 module.exports = {
     modes: {LOG: false, TEST: false},
@@ -17,6 +12,8 @@ module.exports = {
         }
         if (!module.exports.modes.TEST) {
             if (db === undefined) {
+                var credentials = require('./secrets/database');
+                var databaseUrl = 'mongodb://' + credentials.username + ':' + credentials.password + '@ds051970.mongolab.com:51970/all-talk';
                 db = require('mongojs').connect(databaseUrl, collections);
             }
         } else {
