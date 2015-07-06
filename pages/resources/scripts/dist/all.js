@@ -189,15 +189,9 @@ function isEmail (email) {
 (function () {
     var app = angular.module('AllTalk', []);
     app.controller('MessengerController', function () {
-        this.users = [];
         this.chats = {};
-        this.you = {
-            name: 'Clarence Meyer',
-            id: 457,
-            image: 'resources/images/457.jpg'
-        };
-        this.users = [456, 450, 451, 452, 453, 455];
-        this.currentChat = 450;
+        this.you = {};
+        this.currentChat = '555ad069d279374e636b3bd6';
 
         this.toolbarItems = [{icon: 'account-plus', title: 'Add people', importance: 0}, {icon: 'history', title: 'Turn history off', importance: 1}, {icon: 'package', title: 'Archive', importance: 2}, {icon: 'rename-box', title: 'Rename', importance: 3}, {icon: 'delete', title: 'Delete', importance: 4}];
     });
@@ -220,10 +214,9 @@ function isEmail (email) {
                             this.chatList.childNodes[i].removeAttribute('open');
                         }
                     }
-                    $scope.ctrlChatHistory.history = $scope.ctrlMessenger.chats[user].history;
                     chat.setAttribute('open', '');
 
-                    $scope.ctrlRightSidebar.user = $scope.ctrlMessenger.chats[user];
+                    $scope.ctrlRightSidebar.user = $scope.ctrlMessenger.chats[user].users[0];
 
                     $scope.$apply();
 
@@ -293,10 +286,10 @@ function isEmail (email) {
         return {
             restrict: 'A',
             link: function (scope, element) {
-                if (scope.message.isyou) {
-                    element[0].setAttribute('sender', 'you');
-                } else {
+                if (scope.ctrlMessenger.chats[scope.ctrlMessenger.currentChat].users[0]._id == scope.message.sender) {
                     element[0].setAttribute('sender', 'other');
+                } else {
+                    element[0].setAttribute('sender', 'you');
                 }
             }
         };
@@ -411,9 +404,9 @@ function isEmail (email) {
         return {
             restrict: 'E',
             templateUrl: '/parts/messaging/chats_list.html',
-            controller: function ($scope) {
-                this.chats = $scope.ctrlMessenger.chats;
-            },
+            // controller: function ($scope) {
+            //     this.chats = $scope.ctrlMessenger.chats;
+            // },
             controllerAs: 'ctrlChatList'
         };
     });
@@ -454,28 +447,13 @@ function isEmail (email) {
             templateUrl: '/parts/messaging/toolbar_menu_item.html'
         };
     });
-    app.directive('openOverflow', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element) {
-                element.on('click', function () {
-                    var overflowMenuList = document.getElementById('overflow_menu');
-                    if (overflowMenuList.hasAttribute('open')) {
-                        overflowMenuList.removeAttribute('open');
-                    } else {
-                        overflowMenuList.setAttribute('open', '');
-                    }
-                });
-            }
-        };
-    });
 
     app.directive('rightSidebar', function () {
         return {
             restrict: 'E',
             templateUrl: '/parts/messaging/right_sidebar.html',
             controller: function ($scope) {
-                this.user = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat];
+                // this.user = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].users[0];
             },
             controllerAs: 'ctrlRightSidebar'
         };
@@ -485,7 +463,7 @@ function isEmail (email) {
             restrict: 'A',
             link: function (scope, element) {
                 element.on('change', function () {
-                    scope.ctrlMessenger.chats[scope.ctrlMessenger.currentChat].chatStatus = (!this.checked ? ChatStatus.MUTED : ChatStatus.NONE);
+                    scope.ctrlMessenger.chats[scope.ctrlMessenger.currentChat].status = (!this.checked ? ChatStatus.MUTED : ChatStatus.NONE);
                     scope.$apply();
                 });
             }
@@ -644,14 +622,17 @@ window.onload = function () {
     });
     socket.on('connect', function () {
         socket.emit('get chats');
+        socket.emit('get me');
     });
     socket.on('message', function (msg) {
         scope.ctrlChat.addMessage(msg);
     });
     socket.on('get chats', function (chats) {
         scope.ctrlMessenger.chats = chats;
-        // TODO: for through each chat and add it to the list
         scope.$apply();
         scope.ctrlChat.switchChat(scope.ctrlMessenger.currentChat, document.getElementById('chats').firstElementChild);
+    });
+    socket.on('get me', function (user) {
+        scope.ctrlMessenger.you = user;
     });
 };

@@ -1,9 +1,12 @@
 var Utils = require('./utils');
+var credentials = require('./secrets/database');
 
-var databaseUrl = 'mongodb://localhost:27017/AllTalk';
+var databaseUrl = 'mongodb://' + credentials.username + ':' + credentials.password + '@ds051970.mongolab.com:51970/all-talk';
 var collections = ['users', 'conversations', 'attachments'];
 var db;
 var testDB = {};
+// TODO remove this when Chat is no longer required
+var headers = require('./headers');
 
 module.exports = {
     modes: {LOG: false, TEST: false},
@@ -17,81 +20,56 @@ module.exports = {
                 db = require('mongojs').connect(databaseUrl, collections);
             }
         } else {
-            // var tmpDB = require('mongojs').connect(databaseUrl, collections);
             // for (var i = 0; i < collections.length; i++) {
-            //     testDB[collections[i]] = {};
+            //     testDB[collections[i]] = {
+            //         data: {
+            //             foo: 'foo',
+            //             bar: 'bar'
+            //         },
+            //         find: function (query, callback) {
+            //             var err = {};
+            //
+            //             // var queryKeys = Object.keys(query);
+            //             var response = [];
+            //             // var dataKeys = Object.keys(this.data);
+            //             // for (var i = 0; i < queryKeys.length; i++) {
+            //             //     for (var j = 0; j < dataKeys.length; j++) {
+            //             //         if (queryKeys[i] === dataKeys[j]) {
+            //             //             if (query[queryKeys[i]] !== '' || query[queryKeys[i]] !== undefined) {
+            //             //                 response.push(this.data[dataKeys[j]]);
+            //             //             }
+            //             //         }
+            //             //     }
+            //             // }
+            //
+            //             callback(err, response);
+            //         },
+            //         save: function (newDoc, callback) {
+            //             var err = {};
+            //
+            //             callback(err);
+            //         },
+            //         update: function (query, updateDoc, callback) {
+            //             var err = {};
+            //
+            //             // var queryKeys = Object.keys(query);
+            //             var response = [];
+            //             // var dataKeys = Object.keys(this.data);
+            //             // for (var i = 0; i < queryKeys.length; i++) {
+            //             //     for (var j = 0; j < dataKeys.length; j++) {
+            //             //         if (queryKeys[i] === dataKeys[j]) {
+            //             //             if (query[queryKeys[i]] !== '' || query[queryKeys[i]] !== undefined) {
+            //             //                 response.push(this.data[dataKeys[j]]);
+            //             //             }
+            //             //         }
+            //             //     }
+            //             // }
+            //
+            //             callback(err, response);
+            //         }
+            //     };
             // }
-            // tmpDB.users.find({}, function (err, users) {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         testDB.users = users;
-            //     }
-            // });
-            // tmpDB.conversations.find({}, function (err, conversations) {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         testDB.conversations = conversations;
-            //     }
-            // });
-            // tmpDB.attachments.find({}, function (err, attachments) {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         testDB.attachments = attachments;
-            //     }
-            // });
 
-            for (var i = 0; i < collections.length; i++) {
-                testDB[collections[i]] = {
-                    data: {
-                        foo: 'foo',
-                        bar: 'bar'
-                    },
-                    find: function (query, callback) {
-                        var err = {};
-
-                        // var queryKeys = Object.keys(query);
-                        var response = [];
-                        // var dataKeys = Object.keys(this.data);
-                        // for (var i = 0; i < queryKeys.length; i++) {
-                        //     for (var j = 0; j < dataKeys.length; j++) {
-                        //         if (queryKeys[i] === dataKeys[j]) {
-                        //             if (query[queryKeys[i]] !== '' || query[queryKeys[i]] !== undefined) {
-                        //                 response.push(this.data[dataKeys[j]]);
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-                        callback(err, response);
-                    },
-                    save: function (newDoc, callback) {
-                        var err = {};
-
-                        callback(err);
-                    },
-                    update: function (query, updateDoc, callback) {
-                        var err = {};
-
-                        // var queryKeys = Object.keys(query);
-                        var response = [];
-                        // var dataKeys = Object.keys(this.data);
-                        // for (var i = 0; i < queryKeys.length; i++) {
-                        //     for (var j = 0; j < dataKeys.length; j++) {
-                        //         if (queryKeys[i] === dataKeys[j]) {
-                        //             if (query[queryKeys[i]] !== '' || query[queryKeys[i]] !== undefined) {
-                        //                 response.push(this.data[dataKeys[j]]);
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-                        callback(err, response);
-                    }
-                };
-            }
             testDB.close = function () {
                 return;
             };
@@ -169,28 +147,51 @@ module.exports = {
             callback(testDB.users.data.length);
         }
     },
-    getConversationsByUserID: function (ID, callback) {
+    getConversationsByUserID: function (uID, callback) {
         if (!module.exports.modes.TEST) {
-            db.users.find({_id: ID}, function (err, user) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var returnConversations = [];
+            db.users.find({_id: db.ObjectId(uID)}, function (err, user) {
+                user = user[0];
+                if (!err) {
+                    var returnConversations = {};
                     for (var i = 0; i < user.conversations.length; i++) {
-                        db.conversations.find({_id: user.conversations[i]}, function (err, conversation) {
+                        db.conversations.find({_id: db.ObjectId(user.conversations[i].id)}, function (err, conversation) {
+                            conversation = conversation[0];
+                            for (var k = 0; k < user.conversations.length; k++) {
+                                if (conversation._id == user.conversations[k].id) {
+                                    console.log(user.conversations[k]);
+                                    conversation.status = user.conversations[k].status;
+                                }
+                            }
                             if (!err) {
-                                returnConversations.push(conversation);
-                                if (returnConversations.length === user.conversations.length) {
-                                    callback(returnConversations);
+                                // replace user IDs in conversation.users with actual data
+                                var usersInChat = [];
+                                for (var j = 0; j < conversation.users.length; j++) {
+                                    if (conversation.users[j] !== uID) {
+                                        db.users.find({_id: db.ObjectId(conversation.users[j])}, function (err, cUser) {
+                                            if (!err) {
+                                                cUser = cUser[0];
+                                                cUser.conversations = undefined;
+                                                usersInChat.push(cUser);
+                                                if (usersInChat.length === conversation.users.length - 1) {
+                                                    conversation.users = usersInChat;
+                                                    returnConversations[conversation._id] = conversation;
+                                                    returnConversations[conversation._id].id = returnConversations[conversation._id]._id;
+                                                    returnConversations[conversation._id]._id = undefined;
+                                                }
+                                                if (Object.keys(returnConversations).length === user.conversations.length) {
+                                                    callback(returnConversations);
+                                                }
+                                            }
+                                        }); // jshint ignore:line
+                                    }
                                 }
                             }
                         }); // jshint ignore:line
                     }
-                    callback(user.conversations);
                 }
             });
         } else {
-
+            callback(testDB.chats);
         }
     },
     storeMessage: function (msg) {
@@ -202,12 +203,6 @@ module.exports = {
                     console.log(saved);
                 }
             });
-        } else {
-            for (var i = 0; i < testDB.conversations.length; i++) {
-                if (testDB.conversations[i]._id === msg.conversationID) {
-                    testDB.conversations.data[i].history.push({sender: msg.sender, message: msg.message, time: msg.time});
-                }
-            }
         }
     }
 };

@@ -24,8 +24,8 @@ describe('chat_server.js tests', function () {
     });
     it('send message', function (done) {
         var testMsg = {
-            conversationID: '123456789abcdef',
-            sender: 'abcdef123456789',
+            conversationID: '555aeaadd279374e636b3bdc',
+            sender: '555acd41d279374e636b3bd4',
             message: 'Hello World!',
             time: 1434695331570
         };
@@ -39,8 +39,8 @@ describe('chat_server.js tests', function () {
     });
     it('receive message', function (done) {
         var testMsg = {
-            conversationID: '123456789abcdef',
-            sender: 'abcdef123456789',
+            conversationID: '555aeaadd279374e636b3bdc',
+            sender: '555acd41d279374e636b3bd4',
             message: 'Hello World!',
             time: 1434695331570
         };
