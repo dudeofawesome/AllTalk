@@ -4,11 +4,20 @@ var db;
 var testDB = {};
 
 module.exports = {
+    modesSet: false,
     modes: {LOG: false, TEST: false},
 
     init: function (modes) {
-        if (modes !== undefined) {
+        if (modes !== undefined && !module.exports.modesSet) {
+            module.exports.modesSet = true;
             module.exports.modes = modes;
+        }
+        if (typeof global.it === 'function') {
+            module.exports.modes.TEST = true;
+            if (db === undefined) {
+                var databaseUrl = 'mongodb://travis:test@127.0.0.1:27017/mydb_test';
+                db = require('mongojs').connect(databaseUrl, collections);
+            }
         }
         if (!module.exports.modes.TEST) {
             if (db === undefined) {

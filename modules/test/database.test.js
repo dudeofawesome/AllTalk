@@ -4,11 +4,8 @@ var should = require('should'); // jshint ignore:line
 
 describe('database.js tests', function () {
     // it('connect to database', function (done) {
-    //     testing = testing.init();
+    //     testing = testing.init({LOG: false, TEST: true});
     //     testing.should.be.an.instanceOf(Object);
-    //     // TODO change modes.TEST to false
-    //     var testing2 = require('../database').init({LOG: false, TEST: true});
-    //     testing.should.equal(testing2);
     //
     //     done();
     // });
