@@ -14,14 +14,16 @@ module.exports = {
         }
         if (typeof global.it === 'function') {
             module.exports.modes.TEST = true;
-            if (db === undefined) {
-                var databaseUrl = 'mongodb://travis:test@127.0.0.1:27017/mydb_test';
-                db = require('mongojs').connect(databaseUrl, collections);
-            }
         }
         if (!module.exports.modes.TEST) {
             if (db === undefined) {
-                var credentials = require('./secrets/database');
+                var credentials = {};
+                if (process.env.DB_USERNAME && process.env.DB_PASSWORD) {
+                    credentials.username = process.env.DB_USERNAME;
+                    credentials.password = process.env.DB_PASSWORD;
+                } else {
+                    credentials = require('./secrets/database');
+                }
                 var databaseUrl = 'mongodb://' + credentials.username + ':' + credentials.password + '@ds051970.mongolab.com:51970/all-talk';
                 db = require('mongojs').connect(databaseUrl, collections);
             }
@@ -75,10 +77,13 @@ module.exports = {
             //         }
             //     };
             // }
-
-            testDB.close = function () {
-                return;
-            };
+            // testDB.close = function () {
+            //     return;
+            // };
+            if (db === undefined) {
+                var databaseUrl = 'mongodb://travis:test@127.0.0.1:27017/mydb_test';
+                db = require('mongojs').connect(databaseUrl, collections);
+            }
         }
         return this;
     },

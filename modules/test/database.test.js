@@ -3,12 +3,12 @@ var testing = require('../database');
 var should = require('should'); // jshint ignore:line
 
 describe('database.js tests', function () {
-    // it('connect to database', function (done) {
-    //     testing = testing.init({LOG: false, TEST: true});
-    //     testing.should.be.an.instanceOf(Object);
-    //
-    //     done();
-    // });
+    it('connect to database', function (done) {
+        testing = testing.init({LOG: false, TEST: true});
+        testing.should.be.an.instanceOf(Object);
+
+        done();
+    });
     // it('get users', function (done) {
     //     testing.getUsers(function (users) {
     //         users.should.not.be.empty; // jshint ignore:line

@@ -10,9 +10,14 @@ gulp.task('lint', function () {
 });
 
 gulp.task('test', function () {
+    if (!process.env.TRAVIS) {
+        gulp.start('start-mongo');
+    }
+
     var mocha = require('gulp-mocha');
-    return gulp.src(['modules/test/*', 'pages/resources/scripts/main/test/*', 'pages/resources/scripts/messaging/test/*'], {read: false})
+    gulp.src(['modules/test/*', 'pages/resources/scripts/main/test/*', 'pages/resources/scripts/messaging/test/*'], {read: false})
         .pipe(mocha());
+    gulp.start('stop-mongo');
 });
 
 gulp.task('sass', function () {
@@ -51,8 +56,6 @@ gulp.task('scripts', function () {
 
 gulp.task('node-server', function () {
     var gls = require('gulp-live-server');
-    // TODO switch to another DB server
-    // gulp.start('start-mongo');
     if (server) {
         server.stop();
     }
