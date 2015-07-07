@@ -36,7 +36,7 @@
                     document.getElementById('send_message').focus();
                 };
                 this.sendMessage = function (message, attachment) {
-                    model.sendMessage({conversationID: $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].id, sender: $scope.ctrlMessenger.you.id, message: message, time: Date.now()});
+                    model.sendMessage({conversationID: $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].id, sender: $scope.ctrlMessenger.you._id, message: message, time: Date.now()});
                     $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history.push(new Message($scope.ctrlMessenger.you.id, true, message, attachment, Date.now()));
                     $scope.$apply();
                 };
