@@ -169,7 +169,6 @@ module.exports = {
                             conversation = conversation[0];
                             for (var k = 0; k < user.conversations.length; k++) {
                                 if (conversation._id == user.conversations[k].id) {
-                                    console.log(user.conversations[k]);
                                     conversation.status = user.conversations[k].status;
                                 }
                             }

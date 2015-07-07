@@ -220,11 +220,12 @@ function isEmail (email) {
 
                     $scope.$apply();
 
+                    $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText === undefined ? '' : $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
                     document.getElementById('send_message').value = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
                     document.getElementById('send_message').focus();
                 };
                 this.sendMessage = function (message, attachment) {
-                    model.sendMessage({conversationID: $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].id, sender: $scope.ctrlMessenger.you.id, message: message, time: Date.now()});
+                    model.sendMessage({conversationID: $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].id, sender: $scope.ctrlMessenger.you._id, message: message, time: Date.now()});
                     $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].history.push(new Message($scope.ctrlMessenger.you.id, true, message, attachment, Date.now()));
                     $scope.$apply();
                 };
@@ -452,8 +453,8 @@ function isEmail (email) {
         return {
             restrict: 'E',
             templateUrl: '/parts/messaging/right_sidebar.html',
-            controller: function ($scope) {
-                // this.user = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].users[0];
+            controller: function () {
+
             },
             controllerAs: 'ctrlRightSidebar'
         };

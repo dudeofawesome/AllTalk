@@ -32,6 +32,7 @@
 
                     $scope.$apply();
 
+                    $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText === undefined ? '' : $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
                     document.getElementById('send_message').value = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].draftText;
                     document.getElementById('send_message').focus();
                 };
@@ -264,8 +265,8 @@
         return {
             restrict: 'E',
             templateUrl: '/parts/messaging/right_sidebar.html',
-            controller: function ($scope) {
-                // this.user = $scope.ctrlMessenger.chats[$scope.ctrlMessenger.currentChat].users[0];
+            controller: function () {
+
             },
             controllerAs: 'ctrlRightSidebar'
         };
