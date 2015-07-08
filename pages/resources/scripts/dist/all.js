@@ -631,7 +631,7 @@ window.onload = function () {
     socket.on('get chats', function (chats) {
         scope.ctrlMessenger.chats = chats;
         scope.$apply();
-        scope.ctrlChat.switchChat(scope.ctrlMessenger.currentChat, document.getElementById('chats').firstElementChild);
+        document.getElementById('chats').firstElementChild.click();
     });
     socket.on('get me', function (user) {
         scope.ctrlMessenger.you = user;
